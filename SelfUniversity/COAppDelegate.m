@@ -1,3 +1,4 @@
+// =================================================================================================================
 //
 //  COAppDelegate.m
 //  SelfUniversity
@@ -5,8 +6,14 @@
 //  Created by Jeffrey Young on 6/25/14.
 //  Copyright (c) 2014 infinite Discoveries. All rights reserved.
 //
+// =================================================================================================================
 
 #import "COAppDelegate.h"
+#import "COBookViewViewController.h"
+#import "COVisionViewController.h"
+#import "COContentViewController.h"
+#import "COPracticeViewController.h"
+#import "COProjectViewController.h"
 
 @implementation COAppDelegate
 
@@ -14,14 +21,30 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
+// =================================================================================================================
+#pragma mark - Initialization
+// =================================================================================================================
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
+    
+    COBookViewViewController *bvc = [[COBookViewViewController alloc] init];
+    COVisionViewController *vvc = [[COVisionViewController alloc] init];
+    COContentViewController *cvc = [[COContentViewController alloc] init];
+    COPracticeViewController *pravc = [[COPracticeViewController alloc] init];
+    COProjectViewController *provc = [[COProjectViewController alloc] init];
+    
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    tabBarController.viewControllers = @[bvc, vvc, cvc, pravc, provc];
+    self.window.rootViewController = tabBarController;
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
 }
+
+// -----------------------------------------------------------------------------------------------------------------
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -29,27 +52,37 @@
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
+// -----------------------------------------------------------------------------------------------------------------
+
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
+// -----------------------------------------------------------------------------------------------------------------
+
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
+
+// -----------------------------------------------------------------------------------------------------------------
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
+// -----------------------------------------------------------------------------------------------------------------
+
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
 }
+
+// -----------------------------------------------------------------------------------------------------------------
 
 - (void)saveContext
 {
@@ -65,8 +98,12 @@
     }
 }
 
+// =================================================================================================================
 #pragma mark - Core Data stack
+// =================================================================================================================
 
+
+// -----------------------------------------------------------------------------------------------------------------
 // Returns the managed object context for the application.
 // If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
 - (NSManagedObjectContext *)managedObjectContext
@@ -83,6 +120,8 @@
     return _managedObjectContext;
 }
 
+
+// -----------------------------------------------------------------------------------------------------------------
 // Returns the managed object model for the application.
 // If the model doesn't already exist, it is created from the application's model.
 - (NSManagedObjectModel *)managedObjectModel
@@ -95,6 +134,8 @@
     return _managedObjectModel;
 }
 
+
+// -----------------------------------------------------------------------------------------------------------------
 // Returns the persistent store coordinator for the application.
 // If the coordinator doesn't already exist, it is created and the application's store added to it.
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
@@ -138,7 +179,9 @@
     return _persistentStoreCoordinator;
 }
 
+// =================================================================================================================
 #pragma mark - Application's Documents directory
+// =================================================================================================================
 
 // Returns the URL to the application's Documents directory.
 - (NSURL *)applicationDocumentsDirectory

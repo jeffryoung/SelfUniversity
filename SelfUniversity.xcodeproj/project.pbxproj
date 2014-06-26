@@ -22,6 +22,12 @@
 		E4DC0B10195B581E001CE110 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4DC0AF4195B581E001CE110 /* CoreData.framework */; };
 		E4DC0B18195B581E001CE110 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E4DC0B16195B581E001CE110 /* InfoPlist.strings */; };
 		E4DC0B1A195B581E001CE110 /* SelfUniversityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC0B19195B581E001CE110 /* SelfUniversityTests.m */; };
+		E4DC0B27195B6CAB001CE110 /* COBookViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC0B26195B6CAB001CE110 /* COBookViewViewController.m */; };
+		E4DC0B2A195B6CD6001CE110 /* COVisionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC0B29195B6CD6001CE110 /* COVisionViewController.m */; };
+		E4DC0B2D195B6CF2001CE110 /* COContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC0B2C195B6CF2001CE110 /* COContentViewController.m */; };
+		E4DC0B30195B6D11001CE110 /* COPracticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC0B2F195B6D11001CE110 /* COPracticeViewController.m */; };
+		E4DC0B33195B6D2A001CE110 /* COProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC0B32195B6D2A001CE110 /* COProjectViewController.m */; };
+		E4DC0B36195B6D40001CE110 /* COPortfolioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC0B35195B6D40001CE110 /* COPortfolioViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +60,18 @@
 		E4DC0B17195B581E001CE110 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E4DC0B19195B581E001CE110 /* SelfUniversityTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelfUniversityTests.m; sourceTree = "<group>"; };
 		E4DC0B24195B5870001CE110 /* COGlobalDefsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COGlobalDefsConstants.h; sourceTree = "<group>"; };
+		E4DC0B25195B6CAB001CE110 /* COBookViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COBookViewViewController.h; sourceTree = "<group>"; };
+		E4DC0B26195B6CAB001CE110 /* COBookViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COBookViewViewController.m; sourceTree = "<group>"; };
+		E4DC0B28195B6CD6001CE110 /* COVisionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COVisionViewController.h; sourceTree = "<group>"; };
+		E4DC0B29195B6CD6001CE110 /* COVisionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COVisionViewController.m; sourceTree = "<group>"; };
+		E4DC0B2B195B6CF2001CE110 /* COContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COContentViewController.h; sourceTree = "<group>"; };
+		E4DC0B2C195B6CF2001CE110 /* COContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COContentViewController.m; sourceTree = "<group>"; };
+		E4DC0B2E195B6D11001CE110 /* COPracticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COPracticeViewController.h; sourceTree = "<group>"; };
+		E4DC0B2F195B6D11001CE110 /* COPracticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COPracticeViewController.m; sourceTree = "<group>"; };
+		E4DC0B31195B6D2A001CE110 /* COProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COProjectViewController.h; sourceTree = "<group>"; };
+		E4DC0B32195B6D2A001CE110 /* COProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COProjectViewController.m; sourceTree = "<group>"; };
+		E4DC0B34195B6D40001CE110 /* COPortfolioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COPortfolioViewController.h; sourceTree = "<group>"; };
+		E4DC0B35195B6D40001CE110 /* COPortfolioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COPortfolioViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +137,18 @@
 				E4DC0B24195B5870001CE110 /* COGlobalDefsConstants.h */,
 				E4DC0AFF195B581E001CE110 /* COAppDelegate.h */,
 				E4DC0B00195B581E001CE110 /* COAppDelegate.m */,
+				E4DC0B25195B6CAB001CE110 /* COBookViewViewController.h */,
+				E4DC0B26195B6CAB001CE110 /* COBookViewViewController.m */,
+				E4DC0B2B195B6CF2001CE110 /* COContentViewController.h */,
+				E4DC0B2C195B6CF2001CE110 /* COContentViewController.m */,
+				E4DC0B34195B6D40001CE110 /* COPortfolioViewController.h */,
+				E4DC0B35195B6D40001CE110 /* COPortfolioViewController.m */,
+				E4DC0B2E195B6D11001CE110 /* COPracticeViewController.h */,
+				E4DC0B2F195B6D11001CE110 /* COPracticeViewController.m */,
+				E4DC0B31195B6D2A001CE110 /* COProjectViewController.h */,
+				E4DC0B32195B6D2A001CE110 /* COProjectViewController.m */,
+				E4DC0B28195B6CD6001CE110 /* COVisionViewController.h */,
+				E4DC0B29195B6CD6001CE110 /* COVisionViewController.m */,
 				E4DC0B05195B581E001CE110 /* Images.xcassets */,
 				E4DC0B02195B581E001CE110 /* SelfUniversity.xcdatamodeld */,
 				E4DC0AF7195B581E001CE110 /* Supporting Files */,
@@ -251,8 +281,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4DC0B30195B6D11001CE110 /* COPracticeViewController.m in Sources */,
+				E4DC0B27195B6CAB001CE110 /* COBookViewViewController.m in Sources */,
 				E4DC0B04195B581E001CE110 /* SelfUniversity.xcdatamodeld in Sources */,
 				E4DC0B01195B581E001CE110 /* COAppDelegate.m in Sources */,
+				E4DC0B33195B6D2A001CE110 /* COProjectViewController.m in Sources */,
+				E4DC0B2A195B6CD6001CE110 /* COVisionViewController.m in Sources */,
+				E4DC0B2D195B6CF2001CE110 /* COContentViewController.m in Sources */,
+				E4DC0B36195B6D40001CE110 /* COPortfolioViewController.m in Sources */,
 				E4DC0AFD195B581E001CE110 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
