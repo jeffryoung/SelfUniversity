@@ -1,6 +1,6 @@
 // =================================================================================================================
 //
-//  COBookViewViewController.h
+//  COBookRootViewController.h
 //  SelfUniversity
 //
 //  Created by Jeffrey Young on 6/25/14.
@@ -10,6 +10,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface COBookViewViewController : UIViewController
+@interface COBookRootViewController : UIViewController <UIPageViewControllerDelegate>
+
+@property(nonatomic, strong) UIPageViewController *m_pageViewController;
+@property (nonatomic, strong) UITabBarController *m_tabBarController;
 
 @end

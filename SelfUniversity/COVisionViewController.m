@@ -25,7 +25,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Set the tab bar item's title
-        self.tabBarItem.title = @"Vision";
+        self.tabBarItem.title = @"Inquiry";
         
         // Create a UIImage from the icon
         UIImage *image = [UIImage imageNamed:@"EyeIcon.png"];

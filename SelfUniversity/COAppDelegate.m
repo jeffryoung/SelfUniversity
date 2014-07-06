@@ -9,7 +9,7 @@
 // =================================================================================================================
 
 #import "COAppDelegate.h"
-#import "COBookViewViewController.h"
+#import "COBookRootViewController.h"
 #import "COVisionViewController.h"
 #import "COContentViewController.h"
 #import "COPracticeViewController.h"
@@ -28,16 +28,18 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    self.window.rootViewController = tabBarController;
     
-    COBookViewViewController *bvc = [[COBookViewViewController alloc] init];
+    COBookRootViewController *bvc = [[COBookRootViewController alloc] init];
+    bvc.m_tabBarController = tabBarController;
+    
     COVisionViewController *vvc = [[COVisionViewController alloc] init];
     COContentViewController *cvc = [[COContentViewController alloc] init];
     COPracticeViewController *pravc = [[COPracticeViewController alloc] init];
     COProjectViewController *provc = [[COProjectViewController alloc] init];
     
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
     tabBarController.viewControllers = @[bvc, vvc, cvc, pravc, provc];
-    self.window.rootViewController = tabBarController;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
