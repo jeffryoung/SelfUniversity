@@ -13,7 +13,6 @@
 @interface COBookTiledPDFView : UIView
 
 @property CGPDFPageRef m_pdfPage;
-@property CGRect m_pdfPageRect;
 @property CGFloat m_myScale;
 
 - (id)initWithFrame:(CGRect)frame scale:(CGFloat)scale;

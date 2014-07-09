@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E41AC094196B3C2D000A81E6 /* EducationReinvented.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E41AC093196B3C2D000A81E6 /* EducationReinvented.pdf */; };
+		E41AC098196B4930000A81E6 /* iDiscoveries.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E41AC097196B4930000A81E6 /* iDiscoveries.pdf */; };
 		E476AC7419634FAC007734C0 /* COBookDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E476AC7319634FAC007734C0 /* COBookDataViewController.m */; };
 		E476AC7A196356B8007734C0 /* BookStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E476AC79196356B8007734C0 /* BookStoryboard_iPad.storyboard */; };
 		E476AC7C196356BF007734C0 /* BookStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E476AC7B196356BF007734C0 /* BookStoryboard_iPhone.storyboard */; };
 		E476AC7F19635C33007734C0 /* COBookModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = E476AC7E19635C33007734C0 /* COBookModelController.m */; };
-		E476AC8119635E0C007734C0 /* Education_Reinvented.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E476AC8019635E0C007734C0 /* Education_Reinvented.pdf */; };
 		E4AFA060196340AB00B54B54 /* COBookTiledPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AFA05F196340AB00B54B54 /* COBookTiledPDFView.m */; };
 		E4AFA0631963441D00B54B54 /* COBookPDFScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AFA0621963441D00B54B54 /* COBookPDFScrollView.m */; };
 		E4DC0AEF195B581E001CE110 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4DC0AEE195B581E001CE110 /* Foundation.framework */; };
@@ -48,13 +49,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E41AC093196B3C2D000A81E6 /* EducationReinvented.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EducationReinvented.pdf; sourceTree = "<group>"; };
+		E41AC097196B4930000A81E6 /* iDiscoveries.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = iDiscoveries.pdf; sourceTree = "<group>"; };
 		E476AC7219634FAC007734C0 /* COBookDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COBookDataViewController.h; sourceTree = "<group>"; };
 		E476AC7319634FAC007734C0 /* COBookDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COBookDataViewController.m; sourceTree = "<group>"; };
 		E476AC79196356B8007734C0 /* BookStoryboard_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BookStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		E476AC7B196356BF007734C0 /* BookStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BookStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		E476AC7D19635C33007734C0 /* COBookModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COBookModelController.h; sourceTree = "<group>"; };
 		E476AC7E19635C33007734C0 /* COBookModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COBookModelController.m; sourceTree = "<group>"; };
-		E476AC8019635E0C007734C0 /* Education_Reinvented.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Education_Reinvented.pdf; sourceTree = "<group>"; };
 		E4AFA05E196340AB00B54B54 /* COBookTiledPDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COBookTiledPDFView.h; sourceTree = "<group>"; };
 		E4AFA05F196340AB00B54B54 /* COBookTiledPDFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COBookTiledPDFView.m; sourceTree = "<group>"; };
 		E4AFA0611963441D00B54B54 /* COBookPDFScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COBookPDFScrollView.h; sourceTree = "<group>"; };
@@ -233,7 +235,8 @@
 		E4DC0AF7195B581E001CE110 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E476AC8019635E0C007734C0 /* Education_Reinvented.pdf */,
+				E41AC093196B3C2D000A81E6 /* EducationReinvented.pdf */,
+				E41AC097196B4930000A81E6 /* iDiscoveries.pdf */,
 				E476AC79196356B8007734C0 /* BookStoryboard_iPad.storyboard */,
 				E476AC7B196356BF007734C0 /* BookStoryboard_iPhone.storyboard */,
 				E4DC0AF8195B581E001CE110 /* SelfUniversity-Info.plist */,
@@ -338,8 +341,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E476AC8119635E0C007734C0 /* Education_Reinvented.pdf in Resources */,
+				E41AC098196B4930000A81E6 /* iDiscoveries.pdf in Resources */,
 				E476AC7A196356B8007734C0 /* BookStoryboard_iPad.storyboard in Resources */,
+				E41AC094196B3C2D000A81E6 /* EducationReinvented.pdf in Resources */,
 				E4DC0AFB195B581E001CE110 /* InfoPlist.strings in Resources */,
 				E476AC7C196356BF007734C0 /* BookStoryboard_iPhone.storyboard in Resources */,
 				E4DC0B06195B581E001CE110 /* Images.xcassets in Resources */,

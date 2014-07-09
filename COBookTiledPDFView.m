@@ -50,7 +50,10 @@
 - (void)setPage:(CGPDFPageRef)newPage
 {
     if( self.m_pdfPage != NULL ) CGPDFPageRelease( self.m_pdfPage );
-    if( newPage != NULL ) self.m_pdfPage = CGPDFPageRetain( newPage );
+    if( newPage != NULL ) {
+        self.m_pdfPage = CGPDFPageRetain( newPage );
+        self.m_pdfPageRect = CGPDFPageGetBoxRect(newPage, kCGPDFCropBox);
+    }
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -70,7 +73,10 @@
     CGContextSaveGState(context);
     
     // Flip the context so that the PDF page is rendered right side up.
-    CGContextTranslateCTM(context, 0.0, self.bounds.size.height);
+    // If the height of the pdf page is smaller than the height of the window, then translate only the actual height of the page.
+    NSLog(@"%s Displaying PDF page of height %f, in a window of height %f.", __PRETTY_FUNCTION__, self.m_pdfPageRect.size.height, self.bounds.size.height);
+    CGContextTranslateCTM(context, 0.0, (self.bounds.size.height < self.m_pdfPageRect.size.height) ? self.bounds.size.height : self.m_pdfPageRect.size.height);
+
     
     CGContextScaleCTM(context, 1.0, -1.0);
     

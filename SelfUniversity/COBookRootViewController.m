@@ -85,6 +85,8 @@
     CGRect pageViewRect = self.view.bounds;
     pageViewRect.size.height -= self.m_tabBarController.tabBar.bounds.size.height;
     self.m_pageViewController.view.frame = pageViewRect;
+    
+    NSLog(@"%s Setting view frame bounds to %@.", __PRETTY_FUNCTION__, NSStringFromCGRect(pageViewRect));
 }
 
 // -----------------------------------------------------------------------------------------------------------------

@@ -159,10 +159,10 @@
 
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
 {
-    NSLog(@"BEFORE  %s scale=%f, _PDFScale=%f",__PRETTY_FUNCTION__,scale,_m_PDFScale);
+    NSLog(@"BEFORE  %s scale=%f, _PDFScale=%f",__PRETTY_FUNCTION__,scale,self.m_PDFScale);
     // Set the new scale factor for the TiledPDFView.
-    _m_PDFScale *= scale;
-    NSLog(@"AFTER  %s scale=%f, _m_PDFScale=%f newFrame=%@",__PRETTY_FUNCTION__, scale, _m_PDFScale, NSStringFromCGRect(self.m_oldTiledPDFView.frame));
+    self.m_PDFScale *= scale;
+    NSLog(@"AFTER  %s scale=%f, _m_PDFScale=%f newFrame=%@",__PRETTY_FUNCTION__, scale, self.m_PDFScale, NSStringFromCGRect(self.m_oldTiledPDFView.frame));
     
     // Create a new tiled PDF View at the new scale
     [self replaceTiledPDFViewWithFrame:self.m_oldTiledPDFView.frame];
@@ -173,7 +173,8 @@
 -(void)replaceTiledPDFViewWithFrame:(CGRect)frame
 {
     // Create a new tiled PDF View at the new scale
-    COBookTiledPDFView *tiledPDFView = [[COBookTiledPDFView alloc] initWithFrame:frame scale:_m_PDFScale];
+    NSLog(@"%s Creating a new tiled PDF View with frame %@ at scale %f", __PRETTY_FUNCTION__, NSStringFromCGRect(frame), self.m_PDFScale);
+    COBookTiledPDFView *tiledPDFView = [[COBookTiledPDFView alloc] initWithFrame:frame scale:self.m_PDFScale];
     [tiledPDFView setPage:g_PDFPage];
     
     // Add the new TiledPDFView to the PDFScrollView.
