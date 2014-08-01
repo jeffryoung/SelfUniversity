@@ -10,6 +10,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface COVisionViewController : UIViewController
+@interface COVisionViewController : UITableViewController
+@property (nonatomic, strong) UITabBarController *m_tabBarController;
 
 @end

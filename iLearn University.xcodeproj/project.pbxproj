@@ -1,0 +1,604 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E40ABE771975CC530014E1A1 /* iLearnUniversity.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E40ABE761975CC530014E1A1 /* iLearnUniversity.pdf */; };
+		E476AC7419634FAC007734C0 /* COBookDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E476AC7319634FAC007734C0 /* COBookDataViewController.m */; };
+		E476AC7A196356B8007734C0 /* BookStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E476AC79196356B8007734C0 /* BookStoryboard_iPad.storyboard */; };
+		E476AC7C196356BF007734C0 /* BookStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E476AC7B196356BF007734C0 /* BookStoryboard_iPhone.storyboard */; };
+		E476AC7F19635C33007734C0 /* COBookModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = E476AC7E19635C33007734C0 /* COBookModelController.m */; };
+		E4AFA060196340AB00B54B54 /* COBookTiledPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AFA05F196340AB00B54B54 /* COBookTiledPDFView.m */; };
+		E4AFA0631963441D00B54B54 /* COBookPDFScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AFA0621963441D00B54B54 /* COBookPDFScrollView.m */; };
+		E4DC0AEF195B581E001CE110 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4DC0AEE195B581E001CE110 /* Foundation.framework */; };
+		E4DC0AF1195B581E001CE110 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4DC0AF0195B581E001CE110 /* CoreGraphics.framework */; };
+		E4DC0AF3195B581E001CE110 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4DC0AF2195B581E001CE110 /* UIKit.framework */; };
+		E4DC0AF5195B581E001CE110 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4DC0AF4195B581E001CE110 /* CoreData.framework */; };
+		E4DC0AFB195B581E001CE110 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E4DC0AF9195B581E001CE110 /* InfoPlist.strings */; };
+		E4DC0AFD195B581E001CE110 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC0AFC195B581E001CE110 /* main.m */; };
+		E4DC0B01195B581E001CE110 /* COAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC0B00195B581E001CE110 /* COAppDelegate.m */; };
+		E4DC0B04195B581E001CE110 /* iLearn University.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E4DC0B02195B581E001CE110 /* iLearn University.xcdatamodeld */; };
+		E4DC0B06195B581E001CE110 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4DC0B05195B581E001CE110 /* Images.xcassets */; };
+		E4DC0B0D195B581E001CE110 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4DC0B0C195B581E001CE110 /* XCTest.framework */; };
+		E4DC0B0E195B581E001CE110 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4DC0AEE195B581E001CE110 /* Foundation.framework */; };
+		E4DC0B0F195B581E001CE110 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4DC0AF2195B581E001CE110 /* UIKit.framework */; };
+		E4DC0B10195B581E001CE110 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4DC0AF4195B581E001CE110 /* CoreData.framework */; };
+		E4DC0B18195B581E001CE110 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E4DC0B16195B581E001CE110 /* InfoPlist.strings */; };
+		E4DC0B1A195B581E001CE110 /* SelfUniversityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC0B19195B581E001CE110 /* SelfUniversityTests.m */; };
+		E4DC0B27195B6CAB001CE110 /* COBookRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC0B26195B6CAB001CE110 /* COBookRootViewController.m */; };
+		E4DC0B2A195B6CD6001CE110 /* COVisionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC0B29195B6CD6001CE110 /* COVisionViewController.m */; };
+		E4DC0B2D195B6CF2001CE110 /* COContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC0B2C195B6CF2001CE110 /* COContentViewController.m */; };
+		E4DC0B30195B6D11001CE110 /* COPracticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC0B2F195B6D11001CE110 /* COPracticeViewController.m */; };
+		E4DC0B33195B6D2A001CE110 /* COProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC0B32195B6D2A001CE110 /* COProjectViewController.m */; };
+		E4DC0B36195B6D40001CE110 /* COPortfolioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC0B35195B6D40001CE110 /* COPortfolioViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E4DC0B11195B581E001CE110 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E4DC0AE3195B581E001CE110 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E4DC0AEA195B581E001CE110;
+			remoteInfo = SelfUniversity;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E40ABE761975CC530014E1A1 /* iLearnUniversity.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = iLearnUniversity.pdf; sourceTree = "<group>"; };
+		E476AC7219634FAC007734C0 /* COBookDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COBookDataViewController.h; sourceTree = "<group>"; };
+		E476AC7319634FAC007734C0 /* COBookDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COBookDataViewController.m; sourceTree = "<group>"; };
+		E476AC79196356B8007734C0 /* BookStoryboard_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BookStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		E476AC7B196356BF007734C0 /* BookStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BookStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		E476AC7D19635C33007734C0 /* COBookModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COBookModelController.h; sourceTree = "<group>"; };
+		E476AC7E19635C33007734C0 /* COBookModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COBookModelController.m; sourceTree = "<group>"; };
+		E4AFA05E196340AB00B54B54 /* COBookTiledPDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COBookTiledPDFView.h; sourceTree = "<group>"; };
+		E4AFA05F196340AB00B54B54 /* COBookTiledPDFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COBookTiledPDFView.m; sourceTree = "<group>"; };
+		E4AFA0611963441D00B54B54 /* COBookPDFScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COBookPDFScrollView.h; sourceTree = "<group>"; };
+		E4AFA0621963441D00B54B54 /* COBookPDFScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COBookPDFScrollView.m; sourceTree = "<group>"; };
+		E4DC0AEB195B581E001CE110 /* iLearn University.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iLearn University.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4DC0AEE195B581E001CE110 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E4DC0AF0195B581E001CE110 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E4DC0AF2195B581E001CE110 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E4DC0AF4195B581E001CE110 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		E4DC0AF8195B581E001CE110 /* iLearn University-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iLearn University-Info.plist"; sourceTree = "<group>"; };
+		E4DC0AFA195B581E001CE110 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E4DC0AFC195B581E001CE110 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E4DC0AFE195B581E001CE110 /* iLearn University-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iLearn University-Prefix.pch"; sourceTree = "<group>"; };
+		E4DC0AFF195B581E001CE110 /* COAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = COAppDelegate.h; sourceTree = "<group>"; };
+		E4DC0B00195B581E001CE110 /* COAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = COAppDelegate.m; sourceTree = "<group>"; };
+		E4DC0B03195B581E001CE110 /* iLearn University.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iLearn University.xcdatamodel"; sourceTree = "<group>"; };
+		E4DC0B05195B581E001CE110 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		E4DC0B0B195B581E001CE110 /* iLearn UniversityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iLearn UniversityTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4DC0B0C195B581E001CE110 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		E4DC0B15195B581E001CE110 /* iLearn UniversityTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iLearn UniversityTests-Info.plist"; sourceTree = "<group>"; };
+		E4DC0B17195B581E001CE110 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E4DC0B19195B581E001CE110 /* SelfUniversityTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelfUniversityTests.m; sourceTree = "<group>"; };
+		E4DC0B24195B5870001CE110 /* COGlobalDefsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COGlobalDefsConstants.h; sourceTree = "<group>"; };
+		E4DC0B25195B6CAB001CE110 /* COBookRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COBookRootViewController.h; sourceTree = "<group>"; };
+		E4DC0B26195B6CAB001CE110 /* COBookRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COBookRootViewController.m; sourceTree = "<group>"; };
+		E4DC0B28195B6CD6001CE110 /* COVisionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COVisionViewController.h; sourceTree = "<group>"; };
+		E4DC0B29195B6CD6001CE110 /* COVisionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COVisionViewController.m; sourceTree = "<group>"; };
+		E4DC0B2B195B6CF2001CE110 /* COContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COContentViewController.h; sourceTree = "<group>"; };
+		E4DC0B2C195B6CF2001CE110 /* COContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COContentViewController.m; sourceTree = "<group>"; };
+		E4DC0B2E195B6D11001CE110 /* COPracticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COPracticeViewController.h; sourceTree = "<group>"; };
+		E4DC0B2F195B6D11001CE110 /* COPracticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COPracticeViewController.m; sourceTree = "<group>"; };
+		E4DC0B31195B6D2A001CE110 /* COProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COProjectViewController.h; sourceTree = "<group>"; };
+		E4DC0B32195B6D2A001CE110 /* COProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COProjectViewController.m; sourceTree = "<group>"; };
+		E4DC0B34195B6D40001CE110 /* COPortfolioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COPortfolioViewController.h; sourceTree = "<group>"; };
+		E4DC0B35195B6D40001CE110 /* COPortfolioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COPortfolioViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E4DC0AE8195B581E001CE110 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4DC0AF1195B581E001CE110 /* CoreGraphics.framework in Frameworks */,
+				E4DC0AF5195B581E001CE110 /* CoreData.framework in Frameworks */,
+				E4DC0AF3195B581E001CE110 /* UIKit.framework in Frameworks */,
+				E4DC0AEF195B581E001CE110 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4DC0B08195B581E001CE110 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4DC0B0D195B581E001CE110 /* XCTest.framework in Frameworks */,
+				E4DC0B10195B581E001CE110 /* CoreData.framework in Frameworks */,
+				E4DC0B0F195B581E001CE110 /* UIKit.framework in Frameworks */,
+				E4DC0B0E195B581E001CE110 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E4DAD8EB1969F34B001C59A7 /* Book View */ = {
+			isa = PBXGroup;
+			children = (
+				E4DC0B25195B6CAB001CE110 /* COBookRootViewController.h */,
+				E4DC0B26195B6CAB001CE110 /* COBookRootViewController.m */,
+				E476AC7219634FAC007734C0 /* COBookDataViewController.h */,
+				E476AC7319634FAC007734C0 /* COBookDataViewController.m */,
+				E476AC7D19635C33007734C0 /* COBookModelController.h */,
+				E476AC7E19635C33007734C0 /* COBookModelController.m */,
+				E4AFA0611963441D00B54B54 /* COBookPDFScrollView.h */,
+				E4AFA0621963441D00B54B54 /* COBookPDFScrollView.m */,
+				E4AFA05E196340AB00B54B54 /* COBookTiledPDFView.h */,
+				E4AFA05F196340AB00B54B54 /* COBookTiledPDFView.m */,
+			);
+			name = "Book View";
+			sourceTree = "<group>";
+		};
+		E4DAD8EC1969F3F2001C59A7 /* Content View */ = {
+			isa = PBXGroup;
+			children = (
+				E4DC0B2B195B6CF2001CE110 /* COContentViewController.h */,
+				E4DC0B2C195B6CF2001CE110 /* COContentViewController.m */,
+			);
+			name = "Content View";
+			sourceTree = "<group>";
+		};
+		E4DAD8ED1969F415001C59A7 /* Portfolio View */ = {
+			isa = PBXGroup;
+			children = (
+				E4DC0B34195B6D40001CE110 /* COPortfolioViewController.h */,
+				E4DC0B35195B6D40001CE110 /* COPortfolioViewController.m */,
+			);
+			name = "Portfolio View";
+			sourceTree = "<group>";
+		};
+		E4DAD8EE1969F426001C59A7 /* Practice View */ = {
+			isa = PBXGroup;
+			children = (
+				E4DC0B2E195B6D11001CE110 /* COPracticeViewController.h */,
+				E4DC0B2F195B6D11001CE110 /* COPracticeViewController.m */,
+			);
+			name = "Practice View";
+			sourceTree = "<group>";
+		};
+		E4DAD8EF1969F438001C59A7 /* Project View */ = {
+			isa = PBXGroup;
+			children = (
+				E4DC0B31195B6D2A001CE110 /* COProjectViewController.h */,
+				E4DC0B32195B6D2A001CE110 /* COProjectViewController.m */,
+			);
+			name = "Project View";
+			sourceTree = "<group>";
+		};
+		E4DAD8F01969F44D001C59A7 /* Inquiry View */ = {
+			isa = PBXGroup;
+			children = (
+				E4DC0B28195B6CD6001CE110 /* COVisionViewController.h */,
+				E4DC0B29195B6CD6001CE110 /* COVisionViewController.m */,
+			);
+			name = "Inquiry View";
+			sourceTree = "<group>";
+		};
+		E4DC0AE2195B581E001CE110 = {
+			isa = PBXGroup;
+			children = (
+				E4DC0AF6195B581E001CE110 /* iLearn University */,
+				E4DC0B13195B581E001CE110 /* iLearn UniversityTests */,
+				E4DC0AED195B581E001CE110 /* Frameworks */,
+				E4DC0AEC195B581E001CE110 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E4DC0AEC195B581E001CE110 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E4DC0AEB195B581E001CE110 /* iLearn University.app */,
+				E4DC0B0B195B581E001CE110 /* iLearn UniversityTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E4DC0AED195B581E001CE110 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E4DC0AEE195B581E001CE110 /* Foundation.framework */,
+				E4DC0AF0195B581E001CE110 /* CoreGraphics.framework */,
+				E4DC0AF2195B581E001CE110 /* UIKit.framework */,
+				E4DC0AF4195B581E001CE110 /* CoreData.framework */,
+				E4DC0B0C195B581E001CE110 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E4DC0AF6195B581E001CE110 /* iLearn University */ = {
+			isa = PBXGroup;
+			children = (
+				E4DC0B24195B5870001CE110 /* COGlobalDefsConstants.h */,
+				E4DC0AFF195B581E001CE110 /* COAppDelegate.h */,
+				E4DC0B00195B581E001CE110 /* COAppDelegate.m */,
+				E4DAD8EB1969F34B001C59A7 /* Book View */,
+				E4DAD8EC1969F3F2001C59A7 /* Content View */,
+				E4DAD8F01969F44D001C59A7 /* Inquiry View */,
+				E4DAD8ED1969F415001C59A7 /* Portfolio View */,
+				E4DAD8EE1969F426001C59A7 /* Practice View */,
+				E4DAD8EF1969F438001C59A7 /* Project View */,
+				E4DC0B05195B581E001CE110 /* Images.xcassets */,
+				E4DC0B02195B581E001CE110 /* iLearn University.xcdatamodeld */,
+				E4DC0AF7195B581E001CE110 /* Supporting Files */,
+			);
+			name = "iLearn University";
+			path = SelfUniversity;
+			sourceTree = "<group>";
+		};
+		E4DC0AF7195B581E001CE110 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E476AC79196356B8007734C0 /* BookStoryboard_iPad.storyboard */,
+				E476AC7B196356BF007734C0 /* BookStoryboard_iPhone.storyboard */,
+				E40ABE761975CC530014E1A1 /* iLearnUniversity.pdf */,
+				E4DC0AF8195B581E001CE110 /* iLearn University-Info.plist */,
+				E4DC0AF9195B581E001CE110 /* InfoPlist.strings */,
+				E4DC0AFC195B581E001CE110 /* main.m */,
+				E4DC0AFE195B581E001CE110 /* iLearn University-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E4DC0B13195B581E001CE110 /* iLearn UniversityTests */ = {
+			isa = PBXGroup;
+			children = (
+				E4DC0B19195B581E001CE110 /* SelfUniversityTests.m */,
+				E4DC0B14195B581E001CE110 /* Supporting Files */,
+			);
+			name = "iLearn UniversityTests";
+			path = SelfUniversityTests;
+			sourceTree = "<group>";
+		};
+		E4DC0B14195B581E001CE110 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E4DC0B15195B581E001CE110 /* iLearn UniversityTests-Info.plist */,
+				E4DC0B16195B581E001CE110 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E4DC0AEA195B581E001CE110 /* iLearn University */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E4DC0B1D195B581E001CE110 /* Build configuration list for PBXNativeTarget "iLearn University" */;
+			buildPhases = (
+				E4DC0AE7195B581E001CE110 /* Sources */,
+				E4DC0AE8195B581E001CE110 /* Frameworks */,
+				E4DC0AE9195B581E001CE110 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "iLearn University";
+			productName = SelfUniversity;
+			productReference = E4DC0AEB195B581E001CE110 /* iLearn University.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E4DC0B0A195B581E001CE110 /* iLearn UniversityTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E4DC0B20195B581E001CE110 /* Build configuration list for PBXNativeTarget "iLearn UniversityTests" */;
+			buildPhases = (
+				E4DC0B07195B581E001CE110 /* Sources */,
+				E4DC0B08195B581E001CE110 /* Frameworks */,
+				E4DC0B09195B581E001CE110 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E4DC0B12195B581E001CE110 /* PBXTargetDependency */,
+			);
+			name = "iLearn UniversityTests";
+			productName = SelfUniversityTests;
+			productReference = E4DC0B0B195B581E001CE110 /* iLearn UniversityTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E4DC0AE3195B581E001CE110 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = CO;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "infinite Discoveries";
+				TargetAttributes = {
+					E4DC0B0A195B581E001CE110 = {
+						TestTargetID = E4DC0AEA195B581E001CE110;
+					};
+				};
+			};
+			buildConfigurationList = E4DC0AE6195B581E001CE110 /* Build configuration list for PBXProject "iLearn University" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E4DC0AE2195B581E001CE110;
+			productRefGroup = E4DC0AEC195B581E001CE110 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E4DC0AEA195B581E001CE110 /* iLearn University */,
+				E4DC0B0A195B581E001CE110 /* iLearn UniversityTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E4DC0AE9195B581E001CE110 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E476AC7A196356B8007734C0 /* BookStoryboard_iPad.storyboard in Resources */,
+				E4DC0AFB195B581E001CE110 /* InfoPlist.strings in Resources */,
+				E476AC7C196356BF007734C0 /* BookStoryboard_iPhone.storyboard in Resources */,
+				E40ABE771975CC530014E1A1 /* iLearnUniversity.pdf in Resources */,
+				E4DC0B06195B581E001CE110 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4DC0B09195B581E001CE110 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4DC0B18195B581E001CE110 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E4DC0AE7195B581E001CE110 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E476AC7F19635C33007734C0 /* COBookModelController.m in Sources */,
+				E4DC0B30195B6D11001CE110 /* COPracticeViewController.m in Sources */,
+				E4DC0B27195B6CAB001CE110 /* COBookRootViewController.m in Sources */,
+				E4AFA0631963441D00B54B54 /* COBookPDFScrollView.m in Sources */,
+				E476AC7419634FAC007734C0 /* COBookDataViewController.m in Sources */,
+				E4DC0B04195B581E001CE110 /* iLearn University.xcdatamodeld in Sources */,
+				E4DC0B01195B581E001CE110 /* COAppDelegate.m in Sources */,
+				E4DC0B33195B6D2A001CE110 /* COProjectViewController.m in Sources */,
+				E4AFA060196340AB00B54B54 /* COBookTiledPDFView.m in Sources */,
+				E4DC0B2A195B6CD6001CE110 /* COVisionViewController.m in Sources */,
+				E4DC0B2D195B6CF2001CE110 /* COContentViewController.m in Sources */,
+				E4DC0B36195B6D40001CE110 /* COPortfolioViewController.m in Sources */,
+				E4DC0AFD195B581E001CE110 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4DC0B07195B581E001CE110 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4DC0B1A195B581E001CE110 /* SelfUniversityTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E4DC0B12195B581E001CE110 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E4DC0AEA195B581E001CE110 /* iLearn University */;
+			targetProxy = E4DC0B11195B581E001CE110 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E4DC0AF9195B581E001CE110 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E4DC0AFA195B581E001CE110 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		E4DC0B16195B581E001CE110 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E4DC0B17195B581E001CE110 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E4DC0B1B195B581E001CE110 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E4DC0B1C195B581E001CE110 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E4DC0B1E195B581E001CE110 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SelfUniversity/iLearn University-Prefix.pch";
+				INFOPLIST_FILE = "SelfUniversity/iLearn University-Info.plist";
+				PRODUCT_NAME = "iLearn University";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		E4DC0B1F195B581E001CE110 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SelfUniversity/iLearn University-Prefix.pch";
+				INFOPLIST_FILE = "SelfUniversity/iLearn University-Info.plist";
+				PRODUCT_NAME = "iLearn University";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		E4DC0B21195B581E001CE110 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SelfUniversity.app/SelfUniversity";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SelfUniversity/SelfUniversity-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SelfUniversityTests/iLearn UniversityTests-Info.plist";
+				PRODUCT_NAME = "iLearn UniversityTests";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		E4DC0B22195B581E001CE110 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SelfUniversity.app/SelfUniversity";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SelfUniversity/SelfUniversity-Prefix.pch";
+				INFOPLIST_FILE = "SelfUniversityTests/iLearn UniversityTests-Info.plist";
+				PRODUCT_NAME = "iLearn UniversityTests";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E4DC0AE6195B581E001CE110 /* Build configuration list for PBXProject "iLearn University" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E4DC0B1B195B581E001CE110 /* Debug */,
+				E4DC0B1C195B581E001CE110 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E4DC0B1D195B581E001CE110 /* Build configuration list for PBXNativeTarget "iLearn University" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E4DC0B1E195B581E001CE110 /* Debug */,
+				E4DC0B1F195B581E001CE110 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E4DC0B20195B581E001CE110 /* Build configuration list for PBXNativeTarget "iLearn UniversityTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E4DC0B21195B581E001CE110 /* Debug */,
+				E4DC0B22195B581E001CE110 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E4DC0B02195B581E001CE110 /* iLearn University.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E4DC0B03195B581E001CE110 /* iLearn University.xcdatamodel */,
+			);
+			currentVersion = E4DC0B03195B581E001CE110 /* iLearn University.xcdatamodel */;
+			path = "iLearn University.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = E4DC0AE3195B581E001CE110 /* Project object */;
+}

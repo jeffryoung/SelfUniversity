@@ -35,6 +35,8 @@
     bvc.m_tabBarController = tabBarController;
     
     COVisionViewController *vvc = [[COVisionViewController alloc] init];
+    vvc.m_tabBarController = tabBarController;
+    
     COContentViewController *cvc = [[COContentViewController alloc] init];
     COPracticeViewController *pravc = [[COPracticeViewController alloc] init];
     COProjectViewController *provc = [[COProjectViewController alloc] init];
