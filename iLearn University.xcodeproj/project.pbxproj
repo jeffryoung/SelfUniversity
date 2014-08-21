@@ -7,13 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E40ABE771975CC530014E1A1 /* iLearnUniversity.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E40ABE761975CC530014E1A1 /* iLearnUniversity.pdf */; };
+		E408AEA219A3DD6600D63E0A /* COVisionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E408AEA019A3DD6600D63E0A /* COVisionDetailViewController.m */; };
+		E408AEA319A3DD6600D63E0A /* COVisionDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E408AEA119A3DD6600D63E0A /* COVisionDetailViewController.xib */; };
+		E424CEE219A2989500CF945D /* COLearningGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E424CEE119A2989500CF945D /* COLearningGuideViewController.m */; };
+		E426CD97199BED2E00C352E0 /* COVisionItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E426CD96199BED2E00C352E0 /* COVisionItemStore.m */; };
+		E426CD9A199BEE1600C352E0 /* COVisionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E426CD99199BEE1600C352E0 /* COVisionItem.m */; };
+		E426CDA3199C3FF000C352E0 /* COVisionTypeSelectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E426CDA1199C3FF000C352E0 /* COVisionTypeSelectorTableViewController.m */; };
 		E476AC7419634FAC007734C0 /* COBookDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E476AC7319634FAC007734C0 /* COBookDataViewController.m */; };
 		E476AC7A196356B8007734C0 /* BookStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E476AC79196356B8007734C0 /* BookStoryboard_iPad.storyboard */; };
 		E476AC7C196356BF007734C0 /* BookStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E476AC7B196356BF007734C0 /* BookStoryboard_iPhone.storyboard */; };
 		E476AC7F19635C33007734C0 /* COBookModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = E476AC7E19635C33007734C0 /* COBookModelController.m */; };
 		E4AFA060196340AB00B54B54 /* COBookTiledPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AFA05F196340AB00B54B54 /* COBookTiledPDFView.m */; };
 		E4AFA0631963441D00B54B54 /* COBookPDFScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AFA0621963441D00B54B54 /* COBookPDFScrollView.m */; };
+		E4C28614199ABDCE00DB405B /* iLearn University.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E4C28613199ABDCE00DB405B /* iLearn University.pdf */; };
 		E4DC0AEF195B581E001CE110 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4DC0AEE195B581E001CE110 /* Foundation.framework */; };
 		E4DC0AF1195B581E001CE110 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4DC0AF0195B581E001CE110 /* CoreGraphics.framework */; };
 		E4DC0AF3195B581E001CE110 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4DC0AF2195B581E001CE110 /* UIKit.framework */; };
@@ -48,7 +54,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E40ABE761975CC530014E1A1 /* iLearnUniversity.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = iLearnUniversity.pdf; sourceTree = "<group>"; };
+		E408AE9F19A3DD6600D63E0A /* COVisionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COVisionDetailViewController.h; sourceTree = "<group>"; };
+		E408AEA019A3DD6600D63E0A /* COVisionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COVisionDetailViewController.m; sourceTree = "<group>"; };
+		E408AEA119A3DD6600D63E0A /* COVisionDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = COVisionDetailViewController.xib; sourceTree = "<group>"; };
+		E424CEE019A2989500CF945D /* COLearningGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COLearningGuideViewController.h; sourceTree = "<group>"; };
+		E424CEE119A2989500CF945D /* COLearningGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COLearningGuideViewController.m; sourceTree = "<group>"; };
+		E426CD95199BED2E00C352E0 /* COVisionItemStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COVisionItemStore.h; sourceTree = "<group>"; };
+		E426CD96199BED2E00C352E0 /* COVisionItemStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COVisionItemStore.m; sourceTree = "<group>"; };
+		E426CD98199BEE1600C352E0 /* COVisionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COVisionItem.h; sourceTree = "<group>"; };
+		E426CD99199BEE1600C352E0 /* COVisionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COVisionItem.m; sourceTree = "<group>"; };
+		E426CDA0199C3FF000C352E0 /* COVisionTypeSelectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COVisionTypeSelectorTableViewController.h; sourceTree = "<group>"; };
+		E426CDA1199C3FF000C352E0 /* COVisionTypeSelectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COVisionTypeSelectorTableViewController.m; sourceTree = "<group>"; };
 		E476AC7219634FAC007734C0 /* COBookDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COBookDataViewController.h; sourceTree = "<group>"; };
 		E476AC7319634FAC007734C0 /* COBookDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COBookDataViewController.m; sourceTree = "<group>"; };
 		E476AC79196356B8007734C0 /* BookStoryboard_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BookStoryboard_iPad.storyboard; sourceTree = "<group>"; };
@@ -59,6 +75,7 @@
 		E4AFA05F196340AB00B54B54 /* COBookTiledPDFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COBookTiledPDFView.m; sourceTree = "<group>"; };
 		E4AFA0611963441D00B54B54 /* COBookPDFScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COBookPDFScrollView.h; sourceTree = "<group>"; };
 		E4AFA0621963441D00B54B54 /* COBookPDFScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COBookPDFScrollView.m; sourceTree = "<group>"; };
+		E4C28613199ABDCE00DB405B /* iLearn University.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "iLearn University.pdf"; sourceTree = "<group>"; };
 		E4DC0AEB195B581E001CE110 /* iLearn University.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iLearn University.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4DC0AEE195B581E001CE110 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E4DC0AF0195B581E001CE110 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -118,6 +135,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E424CEE319A298A500CF945D /* Learning Guide View */ = {
+			isa = PBXGroup;
+			children = (
+				E424CEE019A2989500CF945D /* COLearningGuideViewController.h */,
+				E424CEE119A2989500CF945D /* COLearningGuideViewController.m */,
+			);
+			name = "Learning Guide View";
+			sourceTree = "<group>";
+		};
 		E4DAD8EB1969F34B001C59A7 /* Book View */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,8 +200,17 @@
 		E4DAD8F01969F44D001C59A7 /* Inquiry View */ = {
 			isa = PBXGroup;
 			children = (
+				E426CD98199BEE1600C352E0 /* COVisionItem.h */,
+				E426CD99199BEE1600C352E0 /* COVisionItem.m */,
+				E426CD95199BED2E00C352E0 /* COVisionItemStore.h */,
+				E426CD96199BED2E00C352E0 /* COVisionItemStore.m */,
 				E4DC0B28195B6CD6001CE110 /* COVisionViewController.h */,
 				E4DC0B29195B6CD6001CE110 /* COVisionViewController.m */,
+				E408AE9F19A3DD6600D63E0A /* COVisionDetailViewController.h */,
+				E408AEA019A3DD6600D63E0A /* COVisionDetailViewController.m */,
+				E408AEA119A3DD6600D63E0A /* COVisionDetailViewController.xib */,
+				E426CDA0199C3FF000C352E0 /* COVisionTypeSelectorTableViewController.h */,
+				E426CDA1199C3FF000C352E0 /* COVisionTypeSelectorTableViewController.m */,
 			);
 			name = "Inquiry View";
 			sourceTree = "<group>";
@@ -220,6 +255,7 @@
 				E4DAD8EB1969F34B001C59A7 /* Book View */,
 				E4DAD8EC1969F3F2001C59A7 /* Content View */,
 				E4DAD8F01969F44D001C59A7 /* Inquiry View */,
+				E424CEE319A298A500CF945D /* Learning Guide View */,
 				E4DAD8ED1969F415001C59A7 /* Portfolio View */,
 				E4DAD8EE1969F426001C59A7 /* Practice View */,
 				E4DAD8EF1969F438001C59A7 /* Project View */,
@@ -236,7 +272,7 @@
 			children = (
 				E476AC79196356B8007734C0 /* BookStoryboard_iPad.storyboard */,
 				E476AC7B196356BF007734C0 /* BookStoryboard_iPhone.storyboard */,
-				E40ABE761975CC530014E1A1 /* iLearnUniversity.pdf */,
+				E4C28613199ABDCE00DB405B /* iLearn University.pdf */,
 				E4DC0AF8195B581E001CE110 /* iLearn University-Info.plist */,
 				E4DC0AF9195B581E001CE110 /* InfoPlist.strings */,
 				E4DC0AFC195B581E001CE110 /* main.m */,
@@ -342,8 +378,9 @@
 			files = (
 				E476AC7A196356B8007734C0 /* BookStoryboard_iPad.storyboard in Resources */,
 				E4DC0AFB195B581E001CE110 /* InfoPlist.strings in Resources */,
+				E408AEA319A3DD6600D63E0A /* COVisionDetailViewController.xib in Resources */,
 				E476AC7C196356BF007734C0 /* BookStoryboard_iPhone.storyboard in Resources */,
-				E40ABE771975CC530014E1A1 /* iLearnUniversity.pdf in Resources */,
+				E4C28614199ABDCE00DB405B /* iLearn University.pdf in Resources */,
 				E4DC0B06195B581E001CE110 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -364,12 +401,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				E476AC7F19635C33007734C0 /* COBookModelController.m in Sources */,
+				E424CEE219A2989500CF945D /* COLearningGuideViewController.m in Sources */,
+				E426CD9A199BEE1600C352E0 /* COVisionItem.m in Sources */,
 				E4DC0B30195B6D11001CE110 /* COPracticeViewController.m in Sources */,
 				E4DC0B27195B6CAB001CE110 /* COBookRootViewController.m in Sources */,
 				E4AFA0631963441D00B54B54 /* COBookPDFScrollView.m in Sources */,
 				E476AC7419634FAC007734C0 /* COBookDataViewController.m in Sources */,
 				E4DC0B04195B581E001CE110 /* iLearn University.xcdatamodeld in Sources */,
+				E426CD97199BED2E00C352E0 /* COVisionItemStore.m in Sources */,
+				E426CDA3199C3FF000C352E0 /* COVisionTypeSelectorTableViewController.m in Sources */,
 				E4DC0B01195B581E001CE110 /* COAppDelegate.m in Sources */,
+				E408AEA219A3DD6600D63E0A /* COVisionDetailViewController.m in Sources */,
 				E4DC0B33195B6D2A001CE110 /* COProjectViewController.m in Sources */,
 				E4AFA060196340AB00B54B54 /* COBookTiledPDFView.m in Sources */,
 				E4DC0B2A195B6CD6001CE110 /* COVisionViewController.m in Sources */,

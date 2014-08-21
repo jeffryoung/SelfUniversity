@@ -9,8 +9,12 @@
 // =================================================================================================================
 
 #import <UIKit/UIKit.h>
+#import "COGlobalDefsConstants.h"
+#import "COVisionTypeSelectorTableViewController.h"
 
-@interface COVisionViewController : UITableViewController
+@interface COVisionViewController : UITableViewController <COVisionTypeSelectorDelegate>
+
 @property (nonatomic, strong) UITabBarController *m_tabBarController;
+@property (nonatomic) NSInteger m_nVisionTypeSelected;
 
 @end

@@ -28,7 +28,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Set the tab bar item's title
-        self.tabBarItem.title = @"Book";
+        self.tabBarItem.title = @"Library";
         
         // Create a UIImage from the icon
         UIImage *image = [UIImage imageNamed:@"BookIcon.png"];
@@ -53,11 +53,11 @@
     self.m_pageViewController.delegate = self;
     
     UIStoryboard *storyboard;
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+//    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         storyboard = [UIStoryboard storyboardWithName:@"BookStoryboard_iPad" bundle:nil];
-    } else {
-        storyboard = [UIStoryboard storyboardWithName:@"BookStoryboard_iPhone" bundle:nil];
-    }
+//    } else {
+//        storyboard = [UIStoryboard storyboardWithName:@"BookStoryboard_iPhone" bundle:nil];
+//    }
 
     COBookDataViewController *startingViewController = [self.modelController viewControllerAtIndex:0 storyboard:storyboard];
     NSArray *viewControllers = @[startingViewController];

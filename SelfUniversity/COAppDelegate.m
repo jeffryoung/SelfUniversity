@@ -12,6 +12,7 @@
 #import "COBookRootViewController.h"
 #import "COVisionViewController.h"
 #import "COContentViewController.h"
+#import "COLearningGuideViewController.h"
 #import "COPracticeViewController.h"
 #import "COProjectViewController.h"
 
@@ -27,24 +28,46 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    self.window.rootViewController = tabBarController;
-    
-    COBookRootViewController *bvc = [[COBookRootViewController alloc] init];
-    bvc.m_tabBarController = tabBarController;
-    
-    COVisionViewController *vvc = [[COVisionViewController alloc] init];
-    vvc.m_tabBarController = tabBarController;
-    
-    COContentViewController *cvc = [[COContentViewController alloc] init];
-    COPracticeViewController *pravc = [[COPracticeViewController alloc] init];
-    COProjectViewController *provc = [[COProjectViewController alloc] init];
-    
-    tabBarController.viewControllers = @[bvc, vvc, cvc, pravc, provc];
-    
-    self.window.backgroundColor = [UIColor whiteColor];
+    if (!self.window.rootViewController) {
+        UITabBarController *tabBarController = [[UITabBarController alloc] init];
+        self.window.rootViewController = tabBarController;
+        
+        // Create a view controller that will display the book.
+        COBookRootViewController *bvc = [[COBookRootViewController alloc] init];
+        bvc.m_tabBarController = tabBarController;
+        
+        // Create a VisionViewController and make it the rootViewController of a UINavigationController
+        COVisionViewController *vvc = [[COVisionViewController alloc] init];
+        vvc.m_tabBarController = tabBarController;
+        UINavigationController *vNavController = [[UINavigationController alloc] initWithRootViewController:vvc];
+        vNavController.restorationIdentifier = NSStringFromClass([vNavController class]);
+        
+        // Create a Content ViewController that will display the notebook
+        COContentViewController *cvc = [[COContentViewController alloc] init];
+        
+        // Create a Learning Guide ViewController that will display connections to learning guides
+        COLearningGuideViewController *lgvc = [[COLearningGuideViewController alloc] init];
+        
+        // Create a Practice ViewController that will display the practice log
+        COPracticeViewController *pravc = [[COPracticeViewController alloc] init];
+        
+        // Create a Project ViewController that will display the Project Tracker
+        COProjectViewController *provc = [[COProjectViewController alloc] init];
+        
+        // Place each tab's controllers into the tab bar array.
+        tabBarController.viewControllers = @[bvc, vNavController, cvc, lgvc, pravc, provc];
+    }
     [self.window makeKeyAndVisible];
+    return YES;
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
+- (BOOL) application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+
     return YES;
 }
 
@@ -191,6 +214,22 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+// =================================================================================================================
+#pragma mark - State Restoration Methods
+// =================================================================================================================
+
+- (BOOL) application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder
+{
+    return YES;
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
+- (BOOL) application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder
+{
+    return YES;
 }
 
 @end
