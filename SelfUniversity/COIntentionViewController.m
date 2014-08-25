@@ -1,23 +1,23 @@
 // =================================================================================================================
 //
-//  COVisionViewController.m
-//  SelfUniversity
+//  COIntensionViewController.m
+//  iLearn University
 //
 //  Created by Jeffrey Young on 6/25/14.
 //  Copyright (c) 2014 infinite Discoveries. All rights reserved.
 //
 // =================================================================================================================
 
-#import "COVisionViewController.h"
-#import "COVisionDetailViewController.h"
-#import "COVisionItemStore.h"
-#import "COVisionItem.h"
+#import "COIntentionViewController.h"
+#import "COIntentionDetailViewController.h"
+#import "COIntentionItemStore.h"
+#import "COIntentionItem.h"
 
-@interface COVisionViewController ()
+@interface COIntentionViewController ()
 
 @end
 
-@implementation COVisionViewController
+@implementation COIntentionViewController
 
 // =================================================================================================================
 #pragma mark - Initialization
@@ -29,16 +29,16 @@
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
         
-        // Temporarily populate a few random Vision Items so we can see what it all looks like.
+        // Temporarily populate a few random intention Items so we can see what it all looks like.
         for (int i=0; i<8; i++) {
-            [[COVisionItemStore sharedVisionItemStore] createVisionItem];
+            [[COIntentionItemStore sharedIntentionItemStore] createIntentionItem];
         }
         
         // Set the contents of the navigation bar with a title and buttons
         UINavigationItem *navItem = self.navigationItem;
-        navItem.title = @"Vision Inquiry";
+        navItem.title = @"Intention";
         
-        UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewVisionItem:)];
+        UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewIntentionItem:)];
         
         // Set this bar button item as the right item in the navigationItem
         navItem.rightBarButtonItem = barButtonItem;
@@ -72,7 +72,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Set the tab bar item's title
-        self.tabBarItem.title = @"Inquiry";
+        self.tabBarItem.title = @"Intention";
         
         // Create a UIImage from the icon
         UIImage *image = [UIImage imageNamed:@"EyeIcon.png"];
@@ -104,59 +104,59 @@
 #pragma mark - Selectors
 // =================================================================================================================
 
-- (IBAction)addNewVisionItem:(id)sender
+- (IBAction)addNewIntentionItem:(id)sender
 {
-    // Create a visionTypeSelector object, display it and allow the user to choose which type of vision object they would like to add.
-    COVisionTypeSelectorTableViewController *visionTypeSelector = [[COVisionTypeSelectorTableViewController alloc] init];
-    visionTypeSelector.m_delegate = self;
-    visionTypeSelector.m_dismissBlock = ^{
-        [self createNewVisionType];
+    // Create a intentionTypeSelector object, display it and allow the user to choose which type of intention object they would like to add.
+    COIntentionTypeSelectorTableViewController *intentionTypeSelector = [[COIntentionTypeSelectorTableViewController alloc] init];
+    intentionTypeSelector.m_delegate = self;
+    intentionTypeSelector.m_dismissBlock = ^{
+        [self createNewIntentionType];
     };
     
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:visionTypeSelector];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:intentionTypeSelector];
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
-    navController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     
     [self presentViewController:navController animated:YES completion:nil];
 }
 
 // -----------------------------------------------------------------------------------------------------------------
 
-- (void) visionTypeSelected:(NSInteger)visionType
+- (void) intentionTypeSelected:(NSInteger)intentionType
 {
-    self.m_nVisionTypeSelected = visionType;
+    self.m_nIntentionTypeSelected = intentionType;
 }
 
 // -----------------------------------------------------------------------------------------------------------------
-// When the user has selected the type of vision he or she wants to create, we will handle it here and create the
-// right kind of vision object to add to the list.
+// When the user has selected the type of intention he or she wants to create, we will handle it here and create the
+// right kind of intention object to add to the list.
 
-- (void) createNewVisionType
+- (void) createNewIntentionType
 {
-    COVisionItem *newVisionItem = [[COVisionItemStore sharedVisionItemStore] createVisionItem];
-    newVisionItem.m_VisionItemName = @"";
-    newVisionItem.m_VisionItemDescription = @"";
+    COIntentionItem *newIntentionItem = [[COIntentionItemStore sharedIntentionItemStore] createIntentionItem];
+    newIntentionItem.m_IntentionItemName = @"";
+    newIntentionItem.m_IntentionItemDescription = @"";
     
-    COVisionDetailViewController *detailViewController = [[COVisionDetailViewController alloc] initForNewItem:YES];
-    detailViewController.m_VisionItem = newVisionItem;
+    COIntentionDetailViewController *detailViewController = [[COIntentionDetailViewController alloc] initForNewItem:YES];
+    detailViewController.m_IntentionItem = newIntentionItem;
     detailViewController.m_DismissBlock = ^{
         [self.tableView reloadData];
     };
     
-    switch (self.m_nVisionTypeSelected) {
-        case kVisionItem:
-            detailViewController.m_nVisionTypeTitle = @"Create a new Vision";
+    switch (self.m_nIntentionTypeSelected) {
+        case kIntentionItem:
+            detailViewController.m_nIntentionTypeTitle = @"Create a new Intention";
             break;
             
         case kGoalItem:
-            detailViewController.m_nVisionTypeTitle = @"Create a new Goal";
+            detailViewController.m_nIntentionTypeTitle = @"Create a new Goal";
             break;
             
         case kDrivingQuestionItem:
-            detailViewController.m_nVisionTypeTitle = @"Create a new Driving Question";
+            detailViewController.m_nIntentionTypeTitle = @"Create a new Driving Question";
             break;
             
-        case kNoVisionTypeSelectionMade:
+        case kNoIntentionTypeSelectionMade:
             NSLog(@"Cancelled, not creating anything.");
             break;
     }
@@ -164,7 +164,7 @@
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
-    navController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     
     [self presentViewController:navController animated:YES completion:nil];
 
@@ -205,7 +205,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[COVisionItemStore sharedVisionItemStore] allVisionItems] count];
+    return [[[COIntentionItemStore sharedIntentionItemStore] allIntentionItems] count];
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -216,10 +216,10 @@
     
     // Set the text on the cell with the description of the item that is the nth index of items
     
-    NSArray *visionItems = [[COVisionItemStore sharedVisionItemStore] allVisionItems];
-    COVisionItem *visionItem = visionItems[indexPath.row];
+    NSArray *intentionItems = [[COIntentionItemStore sharedIntentionItemStore] allIntentionItems];
+    COIntentionItem *intentionItem = intentionItems[indexPath.row];
     
-    cell.textLabel.text = visionItem.m_VisionItemName;
+    cell.textLabel.text = intentionItem.m_IntentionItemName;
     
     return cell;
 }
@@ -230,9 +230,9 @@
 {
     // If the table view is asking to commit a delete command...
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSArray *visionItems = [[COVisionItemStore sharedVisionItemStore] allVisionItems];
-        COVisionItem *selectedVisionItem = visionItems[indexPath.row];
-        [[COVisionItemStore sharedVisionItemStore] removeVisionItem:selectedVisionItem];
+        NSArray *intentionItems = [[COIntentionItemStore sharedIntentionItemStore] allIntentionItems];
+        COIntentionItem *selectedIntentionItem = intentionItems[indexPath.row];
+        [[COIntentionItemStore sharedIntentionItemStore] removeIntentionItem:selectedIntentionItem];
         
         // Also remove that row from the table view with an animation...
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -243,22 +243,22 @@
 
 - (void) tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-    [[COVisionItemStore sharedVisionItemStore] moveVisionItemAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
+    [[COIntentionItemStore sharedIntentionItemStore] moveIntentionItemAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
 }
 
 // -----------------------------------------------------------------------------------------------------------------
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    COVisionDetailViewController *visionDetailViewController = [[COVisionDetailViewController alloc] initForNewItem:NO];
+    COIntentionDetailViewController *intentionDetailViewController = [[COIntentionDetailViewController alloc] initForNewItem:NO];
     
-    // Give the detail view controller the visionItem we created.
-    NSArray *visionItems = [[COVisionItemStore sharedVisionItemStore] allVisionItems];
-    COVisionItem *selectedVisionItem = visionItems[indexPath.row];
-    visionDetailViewController.m_VisionItem = selectedVisionItem;
+    // Give the detail view controller the intentionItem we created.
+    NSArray *intentionItems = [[COIntentionItemStore sharedIntentionItemStore] allIntentionItems];
+    COIntentionItem *selectedIntentionItem = intentionItems[indexPath.row];
+    intentionDetailViewController.m_IntentionItem = selectedIntentionItem;
     
     // Push the detail view controller onto the top of the navigation controller's stack
-    [self.navigationController pushViewController:visionDetailViewController animated:YES];
+    [self.navigationController pushViewController:intentionDetailViewController animated:YES];
 }
 
 @end

@@ -1,6 +1,6 @@
 // =================================================================================================================
 //
-//  COVisionDetailViewController.m
+//  COIntentionDetailViewController.m
 //  iLearn University
 //
 //  Created by Jeffrey Young on 8/19/14.
@@ -8,20 +8,20 @@
 //
 // =================================================================================================================
 
-#import "COVisionDetailViewController.h"
-#import "COVisionItem.h"
-#import "COVisionItemStore.h"
+#import "COIntentionDetailViewController.h"
+#import "COIntentionItem.h"
+#import "COIntentionItemStore.h"
 
-@interface COVisionDetailViewController ()
+@interface COIntentionDetailViewController ()
 
-@property (weak, nonatomic) IBOutlet UITextField *visionNameField;
-@property (weak, nonatomic) IBOutlet UITextView *visionDescriptionField;
+@property (weak, nonatomic) IBOutlet UITextField *intentionNameField;
+@property (weak, nonatomic) IBOutlet UITextView *intentionDescriptionField;
 @property (weak, nonatomic) IBOutlet UILabel *dateCreatedLabel;
 @property (nonatomic) BOOL m_bIsNew;
 
 @end
 
-@implementation COVisionDetailViewController
+@implementation COIntentionDetailViewController
 
 // =================================================================================================================
 #pragma mark - Object Methods
@@ -63,16 +63,16 @@
 {
     [super viewWillAppear:animated];
     
-    COVisionItem *visionItem = self.m_VisionItem;
+    COIntentionItem *intentionItem = self.m_IntentionItem;
     
     if (self.m_bIsNew) {
-        self.title = self.m_nVisionTypeTitle;
+        self.title = self.m_nIntentionTypeTitle;
     } else {
-        self.title = visionItem.m_VisionItemName;
+        self.title = intentionItem.m_IntentionItemName;
     }
     
-    self.visionNameField.text = visionItem.m_VisionItemName;
-    self.visionDescriptionField.text = visionItem.m_VisionItemDescription;
+    self.intentionNameField.text = intentionItem.m_IntentionItemName;
+    self.intentionDescriptionField.text = intentionItem.m_IntentionItemDescription;
     
     // Format the date into a simle date string
     static NSDateFormatter *dateFormatter = nil;
@@ -82,7 +82,7 @@
         dateFormatter.timeStyle = NSDateFormatterNoStyle;
     }
     
-    self.dateCreatedLabel.text = [dateFormatter stringFromDate:visionItem.m_DateCreated];
+    self.dateCreatedLabel.text = [dateFormatter stringFromDate:intentionItem.m_DateCreated];
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -94,18 +94,18 @@
     // Clear us as being the first responder
     [self.view endEditing:YES];
     
-    // Save changes to the visionItem
-    COVisionItem *visionItem = self.m_VisionItem;
-    visionItem.m_VisionItemName = self.visionNameField.text;
-    visionItem.m_VisionItemDescription = self.visionDescriptionField.text;
+    // Save changes to the intentionItem
+    COIntentionItem *intentionItem = self.m_IntentionItem;
+    intentionItem.m_IntentionItemName = self.intentionNameField.text;
+    intentionItem.m_IntentionItemDescription = self.intentionDescriptionField.text;
 }
 
 // -----------------------------------------------------------------------------------------------------------------
 
-- (void) setVisionItem:(COVisionItem *)visionItem
+- (void) setIntentionItem:(COIntentionItem *)intentionItem
 {
-    _m_VisionItem = visionItem;
-    self.navigationItem.title = visionItem.m_VisionItemName;
+    _m_IntentionItem = intentionItem;
+    self.navigationItem.title = intentionItem.m_IntentionItemName;
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -119,8 +119,8 @@
 
 - (void) cancel:(id)sender
 {
-    // The user cancelled, then we need to remove the new vision item from the store
-    [[COVisionItemStore sharedVisionItemStore] removeVisionItem:self.m_VisionItem];
+    // The user cancelled, then we need to remove the new intention item from the store
+    [[COIntentionItemStore sharedIntentionItemStore] removeIntentionItem:self.m_IntentionItem];
     
     [self.presentingViewController dismissViewControllerAnimated:YES completion:self.m_DismissBlock];
 }

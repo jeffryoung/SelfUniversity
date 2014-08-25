@@ -1,6 +1,6 @@
 // =================================================================================================================
 //
-//  COVisionTypeSelectorTableViewController.m
+//  COIntentionTypeSelectorTableViewController.m
 //  iLearn University
 //
 //  Created by Jeffrey Young on 8/13/14.
@@ -9,15 +9,15 @@
 // =================================================================================================================
 
 #import "COGlobalDefsConstants.h"
-#import "COVisionTypeSelectorTableViewController.h"
+#import "COIntentionTypeSelectorTableViewController.h"
 
 // =================================================================================================================
 #pragma mark - Private Object Data
 // =================================================================================================================
 
-@interface COVisionTypeSelectorTableViewController ()
+@interface COIntentionTypeSelectorTableViewController ()
 
-@property (nonatomic,strong) NSArray *visionTypeData;
+@property (nonatomic,strong) NSArray *intentionTypeData;
 
 @end
 
@@ -25,11 +25,11 @@
 #pragma mark - Object Methods
 // =================================================================================================================
 
-@implementation COVisionTypeSelectorTableViewController
+@implementation COIntentionTypeSelectorTableViewController
 
 @synthesize m_delegate;
 
-static NSString *visionTypeCellIdentifier;
+static NSString *intentionTypeCellIdentifier;
 
 // -----------------------------------------------------------------------------------------------------------------
 
@@ -39,7 +39,7 @@ static NSString *visionTypeCellIdentifier;
     self = [super initWithStyle:UITableViewStyleGrouped];
     
     if (self) {
-        self.visionTypeData = @[@"A New Vision?  or...",@"A New Goal?  or...",@"A New Driving Question?"];
+        self.intentionTypeData = @[@"A New Intention?  or...",@"A New Goal?  or...",@"A New Driving Question?"];
         
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]
                                        initWithBarButtonSystemItem:UIBarButtonSystemItemDone
@@ -53,7 +53,7 @@ static NSString *visionTypeCellIdentifier;
                                          action:@selector(cancel:)];
         
         self.navigationItem.leftBarButtonItem = cancelButton;
-        self.m_nSelectedType = kNoVisionTypeSelectionMade;
+        self.m_nSelectedType = kNoIntentionTypeSelectionMade;
     }
     return self;
 }
@@ -64,8 +64,8 @@ static NSString *visionTypeCellIdentifier;
 {
     [super viewDidLoad];
     
-    visionTypeCellIdentifier = @"visionTypeCellIdentifier";
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:visionTypeCellIdentifier];
+    intentionTypeCellIdentifier = @"intentionTypeCellIdentifier";
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:intentionTypeCellIdentifier];
     
     self.title = @"Creating...";
      
@@ -76,7 +76,7 @@ static NSString *visionTypeCellIdentifier;
 
 - (void) save:(id)sender
 {
-    [[self m_delegate] visionTypeSelected:self.m_nSelectedType];
+    [[self m_delegate] intentionTypeSelected:self.m_nSelectedType];
     [self.presentingViewController dismissViewControllerAnimated:YES completion:self.m_dismissBlock];
 }
 
@@ -103,15 +103,15 @@ static NSString *visionTypeCellIdentifier;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.visionTypeData count];
+    return [self.intentionTypeData count];
 }
 
 // -----------------------------------------------------------------------------------------------------------------
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:visionTypeCellIdentifier forIndexPath:indexPath];
-    cell.textLabel.text = [self.visionTypeData objectAtIndex:indexPath.row];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:intentionTypeCellIdentifier forIndexPath:indexPath];
+    cell.textLabel.text = [self.intentionTypeData objectAtIndex:indexPath.row];
     return cell;
 }
 

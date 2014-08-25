@@ -1,6 +1,6 @@
 // =================================================================================================================
 //
-//  COVisionItem.h
+//  COIntentionItem.h
 //  iLearn University
 //
 //  Created by Jeffrey Young on 8/13/14.
@@ -11,22 +11,22 @@
 #import <Foundation/Foundation.h>
 //#import <CoreData/CoreData.h>
 
-@interface COVisionItem : NSObject //NSManagedObject
+@interface COIntentionItem : NSObject //NSManagedObject
 
 // =================================================================================================================
 #pragma mark - Object Properties
 // =================================================================================================================
 
-@property (nonatomic, retain) NSString *m_VisionItemName;
-@property (nonatomic, retain) NSString *m_VisionItemDescription;
+@property (nonatomic, retain) NSString *m_IntentionItemName;
+@property (nonatomic, retain) NSString *m_IntentionItemDescription;
 @property (nonatomic, retain) NSDate *m_DateCreated;
 
 // =================================================================================================================
 #pragma mark - Object Methods
 // =================================================================================================================
 
-+ (instancetype)randomVisionItem;
-- (instancetype)initWithName:(NSString *)visionItemName
-       visionItemDescription:(NSString *)visionItemDescription;
++ (instancetype)randomIntentionItem;
+- (instancetype)initWithName:(NSString *)intentionItemName
+       intentionItemDescription:(NSString *)intentionItemDescription;
 
 @end

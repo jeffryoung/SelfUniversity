@@ -1,6 +1,6 @@
 // =================================================================================================================
 //
-//  COVisionItemStore.m
+//  COIntentionItemStore.m
 //  iLearn University
 //
 //  Created by Jeffrey Young on 8/13/14.
@@ -8,31 +8,31 @@
 //
 // =================================================================================================================
 
-#import "COVisionItemStore.h"
-#import "COVisionItem.h"
+#import "COIntentionItemStore.h"
+#import "COIntentionItem.h"
 //@import CoreData;
 
-@interface COVisionItemStore()
-@property (nonatomic) NSMutableArray *privateVisionItems;
+@interface COIntentionItemStore()
+@property (nonatomic) NSMutableArray *privateIntentionItems;
 //@property (nonatomic, strong) NSManagedObjectContext *context;
 //@property (nonatomic, strong) NSManagedObjectModel *model;
 @end
 
-@implementation COVisionItemStore
+@implementation COIntentionItemStore
 
 // =================================================================================================================
 #pragma mark - Class Methods
 // =================================================================================================================
 
-+ (instancetype)sharedVisionItemStore
++ (instancetype)sharedIntentionItemStore
 {
-    static COVisionItemStore *sharedVisionItemStore = nil;
+    static COIntentionItemStore *sharedIntentionItemStore = nil;
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
-        sharedVisionItemStore = [[self alloc] initPrivate];
+        sharedIntentionItemStore = [[self alloc] initPrivate];
     });
-    return sharedVisionItemStore;
+    return sharedIntentionItemStore;
 }
 
 // =================================================================================================================
@@ -41,9 +41,9 @@
 
 - (instancetype)init
 {
-    // If a programmer calls [[COVisionItemStore alloc] init], let him or her know by throwing an exception.
+    // If a programmer calls [[COIntentionItemStore alloc] init], let him or her know by throwing an exception.
     @throw [NSException exceptionWithName:@"Singleton Object"
-                                   reason:@"Use +[COVisionItemStore sharedStore]"
+                                   reason:@"Use +[COIntentionItemStore sharedStore]"
                                  userInfo:nil];
     return nil;
 }
@@ -55,64 +55,64 @@
 {
     self = [super init];
     if (self) {
-        _privateVisionItems = [[NSMutableArray alloc] init];
+        _privateIntentionItems = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 // =================================================================================================================
-#pragma mark - Vision Item Handling Methods
+#pragma mark - Intention Item Handling Methods
 // =================================================================================================================
 
-- (NSArray *)allVisionItems
+- (NSArray *)allIntentionItems
 {
-    return self.privateVisionItems;
+    return self.privateIntentionItems;
 }
 
 // -----------------------------------------------------------------------------------------------------------------
 
-- (COVisionItem *)createVisionItem
+- (COIntentionItem *)createIntentionItem
 {
-    COVisionItem *visionItem = [COVisionItem randomVisionItem];
-    [self.privateVisionItems addObject:visionItem];
+    COIntentionItem *intentionItem = [COIntentionItem randomIntentionItem];
+    [self.privateIntentionItems addObject:intentionItem];
     
-    return visionItem;
+    return intentionItem;
 }
 
 // -----------------------------------------------------------------------------------------------------------------
 
-- (void)moveVisionItemAtIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex
+- (void)moveIntentionItemAtIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex
 {
     if (fromIndex == toIndex) {
         return;
     }
-    COVisionItem *visionItem = self.privateVisionItems[fromIndex];
+    COIntentionItem *intentionItem = self.privateIntentionItems[fromIndex];
     
     // Remove the selected item from the store
-    [self.privateVisionItems removeObjectAtIndex:fromIndex];
+    [self.privateIntentionItems removeObjectAtIndex:fromIndex];
     
     // Insert the item into the array at the new location
-    [self.privateVisionItems insertObject:visionItem atIndex:toIndex];
+    [self.privateIntentionItems insertObject:intentionItem atIndex:toIndex];
     
 }
 
 // -----------------------------------------------------------------------------------------------------------------
 
-- (void)removeVisionItem:(COVisionItem *)visionItem
+- (void)removeIntentionItem:(COIntentionItem *)intentionItem
 {
-    [self.privateVisionItems removeObjectIdenticalTo:visionItem];
+    [self.privateIntentionItems removeObjectIdenticalTo:intentionItem];
      
 }
      
 // =================================================================================================================
-#pragma mark - Saving visionItems in the visionItemStore using CoreData
+#pragma mark - Saving intentionItems in the intentionItemStore using CoreData
 // =================================================================================================================
      
-- (NSString *)visionItemsArchivePath
+- (NSString *)intentionItemsArchivePath
 {
     NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [documentDirectories firstObject];
-    return [documentDirectory stringByAppendingPathComponent:@"visionStore.data"];
+    return [documentDirectory stringByAppendingPathComponent:@"intentionStore.data"];
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -122,7 +122,7 @@
     NSError *error;
     BOOL successful = YES; //[self.context save:&error];
     if (!successful) {
-        NSLog(@"Error saving vision items: %@", [error localizedDescription]);
+        NSLog(@"Error saving intention items: %@", [error localizedDescription]);
     }
     return successful;
 }

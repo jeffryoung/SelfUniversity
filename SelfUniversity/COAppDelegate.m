@@ -10,7 +10,7 @@
 
 #import "COAppDelegate.h"
 #import "COBookRootViewController.h"
-#import "COVisionViewController.h"
+#import "COIntentionViewController.h"
 #import "COContentViewController.h"
 #import "COLearningGuideViewController.h"
 #import "COPracticeViewController.h"
@@ -36,8 +36,8 @@
         COBookRootViewController *bvc = [[COBookRootViewController alloc] init];
         bvc.m_tabBarController = tabBarController;
         
-        // Create a VisionViewController and make it the rootViewController of a UINavigationController
-        COVisionViewController *vvc = [[COVisionViewController alloc] init];
+        // Create a IntentionViewController and make it the rootViewController of a UINavigationController
+        COIntentionViewController *vvc = [[COIntentionViewController alloc] init];
         vvc.m_tabBarController = tabBarController;
         UINavigationController *vNavController = [[UINavigationController alloc] initWithRootViewController:vvc];
         vNavController.restorationIdentifier = NSStringFromClass([vNavController class]);

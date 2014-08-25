@@ -1,6 +1,6 @@
 // =================================================================================================================
 //
-//  COVisionItemStore.h
+//  COIntentionItemStore.h
 //  iLearn University
 //
 //  Created by Jeffrey Young on 8/13/14.
@@ -10,24 +10,24 @@
 
 #import <Foundation/Foundation.h>
 
-@class COVisionItem;
+@class COIntentionItem;
 
-@interface COVisionItemStore : NSObject
+@interface COIntentionItemStore : NSObject
 
 // =================================================================================================================
 #pragma mark - Properties
 // =================================================================================================================
 
-@property (nonatomic, readonly) NSArray *allVisionItems;
+@property (nonatomic, readonly) NSArray *allIntentionItems;
 
 // =================================================================================================================
 #pragma mark - Methods
 // =================================================================================================================
 
-+ (instancetype) sharedVisionItemStore;
-- (COVisionItem *) createVisionItem;
-- (void) removeVisionItem:(COVisionItem *)visionItem;
-- (void) moveVisionItemAtIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
++ (instancetype) sharedIntentionItemStore;
+- (COIntentionItem *) createIntentionItem;
+- (void) removeIntentionItem:(COIntentionItem *)intentionItem;
+- (void) moveIntentionItemAtIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 - (BOOL) saveChanges;
 
 @end

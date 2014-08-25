@@ -1,6 +1,6 @@
 // =================================================================================================================
 //
-//  COVisionDetailViewController.h
+//  COGoalDetailViewController.h
 //  iLearn University
 //
 //  Created by Jeffrey Young on 8/19/14.
@@ -10,13 +10,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class COVisionItem;
+@class COIntentionItem;
 
-@interface COVisionDetailViewController : UIViewController
+@interface COGoalDetailViewController : UIViewController
 
-@property (nonatomic, strong) COVisionItem *m_VisionItem;
+@property (nonatomic, strong) COIntentionItem *m_IntentionItem;
 @property (nonatomic, copy) void (^m_DismissBlock)(void);
-@property (nonatomic, strong) NSString *m_nVisionTypeTitle;
+@property (nonatomic, strong) NSString *m_nIntentionTypeTitle;
 
 - (instancetype) initForNewItem:(BOOL)isNew;
 

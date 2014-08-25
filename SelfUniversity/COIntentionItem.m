@@ -1,6 +1,6 @@
 // =================================================================================================================
 //
-//  COVisionItem.m
+//  COIntentionItem.m
 //  iLearn University
 //
 //  Created by Jeffrey Young on 8/13/14.
@@ -8,12 +8,12 @@
 //
 // =================================================================================================================
 
-#import "COVisionItem.h"
+#import "COIntentionItem.h"
 
-@implementation COVisionItem
+@implementation COIntentionItem
 
-/*@dynamic m_VisionItemName;
-@dynamic m_VisionItemDescription;
+/*@dynamic m_IntentionItemName;
+@dynamic m_IntentionItemDescription;
 @dynamic m_DateCreated;
  */
 
@@ -21,33 +21,33 @@
 #pragma mark - Object Class Methods
 // =================================================================================================================
 
-+ (instancetype)randomVisionItem
++ (instancetype)randomIntentionItem
 {
     // Create an immutable array of names
-    NSArray *randomNameList = @[@"My Short Term Vision", @"My Long Term Vision", @"Professional Goal", @"Personal Goal", @"Professional Project", @"Personal Project"];
+    NSArray *randomNameList = @[@"My Short Term Intention", @"My Long Term Intention", @"Professional Goal", @"Personal Goal", @"Professional Project", @"Personal Project"];
     
     // Create an immutable array of descriptions
-    NSArray *randomDescriptionList = @[@"A longer description of my vision", @"A longer description of my goal", @"A longer description of my project"];
+    NSArray *randomDescriptionList = @[@"A longer description of my intention", @"A longer description of my goal", @"A longer description of my project"];
     
-    // Create a random index for the name we will use for this new vision item.
+    // Create a random index for the name we will use for this new intention item.
     NSInteger nameIndex = arc4random() % [randomNameList count];
     NSInteger descriptionIndex = nameIndex / 2;
     
-    COVisionItem *newVisionItem = [[self alloc] initWithName:randomNameList[nameIndex]
-                                       visionItemDescription:randomDescriptionList[descriptionIndex]];
-    return newVisionItem;
+    COIntentionItem *newIntentionItem = [[self alloc] initWithName:randomNameList[nameIndex]
+                                       intentionItemDescription:randomDescriptionList[descriptionIndex]];
+    return newIntentionItem;
 }
 
 // =================================================================================================================
 #pragma mark - Object Initialization Methods
 // =================================================================================================================
 
-- (instancetype)initWithName:(NSString *)visionItemName visionItemDescription:(NSString *)visionItemDescription
+- (instancetype)initWithName:(NSString *)intentionItemName intentionItemDescription:(NSString *)intentionItemDescription
 {
     self = [super init];
     if (self) {
-        self.m_VisionItemName = visionItemName;
-        self.m_VisionItemDescription = visionItemDescription;
+        self.m_IntentionItemName = intentionItemName;
+        self.m_IntentionItemDescription = intentionItemDescription;
         self.m_DateCreated = [[NSDate alloc] init];
     }
     return self;

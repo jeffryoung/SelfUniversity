@@ -1,6 +1,6 @@
 // =================================================================================================================
 //
-//  COVisionTypeSelectorTableViewController.h
+//  COIntentionTypeSelectorTableViewController.h
 //  iLearn University
 //
 //  Created by Jeffrey Young on 8/13/14.
@@ -14,22 +14,22 @@
 #pragma mark - Constant Definitions
 // =================================================================================================================
 
-#define kNoVisionTypeSelectionMade    -1
+#define kNoIntentionTypeSelectionMade    -1
 
 typedef enum : NSUInteger {
-    kVisionItem,
+    kIntentionItem,
     kGoalItem,
     kDrivingQuestionItem,
-} tVisionType;
+} tIntentionType;
 
 // =================================================================================================================
 #pragma mark - Protocol Definition
 // =================================================================================================================
 
-@protocol COVisionTypeSelectorDelegate <NSObject>
+@protocol COIntentionTypeSelectorDelegate <NSObject>
 
 @required
-- (void) visionTypeSelected:(NSInteger)visionType;
+- (void) intentionTypeSelected:(NSInteger)intentionType;
 
 @end
 
@@ -37,7 +37,7 @@ typedef enum : NSUInteger {
 #pragma mark - Interface Definition
 // =================================================================================================================
 
-@interface COVisionTypeSelectorTableViewController : UITableViewController
+@interface COIntentionTypeSelectorTableViewController : UITableViewController
 
 @property (nonatomic) NSInteger m_nSelectedType;
 @property (retain) id m_delegate;
