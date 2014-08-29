@@ -10,6 +10,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface COLearningGuideViewController : UIViewController
+@interface COLearningGuideViewController : UIViewController <UIViewControllerRestoration>
 
 @end

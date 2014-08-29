@@ -10,6 +10,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface COPortfolioViewController : UIViewController
+@interface COPortfolioViewController : UIViewController <UIViewControllerRestoration>
 
 @end

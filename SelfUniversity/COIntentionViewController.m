@@ -15,6 +15,8 @@
 
 @interface COIntentionViewController ()
 
+@property (nonatomic) NSMutableArray *gListToIntentionTypeTranslator;
+
 @end
 
 @implementation COIntentionViewController
@@ -36,7 +38,7 @@
         
         // Set the contents of the navigation bar with a title and buttons
         UINavigationItem *navItem = self.navigationItem;
-        navItem.title = @"Intention";
+        navItem.title = NSLocalizedString(@"Intention", @"Intention View Controller Title");
         
         UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewIntentionItem:)];
         
@@ -72,7 +74,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Set the tab bar item's title
-        self.tabBarItem.title = @"Intention";
+        self.tabBarItem.title = NSLocalizedString(@"Intention", @"Intention Tab Bar Label");
         
         // Create a UIImage from the icon
         UIImage *image = [UIImage imageNamed:@"EyeIcon.png"];
@@ -106,25 +108,76 @@
 
 - (IBAction)addNewIntentionItem:(id)sender
 {
-    // Create a intentionTypeSelector object, display it and allow the user to choose which type of intention object they would like to add.
-    COIntentionTypeSelectorTableViewController *intentionTypeSelector = [[COIntentionTypeSelectorTableViewController alloc] init];
-    intentionTypeSelector.m_delegate = self;
-    intentionTypeSelector.m_dismissBlock = ^{
+    // Identify which intentions we have turned in in the settings and add their name to the list of intention types
+    // the user can choose from on the List Selector model dialog box.
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *intentionTypeNameList = [[NSMutableArray alloc] init];
+    NSMutableArray *listToIntentionTypeTranslator = [[NSMutableArray alloc] init];
+    
+    if ([defaults boolForKey:@"IntentionItemsEnabled"]) {
+        [intentionTypeNameList addObject:NSLocalizedString(@"A New Intention?", @"New Intention Question")];
+        [listToIntentionTypeTranslator addObject:@(kIntentionItem)];
+    }
+    
+    if ([defaults boolForKey:@"GoalItemsEnabled"]) {
+        [intentionTypeNameList addObject:NSLocalizedString(@"A New Goal?", @"New Goal Question")];
+        [listToIntentionTypeTranslator addObject:@(kGoalItem)];
+    }
+    
+    if ([defaults boolForKey:@"DrivingQuestionItemsEnabled"]) {
+        [intentionTypeNameList addObject:NSLocalizedString(@"A New Driving Question?", @"New Driving Question Question")];
+        [listToIntentionTypeTranslator addObject:@(kDrivingQuestionItem)];
+    }
+    
+    if ([defaults boolForKey:@"ProductItemsEnabled"]) {
+        [intentionTypeNameList addObject:NSLocalizedString(@"A New Product?", @"New Product Question")];
+        [listToIntentionTypeTranslator addObject:@(kProductItem)];
+    }
+    
+    // If we have multiple types of intentions to choose from, then put up a modal dialog to let the user choose which
+    // type of intention they want to create.
+    if ([intentionTypeNameList count] >= 2) {
+     
+        // Create a intentionTypeSelector object, display it and allow the user to choose which type of intention object they would like to add.
+        COListSelector *intentionTypeSelector = [[COListSelector alloc] initWithList:intentionTypeNameList];
+        intentionTypeSelector.m_delegate = self;
+        intentionTypeSelector.m_dismissBlock = ^{
+            [self createNewIntentionType];
+        };
+        self.gListToIntentionTypeTranslator = listToIntentionTypeTranslator;
+        
+        // Create a navigation controller to display the list selector modally.
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:intentionTypeSelector];
+        navController.modalPresentationStyle = UIModalPresentationFormSheet;
+        navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        navController.restorationIdentifier = NSStringFromClass([navController class]);
+        
+        [self presentViewController:navController animated:YES completion:nil];
+        
+    // If only we only have one intention type, then go ahead and create that intention type.
+    } else if ([intentionTypeNameList count] == 1) {
+        self.m_nIntentionTypeSelected = 0;
+        self.gListToIntentionTypeTranslator = listToIntentionTypeTranslator;
         [self createNewIntentionType];
-    };
-    
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:intentionTypeSelector];
-    navController.modalPresentationStyle = UIModalPresentationFormSheet;
-    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    
-    [self presentViewController:navController animated:YES completion:nil];
+        
+    // If we don't have any intention types to choose from, then we don't need to do anything at all.
+    } else if ([intentionTypeNameList count] == 0) {
+        self.m_nIntentionTypeSelected = kNoSelectionMade;
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No Intentions are Enabled in Settings", @"No Intentions enabled message")
+                                                        message:NSLocalizedString(@"Go to settings and enable at least one intention type:", @"Enable intentions instructions")
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"OK", @"OK Button Title")
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 // -----------------------------------------------------------------------------------------------------------------
 
-- (void) intentionTypeSelected:(NSInteger)intentionType
+- (void) indexSelected:(NSInteger)index
 {
-    self.m_nIntentionTypeSelected = intentionType;
+    self.m_nIntentionTypeSelected = index;
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -133,10 +186,15 @@
 
 - (void) createNewIntentionType
 {
+    // Look up what type of intention item we are going to create.
+    self.m_nIntentionTypeSelected = [self.gListToIntentionTypeTranslator[self.m_nIntentionTypeSelected] integerValue];
+    
+    // Create a new intention item of the right type...
     COIntentionItem *newIntentionItem = [[COIntentionItemStore sharedIntentionItemStore] createIntentionItem];
     newIntentionItem.m_IntentionItemName = @"";
     newIntentionItem.m_IntentionItemDescription = @"";
     
+    // Display the correct detail view controller for that type of item as a modal dialog box.
     COIntentionDetailViewController *detailViewController = [[COIntentionDetailViewController alloc] initForNewItem:YES];
     detailViewController.m_IntentionItem = newIntentionItem;
     detailViewController.m_DismissBlock = ^{
@@ -145,26 +203,31 @@
     
     switch (self.m_nIntentionTypeSelected) {
         case kIntentionItem:
-            detailViewController.m_nIntentionTypeTitle = @"Create a new Intention";
+            detailViewController.m_nIntentionTypeTitle = NSLocalizedString(@"Create a new Intention", @"Create new intention title");
             break;
             
         case kGoalItem:
-            detailViewController.m_nIntentionTypeTitle = @"Create a new Goal";
+            detailViewController.m_nIntentionTypeTitle = NSLocalizedString(@"Create a new Goal", @"Create new goal title");
             break;
             
         case kDrivingQuestionItem:
-            detailViewController.m_nIntentionTypeTitle = @"Create a new Driving Question";
+            detailViewController.m_nIntentionTypeTitle = NSLocalizedString(@"Create a new Driving Question", @"Create new driving question title");
             break;
             
-        case kNoIntentionTypeSelectionMade:
-            NSLog(@"Cancelled, not creating anything.");
+        case kProductItem:
+            detailViewController.m_nIntentionTypeTitle = NSLocalizedString(@"Create a new Product", @"Create new product title");
             break;
+            
+        case kNoSelectionMade:
+            NSLog(@"Cancelled, not creating anything.");
+            return;
     }
 
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    navController.restorationIdentifier = NSStringFromClass([navController class]);
     
     [self presentViewController:navController animated:YES completion:nil];
 
@@ -259,6 +322,15 @@
     
     // Push the detail view controller onto the top of the navigation controller's stack
     [self.navigationController pushViewController:intentionDetailViewController animated:YES];
+}
+
+// =================================================================================================================
+#pragma mark - UIViewControllerRestoration Protocol Methods
+// =================================================================================================================
+
++ (UIViewController *) viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder
+{
+    return [[self alloc] init];
 }
 
 @end

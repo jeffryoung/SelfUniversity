@@ -10,7 +10,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface COBookRootViewController : UIViewController <UIPageViewControllerDelegate>
+@interface COBookRootViewController : UIViewController <UIPageViewControllerDelegate, UIViewControllerRestoration>
 
 @property(nonatomic, strong) UIPageViewController *m_pageViewController;
 @property (nonatomic, strong) UITabBarController *m_tabBarController;

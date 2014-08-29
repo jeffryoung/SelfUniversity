@@ -25,7 +25,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Set the tab bar item's title
-        self.tabBarItem.title = @"Notebook";
+        self.tabBarItem.title = NSLocalizedString(@"Notebook", @"Notebook Tab Bar Label");
         
         // Create a UIImage from the icon
         UIImage *image = [UIImage imageNamed:@"NotebookIcon.png"];
@@ -50,6 +50,15 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+// =================================================================================================================
+#pragma mark - UIViewControllerRestoration Protocol Methods
+// =================================================================================================================
+
++ (UIViewController *) viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder
+{
+    return [[self alloc] init];
 }
 
 @end

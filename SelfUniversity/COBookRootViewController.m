@@ -28,13 +28,17 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Set the tab bar item's title
-        self.tabBarItem.title = @"Library";
+        self.tabBarItem.title = NSLocalizedString(@"Library", @"Library Tab Bar Label");
         
         // Create a UIImage from the icon
         UIImage *image = [UIImage imageNamed:@"BookIcon.png"];
         
         // Put that image on the tab bar item
         self.tabBarItem.image = image;
+        
+        // Set the restoration identifier for this view controller.
+        self.restorationIdentifier = NSStringFromClass([self class]);
+        self.restorationClass = [self class];
     }
     self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     return self;
@@ -143,6 +147,15 @@
     
     
     return UIPageViewControllerSpineLocationMid;
+}
+
+// =================================================================================================================
+#pragma mark - UIViewControllerRestoration Protocol Methods
+// =================================================================================================================
+
++ (UIViewController *) viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder
+{
+    return [[self alloc] init];
 }
 
 @end

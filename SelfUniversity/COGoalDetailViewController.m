@@ -44,6 +44,10 @@
             UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc]
                                            initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
             self.navigationItem.leftBarButtonItem = cancelItem;
+            
+            // Set the restoration identifier for this view controller.
+            self.restorationIdentifier = NSStringFromClass([self class]);
+            self.restorationClass = [self class];
         }
     }
     return self;
@@ -124,4 +128,14 @@
     
     [self.presentingViewController dismissViewControllerAnimated:YES completion:self.m_DismissBlock];
 }
+
+// =================================================================================================================
+#pragma mark - UIViewControllerRestoration Protocol Methods
+// =================================================================================================================
+
++ (UIViewController *) viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder
+{
+    return [[self alloc] init];
+}
+
 @end

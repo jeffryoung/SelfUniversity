@@ -26,7 +26,10 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        
+        // Set the restoration identifier for this view controller.
+        self.restorationIdentifier = NSStringFromClass([self class]);
+        self.restorationClass = [self class];
     }
     self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     return self;

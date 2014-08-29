@@ -10,6 +10,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface COProjectViewController : UIViewController
+@interface COProjectViewController : UIViewController <UIViewControllerRestoration>
 
 @end

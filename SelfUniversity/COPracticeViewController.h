@@ -10,6 +10,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface COPracticeViewController : UIViewController
+@interface COPracticeViewController : UIViewController <UIViewControllerRestoration>
 
 @end

@@ -10,9 +10,9 @@
 
 #import <UIKit/UIKit.h>
 #import "COGlobalDefsConstants.h"
-#import "COIntentionTypeSelectorTableViewController.h"
+#import "COListSelector.h"
 
-@interface COIntentionViewController : UITableViewController <COIntentionTypeSelectorDelegate>
+@interface COIntentionViewController : UITableViewController <COListSelectorDelegate, UIViewControllerRestoration>
 
 @property (nonatomic, strong) UITabBarController *m_tabBarController;
 @property (nonatomic) NSInteger m_nIntentionTypeSelected;

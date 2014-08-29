@@ -1,36 +1,37 @@
 // =================================================================================================================
 //
-//  iDGlobalDefsConstants.h
-//  iLearningJourney
+//  COListSelector.h
+//  iLearn University
 //
-//  Created by Jeffrey Young on 6/20/14.
+//  Created by Jeffrey Young on 8/13/14.
 //  Copyright (c) 2014 infinite Discoveries. All rights reserved.
 //
 // =================================================================================================================
 
-#ifndef iLearningJourney_iDGlobalDefsConstants_h
-#define iLearningJourney_iDGlobalDefsConstants_h
+#import <UIKit/UIKit.h>
+#import "COGlobalDefsConstants.h"
 
 // =================================================================================================================
-#pragma mark - Constant Definitions
+#pragma mark - Protocol Definition
 // =================================================================================================================
 
-#define kNoSelectionMade    -1
+@protocol COListSelectorDelegate <NSObject>
 
-typedef enum : NSUInteger {
-    kIntentionItem,
-    kGoalItem,
-    kDrivingQuestionItem,
-    kProductItem
-} tIntentionType;
+@required
+- (void) indexSelected:(NSInteger)index;
+
+@end
 
 // =================================================================================================================
-#pragma mark - Global Settings Definitions
+#pragma mark - Interface Definition
 // =================================================================================================================
 
-extern NSString * const COIntentionItemsEnabledKey;
-extern NSString * const COGoalItemsEnabledKey;
-extern NSString * const CODrivingQuestionItemsEnabledKey;
-extern NSString * const COProductItemsEnabledKey;
+@interface COListSelector : UITableViewController <UIViewControllerRestoration>
 
-#endif
+@property (nonatomic) NSInteger m_nIndexSelected;
+@property (retain) id m_delegate;
+@property (nonatomic, copy) void (^m_dismissBlock)(void);
+
+- (instancetype) initWithList:(NSArray *)listText;
+
+@end

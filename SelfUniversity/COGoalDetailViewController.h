@@ -12,7 +12,7 @@
 
 @class COIntentionItem;
 
-@interface COGoalDetailViewController : UIViewController
+@interface COGoalDetailViewController : UIViewController <UIViewControllerRestoration>
 
 @property (nonatomic, strong) COIntentionItem *m_IntentionItem;
 @property (nonatomic, copy) void (^m_DismissBlock)(void);
