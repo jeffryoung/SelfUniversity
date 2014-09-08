@@ -3,23 +3,26 @@
 //  COIntentionItem.h
 //  iLearn University
 //
-//  Created by Jeffrey Young on 8/13/14.
+//  Created by Jeffrey Young on 9/8/14.
 //  Copyright (c) 2014 infinite Discoveries. All rights reserved.
 //
 // =================================================================================================================
 
 #import <Foundation/Foundation.h>
-//#import <CoreData/CoreData.h>
-
-@interface COIntentionItem : NSObject //NSManagedObject
+#import <CoreData/CoreData.h>
 
 // =================================================================================================================
-#pragma mark - Object Properties
+#pragma mark - Core Data Definitions
 // =================================================================================================================
 
-@property (nonatomic, retain) NSString *m_IntentionItemName;
-@property (nonatomic, retain) NSString *m_IntentionItemDescription;
-@property (nonatomic, retain) NSDate *m_DateCreated;
+@interface COIntentionItem : NSManagedObject
+
+@property (nonatomic, retain)   NSString  * intentionItemKey;
+@property (nonatomic, retain)   NSString  * intentionItemName;
+@property (nonatomic, retain)   NSString  * intentionItemDescription;
+@property (nonatomic, retain)   NSDate    * intentionItemDateCreated;
+@property (nonatomic)           double      intentionItemOrderingValue;
+@property (nonatomic, retain)   NSString  * intentionItemSubType;
 
 // =================================================================================================================
 #pragma mark - Object Methods
@@ -27,6 +30,6 @@
 
 + (instancetype)randomIntentionItem;
 - (instancetype)initWithName:(NSString *)intentionItemName
-       intentionItemDescription:(NSString *)intentionItemDescription;
+    intentionItemDescription:(NSString *)intentionItemDescription;
 
 @end

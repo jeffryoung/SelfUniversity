@@ -1,23 +1,23 @@
 // =================================================================================================================
 //
-//  COBookRootViewViewController.m
-//  SelfUniversity
+//  COLibraryRootViewViewController.m
+//  iLearn University
 //
 //  Created by Jeffrey Young on 6/25/14.
 //  Copyright (c) 2014 infinite Discoveries. All rights reserved.
 //
 // =================================================================================================================
 
-#import "COBookRootViewController.h"
+#import "COLibraryRootViewController.h"
 #import "COBookModelController.h"
 #import "COBookDataViewController.h"
 
-@interface COBookRootViewController ()
+@interface COLibraryRootViewController ()
 @property (nonatomic, readonly, strong) COBookModelController *g_modelController;
 
 @end
 
-@implementation COBookRootViewController
+@implementation COLibraryRootViewController
 
 // =================================================================================================================
 #pragma mark - Initialization

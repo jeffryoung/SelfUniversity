@@ -3,19 +3,26 @@
 //  COIntentionItem.m
 //  iLearn University
 //
-//  Created by Jeffrey Young on 8/13/14.
+//  Created by Jeffrey Young on 9/8/14.
 //  Copyright (c) 2014 infinite Discoveries. All rights reserved.
 //
 // =================================================================================================================
 
 #import "COIntentionItem.h"
 
+
 @implementation COIntentionItem
 
-/*@dynamic m_IntentionItemName;
-@dynamic m_IntentionItemDescription;
-@dynamic m_DateCreated;
- */
+// =================================================================================================================
+#pragma mark - Core Data Class Data
+// =================================================================================================================
+
+@dynamic intentionItemKey;
+@dynamic intentionItemName;
+@dynamic intentionItemDescription;
+@dynamic intentionItemDateCreated;
+@dynamic intentionItemOrderingValue;
+@dynamic intentionItemSubType;
 
 // =================================================================================================================
 #pragma mark - Object Class Methods
@@ -34,7 +41,7 @@
     NSInteger descriptionIndex = nameIndex / 2;
     
     COIntentionItem *newIntentionItem = [[self alloc] initWithName:randomNameList[nameIndex]
-                                       intentionItemDescription:randomDescriptionList[descriptionIndex]];
+                                          intentionItemDescription:randomDescriptionList[descriptionIndex]];
     return newIntentionItem;
 }
 
@@ -46,12 +53,24 @@
 {
     self = [super init];
     if (self) {
-        self.m_IntentionItemName = intentionItemName;
-        self.m_IntentionItemDescription = intentionItemDescription;
-        self.m_DateCreated = [[NSDate alloc] init];
+        self.intentionItemName = intentionItemName;
+        self.intentionItemDescription = intentionItemDescription;
     }
     return self;
 }
 
+// -----------------------------------------------------------------------------------------------------------------
+
+- (void) awakeFromInsert
+{
+    [super awakeFromInsert];
+    
+    self.intentionItemDateCreated = [NSDate date];
+    
+    // Create the record key for this database object using a NSUUID object - and get its string representation
+    NSUUID *uuid = [[NSUUID alloc] init];
+    NSString *key = [uuid UUIDString];
+    self.intentionItemKey = key;
+}
 
 @end

@@ -31,11 +31,6 @@
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
         
-        // Temporarily populate a few random intention Items so we can see what it all looks like.
-        for (int i=0; i<8; i++) {
-            [[COIntentionItemStore sharedIntentionItemStore] createIntentionItem];
-        }
-        
         // Set the contents of the navigation bar with a title and buttons
         UINavigationItem *navItem = self.navigationItem;
         navItem.title = NSLocalizedString(@"Intention", @"Intention View Controller Title");
@@ -191,8 +186,8 @@
     
     // Create a new intention item of the right type...
     COIntentionItem *newIntentionItem = [[COIntentionItemStore sharedIntentionItemStore] createIntentionItem];
-    newIntentionItem.m_IntentionItemName = @"";
-    newIntentionItem.m_IntentionItemDescription = @"";
+    newIntentionItem.intentionItemName = @"";
+    newIntentionItem.intentionItemDescription = @"";
     
     // Display the correct detail view controller for that type of item as a modal dialog box.
     COIntentionDetailViewController *detailViewController = [[COIntentionDetailViewController alloc] initForNewItem:YES];
@@ -282,7 +277,7 @@
     NSArray *intentionItems = [[COIntentionItemStore sharedIntentionItemStore] allIntentionItems];
     COIntentionItem *intentionItem = intentionItems[indexPath.row];
     
-    cell.textLabel.text = intentionItem.m_IntentionItemName;
+    cell.textLabel.text = intentionItem.intentionItemName;
     
     return cell;
 }
