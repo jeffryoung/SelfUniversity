@@ -13,9 +13,10 @@
 		E424CEE219A2989500CF945D /* COLearningGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E424CEE119A2989500CF945D /* COLearningGuideViewController.m */; };
 		E426CD97199BED2E00C352E0 /* COIntentionItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E426CD96199BED2E00C352E0 /* COIntentionItemStore.m */; };
 		E426CDA3199C3FF000C352E0 /* COListSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = E426CDA1199C3FF000C352E0 /* COListSelector.m */; };
+		E42C033C19C2255300AA7F8A /* COIntentionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E42C033B19C2255300AA7F8A /* COIntentionItem.m */; };
 		E43C6BD719A7AF1E002275B1 /* COGoalDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E43C6BD519A7AF1E002275B1 /* COGoalDetailViewController.m */; };
 		E43C6BD819A7AF1E002275B1 /* COGoalDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E43C6BD619A7AF1E002275B1 /* COGoalDetailViewController.xib */; };
-		E44B692D19BE3A60007EF8DD /* COIntentionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E44B692C19BE3A60007EF8DD /* COIntentionItem.m */; };
+		E44B692D19BE3A60007EF8DD /* COIntentionItemType.m in Sources */ = {isa = PBXBuildFile; fileRef = E44B692C19BE3A60007EF8DD /* COIntentionItemType.m */; };
 		E476AC7419634FAC007734C0 /* COBookDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E476AC7319634FAC007734C0 /* COBookDataViewController.m */; };
 		E476AC7A196356B8007734C0 /* BookStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E476AC79196356B8007734C0 /* BookStoryboard_iPad.storyboard */; };
 		E476AC7C196356BF007734C0 /* BookStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E476AC7B196356BF007734C0 /* BookStoryboard_iPhone.storyboard */; };
@@ -70,11 +71,13 @@
 		E426CD96199BED2E00C352E0 /* COIntentionItemStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COIntentionItemStore.m; sourceTree = "<group>"; };
 		E426CDA0199C3FF000C352E0 /* COListSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COListSelector.h; sourceTree = "<group>"; };
 		E426CDA1199C3FF000C352E0 /* COListSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COListSelector.m; sourceTree = "<group>"; };
+		E42C033A19C2255300AA7F8A /* COIntentionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COIntentionItem.h; sourceTree = "<group>"; };
+		E42C033B19C2255300AA7F8A /* COIntentionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COIntentionItem.m; sourceTree = "<group>"; };
 		E43C6BD419A7AF1E002275B1 /* COGoalDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COGoalDetailViewController.h; sourceTree = "<group>"; };
 		E43C6BD519A7AF1E002275B1 /* COGoalDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COGoalDetailViewController.m; sourceTree = "<group>"; };
 		E43C6BD619A7AF1E002275B1 /* COGoalDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = COGoalDetailViewController.xib; sourceTree = "<group>"; };
-		E44B692B19BE3A60007EF8DD /* COIntentionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COIntentionItem.h; sourceTree = "<group>"; };
-		E44B692C19BE3A60007EF8DD /* COIntentionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COIntentionItem.m; sourceTree = "<group>"; };
+		E44B692B19BE3A60007EF8DD /* COIntentionItemType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COIntentionItemType.h; sourceTree = "<group>"; };
+		E44B692C19BE3A60007EF8DD /* COIntentionItemType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COIntentionItemType.m; sourceTree = "<group>"; };
 		E476AC7219634FAC007734C0 /* COBookDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COBookDataViewController.h; sourceTree = "<group>"; };
 		E476AC7319634FAC007734C0 /* COBookDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COBookDataViewController.m; sourceTree = "<group>"; };
 		E476AC79196356B8007734C0 /* BookStoryboard_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BookStoryboard_iPad.storyboard; sourceTree = "<group>"; };
@@ -225,8 +228,10 @@
 				E408AE9F19A3DD6600D63E0A /* COIntentionDetailViewController.h */,
 				E408AEA019A3DD6600D63E0A /* COIntentionDetailViewController.m */,
 				E40688A119B1048800722306 /* COIntentionDetailViewController.xib */,
-				E44B692B19BE3A60007EF8DD /* COIntentionItem.h */,
-				E44B692C19BE3A60007EF8DD /* COIntentionItem.m */,
+				E44B692B19BE3A60007EF8DD /* COIntentionItemType.h */,
+				E44B692C19BE3A60007EF8DD /* COIntentionItemType.m */,
+				E42C033A19C2255300AA7F8A /* COIntentionItem.h */,
+				E42C033B19C2255300AA7F8A /* COIntentionItem.m */,
 				E426CD95199BED2E00C352E0 /* COIntentionItemStore.h */,
 				E426CD96199BED2E00C352E0 /* COIntentionItemStore.m */,
 				E43C6BD419A7AF1E002275B1 /* COGoalDetailViewController.h */,
@@ -430,6 +435,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E476AC7F19635C33007734C0 /* COBookModelController.m in Sources */,
+				E42C033C19C2255300AA7F8A /* COIntentionItem.m in Sources */,
 				E424CEE219A2989500CF945D /* COLearningGuideViewController.m in Sources */,
 				E4DC0B30195B6D11001CE110 /* COPracticeViewController.m in Sources */,
 				E4DC0B27195B6CAB001CE110 /* COLibraryRootViewController.m in Sources */,
@@ -446,7 +452,7 @@
 				E4DC0B2D195B6CF2001CE110 /* COContentViewController.m in Sources */,
 				E4DC0B36195B6D40001CE110 /* COPortfolioViewController.m in Sources */,
 				E4F55A4719BA6DD100CC39C8 /* iLearnUniversity.xcdatamodeld in Sources */,
-				E44B692D19BE3A60007EF8DD /* COIntentionItem.m in Sources */,
+				E44B692D19BE3A60007EF8DD /* COIntentionItemType.m in Sources */,
 				E4DC0AFD195B581E001CE110 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

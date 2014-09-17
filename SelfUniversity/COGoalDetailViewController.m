@@ -72,11 +72,11 @@
     if (self.m_bIsNew) {
         self.title = self.m_nIntentionTypeTitle;
     } else {
-        self.title = intentionItem.intentionItemName;
+        self.title = intentionItem.intentionItemTypeName;
     }
     
-    self.intentionNameField.text = intentionItem.intentionItemName;
-    self.intentionDescriptionField.text = intentionItem.intentionItemDescription;
+    self.intentionNameField.text = intentionItem.intentionItemTypeName;
+    self.intentionDescriptionField.text = intentionItem.intentionItemTypeDescription;
     
     // Format the date into a simle date string
     static NSDateFormatter *dateFormatter = nil;
@@ -86,7 +86,7 @@
         dateFormatter.timeStyle = NSDateFormatterNoStyle;
     }
     
-    self.dateCreatedLabel.text = [dateFormatter stringFromDate:intentionItem.intentionItemDateCreated];
+    self.dateCreatedLabel.text = [dateFormatter stringFromDate:intentionItem.intentionItemTypeDateCreated];
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -100,8 +100,8 @@
     
     // Save changes to the intentionItem
     COIntentionItem *intentionItem = self.m_IntentionItem;
-    intentionItem.intentionItemName = self.intentionNameField.text;
-    intentionItem.intentionItemDescription = self.intentionDescriptionField.text;
+    intentionItem.intentionItemTypeName = self.intentionNameField.text;
+    intentionItem.intentionItemTypeDescription = self.intentionDescriptionField.text;
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -109,7 +109,7 @@
 - (void) setIntentionItem:(COIntentionItem *)intentionItem
 {
     _m_IntentionItem = intentionItem;
-    self.navigationItem.title = intentionItem.intentionItemName;
+    self.navigationItem.title = intentionItem.intentionItemTypeName;
 }
 
 // -----------------------------------------------------------------------------------------------------------------

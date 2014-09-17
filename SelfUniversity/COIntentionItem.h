@@ -3,33 +3,21 @@
 //  COIntentionItem.h
 //  iLearn University
 //
-//  Created by Jeffrey Young on 9/8/14.
+//  Created by Jeffrey Young on 9/11/14.
 //  Copyright (c) 2014 infinite Discoveries. All rights reserved.
 //
 // =================================================================================================================
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+#import <UIKit/UIKit.h>
+#import "COIntentionItemType.h"
 
-// =================================================================================================================
-#pragma mark - Core Data Definitions
-// =================================================================================================================
+@interface COIntentionItem : COIntentionItemType
 
-@interface COIntentionItem : NSManagedObject
-
-@property (nonatomic, retain)   NSString  * intentionItemKey;
-@property (nonatomic, retain)   NSString  * intentionItemName;
-@property (nonatomic, retain)   NSString  * intentionItemDescription;
-@property (nonatomic, retain)   NSDate    * intentionItemDateCreated;
-@property (nonatomic)           double      intentionItemOrderingValue;
-@property (nonatomic, retain)   NSString  * intentionItemSubType;
-
-// =================================================================================================================
-#pragma mark - Object Methods
-// =================================================================================================================
-
-+ (instancetype)randomIntentionItem;
-- (instancetype)initWithName:(NSString *)intentionItemName
-    intentionItemDescription:(NSString *)intentionItemDescription;
+@property (nonatomic, retain)   NSString  * intentionItemContribution;
+@property (nonatomic, retain)   NSString  * intentionItemOutcome1;
+@property (nonatomic, retain)   NSString  * intentionItemOutcome2;
+@property (nonatomic, retain)   NSString  * intentionItemOutcome3;
+@property (nonatomic, retain)   NSString  * intentionItemOutcome4;
+@property (nonatomic, retain)   NSString  * intentionItemOutcome5;
 
 @end

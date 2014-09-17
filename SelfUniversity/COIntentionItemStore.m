@@ -99,12 +99,12 @@
     if ([self.allIntentionItems count] == 0) {
         order = 1.0;
     } else {
-        order = [[self.privateIntentionItems lastObject] intentionItemOrderingValue] + 1.0;
+        order = [[self.privateIntentionItems lastObject] intentionItemTypeOrderingValue] + 1.0;
     }
-    NSLog(@"Adding after %d items, order = %.2f", [self.privateIntentionItems count], order);
+    NSLog(@"Adding after %lu items, order = %.2f", (unsigned long)[self.privateIntentionItems count], order);
     
     COIntentionItem *intentionItem = [NSEntityDescription insertNewObjectForEntityForName:@"COIntentionItem" inManagedObjectContext:self.context];
-    intentionItem.intentionItemOrderingValue = order;
+    intentionItem.intentionItemTypeOrderingValue = order;
     
     [self.privateIntentionItems addObject:intentionItem];
     
@@ -126,29 +126,29 @@
     // Insert the item into the array at the new location
     [self.privateIntentionItems insertObject:intentionItem atIndex:toIndex];
     
-    // Compute a new intentionItemOrderingValue for the object that was moved
+    // Compute a new intentionItemTypeOrderingValue for the object that was moved
     double lowerBound = 0.0;
     
     // Is there an object before it in the array?
     if (toIndex > 0) {
-        lowerBound = [self.privateIntentionItems[(toIndex - 1)] intentionItemOrderingValue];
+        lowerBound = [self.privateIntentionItems[(toIndex - 1)] intentionItemTypeOrderingValue];
     } else {
-        lowerBound = [self.privateIntentionItems[1] intentionItemOrderingValue] - 2.0;
+        lowerBound = [self.privateIntentionItems[1] intentionItemTypeOrderingValue] - 2.0;
     }
     
     double upperBound = 0.0;
     
     // Is there an object after it in the array?
     if (toIndex < [self.privateIntentionItems count] - 1) {
-        upperBound = [self.privateIntentionItems[(toIndex + 1)] intentionItemOrderingValue];
+        upperBound = [self.privateIntentionItems[(toIndex + 1)] intentionItemTypeOrderingValue];
     } else {
-        upperBound = [self.privateIntentionItems[(toIndex - 1)] intentionItemOrderingValue] + 2.0;
+        upperBound = [self.privateIntentionItems[(toIndex - 1)] intentionItemTypeOrderingValue] + 2.0;
     }
     
     double newOrderValue = (lowerBound + upperBound) / 2.0;
     
     NSLog(@"Moving to order %f", newOrderValue);
-    intentionItem.intentionItemOrderingValue = newOrderValue;
+    intentionItem.intentionItemTypeOrderingValue = newOrderValue;
     
 }
 
@@ -169,7 +169,7 @@
 {
     NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [documentDirectories firstObject];
-    return [documentDirectory stringByAppendingPathComponent:@"intentionItemStore.data"];
+    return [documentDirectory stringByAppendingPathComponent:@"iLearnUniversityDataStore.data"];
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -194,7 +194,7 @@
         
         request.entity = e;
         
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"intentionItemOrderingValue" ascending:YES];
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"intentionItemTypeOrderingValue" ascending:YES];
         request.sortDescriptors = @[sortDescriptor];
         
         NSError *error;

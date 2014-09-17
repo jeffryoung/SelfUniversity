@@ -186,8 +186,8 @@
     
     // Create a new intention item of the right type...
     COIntentionItem *newIntentionItem = [[COIntentionItemStore sharedIntentionItemStore] createIntentionItem];
-    newIntentionItem.intentionItemName = @"";
-    newIntentionItem.intentionItemDescription = @"";
+    newIntentionItem.intentionItemTypeName = @"";
+    newIntentionItem.intentionItemTypeDescription = @"";
     
     // Display the correct detail view controller for that type of item as a modal dialog box.
     COIntentionDetailViewController *detailViewController = [[COIntentionDetailViewController alloc] initForNewItem:YES];
@@ -277,7 +277,7 @@
     NSArray *intentionItems = [[COIntentionItemStore sharedIntentionItemStore] allIntentionItems];
     COIntentionItem *intentionItem = intentionItems[indexPath.row];
     
-    cell.textLabel.text = intentionItem.intentionItemName;
+    cell.textLabel.text = intentionItem.intentionItemTypeName;
     
     return cell;
 }
