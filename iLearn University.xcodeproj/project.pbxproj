@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E406889F19B1048800722306 /* COIntentionDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E40688A119B1048800722306 /* COIntentionDetailViewController.xib */; };
 		E40688A619B1181300722306 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E40688A819B1181300722306 /* Localizable.strings */; };
-		E408AEA219A3DD6600D63E0A /* COIntentionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E408AEA019A3DD6600D63E0A /* COIntentionDetailViewController.m */; };
 		E424CEE219A2989500CF945D /* COLearningGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E424CEE119A2989500CF945D /* COLearningGuideViewController.m */; };
 		E426CD97199BED2E00C352E0 /* COIntentionItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E426CD96199BED2E00C352E0 /* COIntentionItemStore.m */; };
 		E426CDA3199C3FF000C352E0 /* COListSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = E426CDA1199C3FF000C352E0 /* COListSelector.m */; };
@@ -21,6 +19,8 @@
 		E476AC7A196356B8007734C0 /* BookStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E476AC79196356B8007734C0 /* BookStoryboard_iPad.storyboard */; };
 		E476AC7C196356BF007734C0 /* BookStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E476AC7B196356BF007734C0 /* BookStoryboard_iPhone.storyboard */; };
 		E476AC7F19635C33007734C0 /* COBookModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = E476AC7E19635C33007734C0 /* COBookModelController.m */; };
+		E495B7E719CF66C0009DFFCD /* COIntentionItemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E495B7E519CF66C0009DFFCD /* COIntentionItemDetailViewController.m */; };
+		E495B7E819CF66C0009DFFCD /* COIntentionItemDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E495B7E619CF66C0009DFFCD /* COIntentionItemDetailViewController.xib */; };
 		E4995F0419AEA7D3009A3011 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E4995F0319AEA7D3009A3011 /* Settings.bundle */; };
 		E4AFA060196340AB00B54B54 /* COBookTiledPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AFA05F196340AB00B54B54 /* COBookTiledPDFView.m */; };
 		E4AFA0631963441D00B54B54 /* COBookPDFScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AFA0621963441D00B54B54 /* COBookPDFScrollView.m */; };
@@ -59,12 +59,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E40688A219B1052800722306 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/COIntentionDetailViewController.xib; sourceTree = "<group>"; };
-		E40688A319B1065D00722306 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/COIntentionDetailViewController.strings; sourceTree = "<group>"; };
 		E40688A719B1181300722306 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E40688A919B1183700722306 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
-		E408AE9F19A3DD6600D63E0A /* COIntentionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COIntentionDetailViewController.h; sourceTree = "<group>"; };
-		E408AEA019A3DD6600D63E0A /* COIntentionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COIntentionDetailViewController.m; sourceTree = "<group>"; };
 		E424CEE019A2989500CF945D /* COLearningGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COLearningGuideViewController.h; sourceTree = "<group>"; };
 		E424CEE119A2989500CF945D /* COLearningGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COLearningGuideViewController.m; sourceTree = "<group>"; };
 		E426CD95199BED2E00C352E0 /* COIntentionItemStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COIntentionItemStore.h; sourceTree = "<group>"; };
@@ -84,6 +80,9 @@
 		E476AC7B196356BF007734C0 /* BookStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BookStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		E476AC7D19635C33007734C0 /* COBookModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COBookModelController.h; sourceTree = "<group>"; };
 		E476AC7E19635C33007734C0 /* COBookModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COBookModelController.m; sourceTree = "<group>"; };
+		E495B7E419CF66C0009DFFCD /* COIntentionItemDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COIntentionItemDetailViewController.h; sourceTree = "<group>"; };
+		E495B7E519CF66C0009DFFCD /* COIntentionItemDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COIntentionItemDetailViewController.m; sourceTree = "<group>"; };
+		E495B7E619CF66C0009DFFCD /* COIntentionItemDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = COIntentionItemDetailViewController.xib; sourceTree = "<group>"; };
 		E4995F0319AEA7D3009A3011 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		E4AFA05E196340AB00B54B54 /* COBookTiledPDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COBookTiledPDFView.h; sourceTree = "<group>"; };
 		E4AFA05F196340AB00B54B54 /* COBookTiledPDFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COBookTiledPDFView.m; sourceTree = "<group>"; };
@@ -225,15 +224,15 @@
 			children = (
 				E4DC0B28195B6CD6001CE110 /* COIntentionViewController.h */,
 				E4DC0B29195B6CD6001CE110 /* COIntentionViewController.m */,
-				E408AE9F19A3DD6600D63E0A /* COIntentionDetailViewController.h */,
-				E408AEA019A3DD6600D63E0A /* COIntentionDetailViewController.m */,
-				E40688A119B1048800722306 /* COIntentionDetailViewController.xib */,
 				E44B692B19BE3A60007EF8DD /* COIntentionItemType.h */,
 				E44B692C19BE3A60007EF8DD /* COIntentionItemType.m */,
-				E42C033A19C2255300AA7F8A /* COIntentionItem.h */,
-				E42C033B19C2255300AA7F8A /* COIntentionItem.m */,
 				E426CD95199BED2E00C352E0 /* COIntentionItemStore.h */,
 				E426CD96199BED2E00C352E0 /* COIntentionItemStore.m */,
+				E42C033A19C2255300AA7F8A /* COIntentionItem.h */,
+				E42C033B19C2255300AA7F8A /* COIntentionItem.m */,
+				E495B7E419CF66C0009DFFCD /* COIntentionItemDetailViewController.h */,
+				E495B7E519CF66C0009DFFCD /* COIntentionItemDetailViewController.m */,
+				E495B7E619CF66C0009DFFCD /* COIntentionItemDetailViewController.xib */,
 				E43C6BD419A7AF1E002275B1 /* COGoalDetailViewController.h */,
 				E43C6BD519A7AF1E002275B1 /* COGoalDetailViewController.m */,
 				E43C6BD619A7AF1E002275B1 /* COGoalDetailViewController.xib */,
@@ -410,12 +409,12 @@
 				E4995F0419AEA7D3009A3011 /* Settings.bundle in Resources */,
 				E476AC7A196356B8007734C0 /* BookStoryboard_iPad.storyboard in Resources */,
 				E4DC0AFB195B581E001CE110 /* InfoPlist.strings in Resources */,
-				E406889F19B1048800722306 /* COIntentionDetailViewController.xib in Resources */,
 				E40688A619B1181300722306 /* Localizable.strings in Resources */,
 				E476AC7C196356BF007734C0 /* BookStoryboard_iPhone.storyboard in Resources */,
 				E4C28614199ABDCE00DB405B /* iLearn University.pdf in Resources */,
 				E4DC0B06195B581E001CE110 /* Images.xcassets in Resources */,
 				E43C6BD819A7AF1E002275B1 /* COGoalDetailViewController.xib in Resources */,
+				E495B7E819CF66C0009DFFCD /* COIntentionItemDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,7 +443,6 @@
 				E426CD97199BED2E00C352E0 /* COIntentionItemStore.m in Sources */,
 				E426CDA3199C3FF000C352E0 /* COListSelector.m in Sources */,
 				E4DC0B01195B581E001CE110 /* COAppDelegate.m in Sources */,
-				E408AEA219A3DD6600D63E0A /* COIntentionDetailViewController.m in Sources */,
 				E43C6BD719A7AF1E002275B1 /* COGoalDetailViewController.m in Sources */,
 				E4DC0B33195B6D2A001CE110 /* COProjectViewController.m in Sources */,
 				E4AFA060196340AB00B54B54 /* COBookTiledPDFView.m in Sources */,
@@ -453,6 +451,7 @@
 				E4DC0B36195B6D40001CE110 /* COPortfolioViewController.m in Sources */,
 				E4F55A4719BA6DD100CC39C8 /* iLearnUniversity.xcdatamodeld in Sources */,
 				E44B692D19BE3A60007EF8DD /* COIntentionItemType.m in Sources */,
+				E495B7E719CF66C0009DFFCD /* COIntentionItemDetailViewController.m in Sources */,
 				E4DC0AFD195B581E001CE110 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -476,15 +475,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		E40688A119B1048800722306 /* COIntentionDetailViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E40688A219B1052800722306 /* Base */,
-				E40688A319B1065D00722306 /* es */,
-			);
-			name = COIntentionDetailViewController.xib;
-			sourceTree = "<group>";
-		};
 		E40688A819B1181300722306 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -593,6 +583,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SelfUniversity/iLearn University-Prefix.pch";
 				INFOPLIST_FILE = "SelfUniversity/iLearn University-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "iLearn University";
 				WRAPPER_EXTENSION = app;
 			};
@@ -606,6 +597,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SelfUniversity/iLearn University-Prefix.pch";
 				INFOPLIST_FILE = "SelfUniversity/iLearn University-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "iLearn University";
 				WRAPPER_EXTENSION = app;
 			};

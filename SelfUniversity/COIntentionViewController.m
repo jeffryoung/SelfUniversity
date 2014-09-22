@@ -9,7 +9,7 @@
 // =================================================================================================================
 
 #import "COIntentionViewController.h"
-#import "COIntentionDetailViewController.h"
+#import "COIntentionItemDetailViewController.h"
 #import "COIntentionItemStore.h"
 #import "COIntentionItem.h"
 
@@ -190,7 +190,7 @@
     newIntentionItem.intentionItemTypeDescription = @"";
     
     // Display the correct detail view controller for that type of item as a modal dialog box.
-    COIntentionDetailViewController *detailViewController = [[COIntentionDetailViewController alloc] initForNewItem:YES];
+    COIntentionItemDetailViewController *detailViewController = [[COIntentionItemDetailViewController alloc] initForNewItem:YES];
     detailViewController.m_IntentionItem = newIntentionItem;
     detailViewController.m_DismissBlock = ^{
         [self.tableView reloadData];
@@ -308,15 +308,15 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    COIntentionDetailViewController *intentionDetailViewController = [[COIntentionDetailViewController alloc] initForNewItem:NO];
+    COIntentionItemDetailViewController *intentionItemDetailViewController = [[COIntentionItemDetailViewController alloc] initForNewItem:NO];
     
     // Give the detail view controller the intentionItem we created.
     NSArray *intentionItems = [[COIntentionItemStore sharedIntentionItemStore] allIntentionItems];
     COIntentionItem *selectedIntentionItem = intentionItems[indexPath.row];
-    intentionDetailViewController.m_IntentionItem = selectedIntentionItem;
+    intentionItemDetailViewController.m_IntentionItem = selectedIntentionItem;
     
     // Push the detail view controller onto the top of the navigation controller's stack
-    [self.navigationController pushViewController:intentionDetailViewController animated:YES];
+    [self.navigationController pushViewController:intentionItemDetailViewController animated:YES];
 }
 
 // =================================================================================================================

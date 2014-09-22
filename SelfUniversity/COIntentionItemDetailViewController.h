@@ -1,9 +1,9 @@
 // =================================================================================================================
 //
-//  COIntentionDetailViewController.h
+//  COIntentionItemDetailViewController.h
 //  iLearn University
 //
-//  Created by Jeffrey Young on 8/19/14.
+//  Created by Jeffrey Young on 9/21/14.
 //  Copyright (c) 2014 infinite Discoveries. All rights reserved.
 //
 // =================================================================================================================
@@ -12,7 +12,7 @@
 
 @class COIntentionItem;
 
-@interface COIntentionDetailViewController : UIViewController <UIViewControllerRestoration>
+@interface COIntentionItemDetailViewController : UIViewController <UIViewControllerRestoration>
 
 @property (nonatomic, strong) COIntentionItem *m_IntentionItem;
 @property (nonatomic, copy) void (^m_DismissBlock)(void);

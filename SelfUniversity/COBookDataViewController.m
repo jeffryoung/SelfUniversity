@@ -56,7 +56,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     // Disable zooming if our pages are currently shown in landscape
-    if( self.interfaceOrientation == UIInterfaceOrientationPortrait || self.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown ) {
+    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
+    if (UIDeviceOrientationIsPortrait(deviceOrientation)) {
         [self.scrollView setUserInteractionEnabled:YES];
     } else {
         [self.scrollView setUserInteractionEnabled:NO];

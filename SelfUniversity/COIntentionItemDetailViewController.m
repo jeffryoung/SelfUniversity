@@ -1,18 +1,18 @@
 // =================================================================================================================
 //
-//  COIntentionDetailViewController.m
+//  COIntentionItemDetailViewController.m
 //  iLearn University
 //
-//  Created by Jeffrey Young on 8/19/14.
+//  Created by Jeffrey Young on 9/21/14.
 //  Copyright (c) 2014 infinite Discoveries. All rights reserved.
 //
 // =================================================================================================================
 
-#import "COIntentionDetailViewController.h"
+#import "COIntentionItemDetailViewController.h"
 #import "COIntentionItem.h"
 #import "COIntentionItemStore.h"
 
-@interface COIntentionDetailViewController ()
+@interface COIntentionItemDetailViewController ()
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
@@ -29,15 +29,16 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateCreatedLabel;
 
 @property (nonatomic) BOOL m_bIsNew;
-@property (nonatomic) BOOL m_bViewScrolledToMakeFieldVisible;
-@property (nonatomic) CGSize m_CurrentKeyboardSize;
+@property (nonatomic) BOOL m_bKeyboardIsBeingShown;
+@property (nonatomic) BOOL m_bUserCancelledNewIntentionItem;
+@property (nonatomic) float m_CurrentKeyboardHeight;
 @property (nonatomic) UIEdgeInsets m_OriginalUIEdgeInsets;
 @property (nonatomic) UITextField *m_ActiveTextField;
 @property (nonatomic) UITextView *m_ActiveTextView;
 
 @end
 
-@implementation COIntentionDetailViewController
+@implementation COIntentionItemDetailViewController
 
 // =================================================================================================================
 #pragma mark - Object Methods
@@ -49,7 +50,8 @@
     
     if (self) {
         self.m_bIsNew = isNew;
-        self.m_bViewScrolledToMakeFieldVisible = NO;
+        self.m_bKeyboardIsBeingShown = NO;
+        self.m_bUserCancelledNewIntentionItem = NO;
         self.restorationIdentifier = NSStringFromClass([self class]);
         self.restorationClass = [self class];
         
@@ -65,16 +67,13 @@
         
         // Register to be notified when the keyboard is displayed and when it goes away.
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWasShown:)
+                                                 selector:@selector(keyboardWillShow:)
                                                      name:UIKeyboardDidShowNotification object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWillBeHidden:)
+                                                 selector:@selector(keyboardWillHide:)
                                                      name:UIKeyboardWillHideNotification object:nil];
         
-        // Hide the keyboard when the user attempts to scroll the view.
-        self.scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-
         // Set the restoration identifier for this view controller.
         self.restorationIdentifier = NSStringFromClass([self class]);
         self.restorationClass = [self class];
@@ -96,8 +95,6 @@
 {
     [super viewDidLoad];
     [self.view addSubview:self.contentView];
-    CGSize contentSize = self.contentView.frame.size;
-    ((UIScrollView *)self.view).contentSize = contentSize;
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -112,64 +109,16 @@
 // When the keyboard is shown, then we might need to scroll the view up to see the current field if they keyboard
 // covered it up.
 
-- (void)keyboardWasShown:(NSNotification*)aNotification
+- (void)keyboardWillShow:(NSNotification*)aNotification
 {
-    NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    self.m_CurrentKeyboardSize = kbSize;
-    
-    [self makeActiveTextFieldVisible];
-}
-
-// -----------------------------------------------------------------------------------------------------------------
-// Called when the UIKeyboardWillHideNotification is sent
-
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification
-{
-    [self resetTextFieldScrolling];
-}
-
-// -----------------------------------------------------------------------------------------------------------------
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    self.m_ActiveTextField = textField;
-    [self makeActiveTextFieldVisible];
-}
-
-// -----------------------------------------------------------------------------------------------------------------
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    [self resetTextFieldScrolling];
-    self.m_ActiveTextField = nil;
-}
-
-// -----------------------------------------------------------------------------------------------------------------
-
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-    self.m_ActiveTextView = textView;
-    [self makeActiveTextFieldVisible];
-}
-
-// -----------------------------------------------------------------------------------------------------------------
-
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
-    [self resetTextFieldScrolling];
-    self.m_ActiveTextView = nil;
-}
-
-// -----------------------------------------------------------------------------------------------------------------
-
-- (void)makeActiveTextFieldVisible
-{
-    if ((!self.m_bViewScrolledToMakeFieldVisible) && (self.m_CurrentKeyboardSize.height > 0)) {
+    if (!self.m_bKeyboardIsBeingShown) {
+        NSDictionary* info = [aNotification userInfo];
+        CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+        self.m_CurrentKeyboardHeight = UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation) ? kbSize.width : kbSize.height;
         
         // If active text field is hidden by keyboard, scroll it so it's visible
         CGRect visibleFrameRect = self.scrollView.frame;
-        visibleFrameRect.size.height -= self.m_CurrentKeyboardSize.height;
+        visibleFrameRect.size.height -= self.m_CurrentKeyboardHeight;
         
         // Get the activeFrameRect, depending upon whether the user is editing one of the text fields or text views.
         CGRect activeFrameRect = CGRectNull;
@@ -185,28 +134,58 @@
         // If the activeFrameRect is covered up by the keyboard, then scroll it into view.
         self.m_OriginalUIEdgeInsets = self.scrollView.contentInset;
         UIEdgeInsets newContentInsets = self.scrollView.contentInset;
-        if (self.m_OriginalUIEdgeInsets.bottom < self.m_CurrentKeyboardSize.height) {
-            newContentInsets.bottom = self.m_CurrentKeyboardSize.height;
+        if (self.m_OriginalUIEdgeInsets.bottom < self.m_CurrentKeyboardHeight) {
+            newContentInsets.bottom = self.m_CurrentKeyboardHeight;
         }
+        
         self.scrollView.contentInset = newContentInsets;
         self.scrollView.scrollIndicatorInsets = newContentInsets;
         
         if (!CGRectContainsRect(visibleFrameRect, activeFrameRect) ) {
             [self.scrollView scrollRectToVisible:activeFrameRect animated:YES];
         }
-        self.m_bViewScrolledToMakeFieldVisible = YES;
+        
+        self.m_bKeyboardIsBeingShown = YES;
     }
 }
 
 // -----------------------------------------------------------------------------------------------------------------
+// Called when the UIKeyboardWillHideNotification is sent
 
-- (void)resetTextFieldScrolling
+- (void)keyboardWillHide:(NSNotification*)aNotification
 {
-    if ((self.m_bViewScrolledToMakeFieldVisible) && (self.m_CurrentKeyboardSize.height > 0)) {
-        self.scrollView.contentInset = self.m_OriginalUIEdgeInsets;
-        self.scrollView.scrollIndicatorInsets = self.m_OriginalUIEdgeInsets;
-        self.m_bViewScrolledToMakeFieldVisible = NO;
-    }
+    self.m_CurrentKeyboardHeight = 0.0;
+    self.scrollView.contentInset = self.m_OriginalUIEdgeInsets;
+    self.scrollView.scrollIndicatorInsets = self.m_OriginalUIEdgeInsets;
+    self.m_bKeyboardIsBeingShown = NO;
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    self.m_ActiveTextField = textField;
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    self.m_ActiveTextField = nil;
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    self.m_ActiveTextView = textView;
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    self.m_ActiveTextView = nil;
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -215,6 +194,20 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    CGSize contentSize = self.contentView.frame.size;
+    
+    CGRect statusBarFrame = [UIApplication sharedApplication].statusBarFrame;
+    CGRect navBarFrame = self.navigationController.navigationBar.frame;
+    
+    self.scrollView.contentSize = contentSize;
+    self.scrollView.contentOffset = CGPointMake(0.0, 0.0-(statusBarFrame.size.height + navBarFrame.size.height));
+    
+    // Set contentInset on the scrollView only if we are creating a new intention item on an iPhone.
+    if (self.m_bIsNew && ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone)) {
+        UIEdgeInsets scrollViewInset = UIEdgeInsetsMake(statusBarFrame.size.height + navBarFrame.size.height, 0.0, 0.0, 0.0);
+        self.scrollView.contentInset = scrollViewInset;
+    }
     
     COIntentionItem *intentionItem = self.m_IntentionItem;
     
@@ -251,19 +244,22 @@
 {
     [super viewWillDisappear:animated];
     
+    if (!self.m_bUserCancelledNewIntentionItem) {
+        
+        // Save any changes back into the intentionItem
+        COIntentionItem *intentionItem = self.m_IntentionItem;
+        intentionItem.intentionItemTypeName = self.intentionNameField.text;
+        intentionItem.intentionItemTypeDescription = self.intentionDescriptionField.text;
+        intentionItem.intentionItemContribution = self.contributionField.text;
+        intentionItem.intentionItemOutcome1 = self.outcome1Field.text;
+        intentionItem.intentionItemOutcome2 = self.outcome2Field.text;
+        intentionItem.intentionItemOutcome3 = self.outcome3Field.text;
+        intentionItem.intentionItemOutcome4 = self.outcome4Field.text;
+        intentionItem.intentionItemOutcome5 = self.outcome5Field.text;
+    }
+    
     // Clear us as being the first responder
     [self.view endEditing:YES];
-    
-    // Save any changes back into the intentionItem
-    COIntentionItem *intentionItem = self.m_IntentionItem;
-    intentionItem.intentionItemTypeName = self.intentionNameField.text;
-    intentionItem.intentionItemTypeDescription = self.intentionDescriptionField.text;
-    intentionItem.intentionItemContribution = self.contributionField.text;
-    intentionItem.intentionItemOutcome1 = self.outcome1Field.text;
-    intentionItem.intentionItemOutcome2 = self.outcome2Field.text;
-    intentionItem.intentionItemOutcome3 = self.outcome3Field.text;
-    intentionItem.intentionItemOutcome4 = self.outcome4Field.text;
-    intentionItem.intentionItemOutcome5 = self.outcome5Field.text;
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -287,6 +283,7 @@
 {
     // The user cancelled, then we need to remove the new intention item from the store
     [[COIntentionItemStore sharedIntentionItemStore] removeIntentionItem:self.m_IntentionItem];
+    self.m_bUserCancelledNewIntentionItem = YES;
     
     [self.presentingViewController dismissViewControllerAnimated:YES completion:self.m_DismissBlock];
 }
