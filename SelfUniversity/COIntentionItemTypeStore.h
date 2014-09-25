@@ -1,6 +1,6 @@
 // =================================================================================================================
 //
-//  COIntentionItemStore.h
+//  COIntentionItemTypeStore.h
 //  iLearn University
 //
 //  Created by Jeffrey Young on 8/13/14.
@@ -9,25 +9,28 @@
 // =================================================================================================================
 
 #import <Foundation/Foundation.h>
+#import "COIntentionItem.h"
+#import "COGoalItem.h"
 
-@class COIntentionItem;
-
-@interface COIntentionItemStore : NSObject
+@interface COIntentionItemTypeStore : NSObject
 
 // =================================================================================================================
 #pragma mark - Properties
 // =================================================================================================================
 
-@property (nonatomic, readonly) NSArray *allIntentionItems;
+@property (nonatomic, readonly) NSArray *allIntentionItemTypes;
 
 // =================================================================================================================
 #pragma mark - Methods
 // =================================================================================================================
 
-+ (instancetype) sharedIntentionItemStore;
++ (instancetype) sharedIntentionItemTypeStore;
 - (COIntentionItem *) createIntentionItem;
-- (void) removeIntentionItem:(COIntentionItem *)intentionItem;
-- (void) moveIntentionItemAtIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
+- (COGoalItem *) createGoalItem;
+//- (CODrivingQuestionItem *) createDrivingQuestionItem;
+//- (COProductItem *) createProductItem;
+- (void) removeIntentionItemType:(COIntentionItemType *)intentionItemType;
+- (void) moveIntentionItemTypeAtIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 - (BOOL) saveChanges;
 
 @end

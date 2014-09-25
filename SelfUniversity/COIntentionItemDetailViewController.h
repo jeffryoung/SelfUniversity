@@ -16,7 +16,7 @@
 
 @property (nonatomic, strong) COIntentionItem *m_IntentionItem;
 @property (nonatomic, copy) void (^m_DismissBlock)(void);
-@property (nonatomic, strong) NSString *m_nIntentionTypeTitle;
+@property (nonatomic, strong) NSString *m_nIntentionItemTitle;
 
 - (instancetype) initForNewItem:(BOOL)isNew;
 

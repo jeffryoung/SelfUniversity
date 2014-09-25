@@ -1,6 +1,6 @@
 // =================================================================================================================
 //
-//  COIntentionViewController.h
+//  COIntentionItemTypeViewController.h
 //  iLearn University
 //
 //  Created by Jeffrey Young on 6/25/14.
@@ -12,9 +12,9 @@
 #import "COGlobalDefsConstants.h"
 #import "COListSelector.h"
 
-@interface COIntentionViewController : UITableViewController <COListSelectorDelegate, UIViewControllerRestoration>
+@interface COIntentionItemTypeViewController : UITableViewController <COListSelectorDelegate, UIViewControllerRestoration>
 
 @property (nonatomic, strong) UITabBarController *m_tabBarController;
-@property (nonatomic) NSInteger m_nIntentionTypeSelected;
+@property (nonatomic) NSInteger m_nIntentionItemTypeSelected;
 
 @end

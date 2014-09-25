@@ -1,22 +1,22 @@
 // =================================================================================================================
 //
-//  COGoalDetailViewController.h
+//  COGoalItemDetailViewController.h
 //  iLearn University
 //
-//  Created by Jeffrey Young on 8/19/14.
+//  Created by Jeffrey Young on 9/21/14.
 //  Copyright (c) 2014 infinite Discoveries. All rights reserved.
 //
 // =================================================================================================================
 
 #import <UIKit/UIKit.h>
 
-@class COIntentionItem;
+@class COGoalItem;
 
-@interface COGoalDetailViewController : UIViewController <UIViewControllerRestoration>
+@interface COGoalItemDetailViewController : UIViewController <UITextFieldDelegate, UIViewControllerRestoration>
 
-@property (nonatomic, strong) COIntentionItem *m_IntentionItem;
+@property (nonatomic, strong) COGoalItem *m_GoalItem;
 @property (nonatomic, copy) void (^m_DismissBlock)(void);
-@property (nonatomic, strong) NSString *m_nIntentionTypeTitle;
+@property (nonatomic, strong) NSString *m_nGoalTitle;
 
 - (instancetype) initForNewItem:(BOOL)isNew;
 

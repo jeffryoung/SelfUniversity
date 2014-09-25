@@ -1,6 +1,6 @@
 // =================================================================================================================
 //
-//  COIntensionViewController.m
+//  COIntensionItemTypeViewController.m
 //  iLearn University
 //
 //  Created by Jeffrey Young on 6/25/14.
@@ -8,18 +8,20 @@
 //
 // =================================================================================================================
 
-#import "COIntentionViewController.h"
-#import "COIntentionItemDetailViewController.h"
-#import "COIntentionItemStore.h"
+#import "COIntentionItemTypeViewController.h"
+#import "COIntentionItemTypeStore.h"
 #import "COIntentionItem.h"
+#import "COIntentionItemDetailViewController.h"
+#import "COGoalItem.h"
+#import "COGoalItemDetailViewController.h"
 
-@interface COIntentionViewController ()
+@interface COIntentionItemTypeViewController ()
 
 @property (nonatomic) NSMutableArray *gListToIntentionTypeTranslator;
 
 @end
 
-@implementation COIntentionViewController
+@implementation COIntentionItemTypeViewController
 
 // =================================================================================================================
 #pragma mark - Initialization
@@ -152,13 +154,13 @@
         
     // If only we only have one intention type, then go ahead and create that intention type.
     } else if ([intentionTypeNameList count] == 1) {
-        self.m_nIntentionTypeSelected = 0;
+        self.m_nIntentionItemTypeSelected = 0;
         self.gListToIntentionTypeTranslator = listToIntentionTypeTranslator;
         [self createNewIntentionType];
         
     // If we don't have any intention types to choose from, then we don't need to do anything at all.
     } else if ([intentionTypeNameList count] == 0) {
-        self.m_nIntentionTypeSelected = kNoSelectionMade;
+        self.m_nIntentionItemTypeSelected = kNoSelectionMade;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No Intentions are Enabled in Settings", @"No Intentions enabled message")
                                                         message:NSLocalizedString(@"Go to settings and enable at least one intention type:", @"Enable intentions instructions")
                                                        delegate:nil
@@ -172,7 +174,7 @@
 
 - (void) indexSelected:(NSInteger)index
 {
-    self.m_nIntentionTypeSelected = index;
+    self.m_nIntentionItemTypeSelected = index;
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -182,51 +184,96 @@
 - (void) createNewIntentionType
 {
     // Look up what type of intention item we are going to create.
-    self.m_nIntentionTypeSelected = [self.gListToIntentionTypeTranslator[self.m_nIntentionTypeSelected] integerValue];
+    self.m_nIntentionItemTypeSelected = [self.gListToIntentionTypeTranslator[self.m_nIntentionItemTypeSelected] integerValue];
     
     // Create a new intention item of the right type...
-    COIntentionItem *newIntentionItem = [[COIntentionItemStore sharedIntentionItemStore] createIntentionItem];
-    newIntentionItem.intentionItemTypeName = @"";
-    newIntentionItem.intentionItemTypeDescription = @"";
-    
     // Display the correct detail view controller for that type of item as a modal dialog box.
-    COIntentionItemDetailViewController *detailViewController = [[COIntentionItemDetailViewController alloc] initForNewItem:YES];
-    detailViewController.m_IntentionItem = newIntentionItem;
-    detailViewController.m_DismissBlock = ^{
-        [self.tableView reloadData];
-    };
     
-    switch (self.m_nIntentionTypeSelected) {
-        case kIntentionItem:
-            detailViewController.m_nIntentionTypeTitle = NSLocalizedString(@"Create a new Intention", @"Create new intention title");
-            break;
-            
-        case kGoalItem:
-            detailViewController.m_nIntentionTypeTitle = NSLocalizedString(@"Create a new Goal", @"Create new goal title");
-            break;
-            
-        case kDrivingQuestionItem:
-            detailViewController.m_nIntentionTypeTitle = NSLocalizedString(@"Create a new Driving Question", @"Create new driving question title");
-            break;
-            
-        case kProductItem:
-            detailViewController.m_nIntentionTypeTitle = NSLocalizedString(@"Create a new Product", @"Create new product title");
-            break;
-            
-        case kNoSelectionMade:
-            NSLog(@"Cancelled, not creating anything.");
-            return;
+    // Intention Items...
+    if (self.m_nIntentionItemTypeSelected == kIntentionItem) {
+        COIntentionItem *newIntentionItem = [[COIntentionItemTypeStore sharedIntentionItemTypeStore] createIntentionItem];
+        newIntentionItem.intentionItemTypeName = @"";
+        newIntentionItem.intentionItemTypeDescription = @"";
+        
+        COIntentionItemDetailViewController *detailViewController = [[COIntentionItemDetailViewController alloc] initForNewItem:YES];
+        detailViewController.m_IntentionItem = (COIntentionItem *)newIntentionItem;
+        detailViewController.m_DismissBlock = ^{
+            [self.tableView reloadData];
+        };
+        detailViewController.m_nIntentionItemTitle = NSLocalizedString(@"Create a new Intention", @"Create new intention title");
+        
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+        navController.modalPresentationStyle = UIModalPresentationFormSheet;
+        navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        navController.restorationIdentifier = NSStringFromClass([navController class]);
+        
+        [self presentViewController:navController animated:YES completion:nil];
+        
+    // Goal Items...
+    } else if (self.m_nIntentionItemTypeSelected == kGoalItem) {
+        COGoalItem *newGoalItem = [[COIntentionItemTypeStore sharedIntentionItemTypeStore] createGoalItem];
+        newGoalItem.intentionItemTypeName = @"";
+        newGoalItem.intentionItemTypeDescription = @"";
+        newGoalItem.goalItemReward = @"";
+        newGoalItem.goalItemTargetDate = [NSDate date];
+        
+        COGoalItemDetailViewController *detailViewController = [[COGoalItemDetailViewController alloc] initForNewItem:YES];
+        detailViewController.m_GoalItem = newGoalItem;
+        detailViewController.m_DismissBlock = ^{
+            [self.tableView reloadData];
+        };
+        detailViewController.m_nGoalTitle = NSLocalizedString(@"Create a new Goal", @"Create new goal title");
+        
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+        navController.modalPresentationStyle = UIModalPresentationFormSheet;
+        navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        navController.restorationIdentifier = NSStringFromClass([navController class]);
+        
+        [self presentViewController:navController animated:YES completion:nil];
+        
+        // Driving Question Items...
+//    } else if (self.m_nIntentionItemTypeSelected == kDrivingQuestionItem) {
+        
+/*        CODrivingQuestionItem *newDrivingQuestionItem = [[COIntentionItemTypeStore sharedIntentionItemTypeStore] createDrivingQuestionItem];
+        newDrivingQuestionItem.intentionItemTypeName = @"";
+        newDrivingQuestionItem.intentionItemTypeDescription = @"";
+        
+        CODrivingQuestionItemDetailViewController *detailViewController = [[CODrivingQuestionItemDetailViewController alloc] initForNewItem:YES];
+        detailViewController.m_DrivingQuestionItem = newDrivingQuestionItem;
+        detailViewController.m_DismissBlock = ^{
+            [self.tableView reloadData];
+        };
+        detailViewController.m_nDrivingQuestionTitle = NSLocalizedString(@"Create a new Driving Question", @"Create new driving question title");
+        
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+        navController.modalPresentationStyle = UIModalPresentationFormSheet;
+        navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        navController.restorationIdentifier = NSStringFromClass([navController class]);
+        
+        [self presentViewController:navController animated:YES completion:nil];
+ */
+        // Product Items...
+//    } else if (self.m_nIntentionItemTypeSelected == kProductItem) {
+/*        COProductItem *newProductItem = [[COIntentionItemTypeStore sharedIntentionItemTypeStore] createProductItem];
+         newProductItem.intentionItemTypeName = @"";
+         newProductItem.intentionItemTypeDescription = @"";
+         
+         COProductItemDetailViewController *detailViewController = [[COProductItemDetailViewController alloc] initForNewItem:YES];
+         detailViewController.m_ProductItem = newProductItem;
+         detailViewController.m_DismissBlock = ^{
+         [self.tableView reloadData];
+         };
+         detailViewController.m_nProductTitle = NSLocalizedString(@"Create a new Product", @"Create new product title");
+         
+         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+         navController.modalPresentationStyle = UIModalPresentationFormSheet;
+         navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+         navController.restorationIdentifier = NSStringFromClass([navController class]);
+         
+         [self presentViewController:navController animated:YES completion:nil];
+         */
+
     }
-
-    
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
-    navController.modalPresentationStyle = UIModalPresentationFormSheet;
-    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    navController.restorationIdentifier = NSStringFromClass([navController class]);
-    
-    [self presentViewController:navController animated:YES completion:nil];
-
-    
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -263,7 +310,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[COIntentionItemStore sharedIntentionItemStore] allIntentionItems] count];
+    return [[[COIntentionItemTypeStore sharedIntentionItemTypeStore] allIntentionItemTypes] count];
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -274,10 +321,10 @@
     
     // Set the text on the cell with the description of the item that is the nth index of items
     
-    NSArray *intentionItems = [[COIntentionItemStore sharedIntentionItemStore] allIntentionItems];
-    COIntentionItem *intentionItem = intentionItems[indexPath.row];
+    NSArray *intentionItemTypes = [[COIntentionItemTypeStore sharedIntentionItemTypeStore] allIntentionItemTypes];
+    COIntentionItemType *intentionItemType = intentionItemTypes[indexPath.row];
     
-    cell.textLabel.text = intentionItem.intentionItemTypeName;
+    cell.textLabel.text = intentionItemType.intentionItemTypeName;
     
     return cell;
 }
@@ -288,9 +335,9 @@
 {
     // If the table view is asking to commit a delete command...
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSArray *intentionItems = [[COIntentionItemStore sharedIntentionItemStore] allIntentionItems];
-        COIntentionItem *selectedIntentionItem = intentionItems[indexPath.row];
-        [[COIntentionItemStore sharedIntentionItemStore] removeIntentionItem:selectedIntentionItem];
+        NSArray *intentionItemTypes = [[COIntentionItemTypeStore sharedIntentionItemTypeStore] allIntentionItemTypes];
+        COIntentionItemType *selectedIntentionItemType = intentionItemTypes[indexPath.row];
+        [[COIntentionItemTypeStore sharedIntentionItemTypeStore] removeIntentionItemType:selectedIntentionItemType];
         
         // Also remove that row from the table view with an animation...
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -301,22 +348,30 @@
 
 - (void) tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-    [[COIntentionItemStore sharedIntentionItemStore] moveIntentionItemAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
+    [[COIntentionItemTypeStore sharedIntentionItemTypeStore] moveIntentionItemTypeAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
 }
 
 // -----------------------------------------------------------------------------------------------------------------
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    COIntentionItemDetailViewController *intentionItemDetailViewController = [[COIntentionItemDetailViewController alloc] initForNewItem:NO];
+    // Get the intentionItemType we selected.
+    NSArray *intentionItemTypes = [[COIntentionItemTypeStore sharedIntentionItemTypeStore] allIntentionItemTypes];
+    COIntentionItemType *selectedIntentionItemType = intentionItemTypes[indexPath.row];
     
-    // Give the detail view controller the intentionItem we created.
-    NSArray *intentionItems = [[COIntentionItemStore sharedIntentionItemStore] allIntentionItems];
-    COIntentionItem *selectedIntentionItem = intentionItems[indexPath.row];
-    intentionItemDetailViewController.m_IntentionItem = selectedIntentionItem;
-    
-    // Push the detail view controller onto the top of the navigation controller's stack
-    [self.navigationController pushViewController:intentionItemDetailViewController animated:YES];
+    // Using the subType string in the intentionItemType, push the appropriate view controller on top of the navigation controller's stack.
+    if ([selectedIntentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"Intention Item", @"Intention Item")]) {
+        COIntentionItemDetailViewController *intentionItemDetailViewController = [[COIntentionItemDetailViewController alloc] initForNewItem:NO];
+        intentionItemDetailViewController.m_IntentionItem = (COIntentionItem *) selectedIntentionItemType;
+        [self.navigationController pushViewController:intentionItemDetailViewController animated:YES];
+        
+    } else if ([selectedIntentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"Goal Item", @"Goal Item")]) {
+        COGoalItemDetailViewController *goalItemDetailViewController = [[COGoalItemDetailViewController alloc] initForNewItem:NO];
+        COGoalItem *selectedGoalItem = (COGoalItem *) selectedIntentionItemType;
+        goalItemDetailViewController.m_GoalItem = selectedGoalItem;
+        [self.navigationController pushViewController:goalItemDetailViewController animated:YES];
+        
+    }
 }
 
 // =================================================================================================================

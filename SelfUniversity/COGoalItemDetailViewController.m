@@ -1,6 +1,6 @@
 // =================================================================================================================
 //
-//  COIntentionItemDetailViewController.m
+//  COGoalItemDetailViewController.m
 //  iLearn University
 //
 //  Created by Jeffrey Young on 9/21/14.
@@ -8,29 +8,25 @@
 //
 // =================================================================================================================
 
-#import "COIntentionItemDetailViewController.h"
-#import "COIntentionItem.h"
+#import "COGoalItemDetailViewController.h"
+#import "COGoalItem.h"
 #import "COIntentionItemTypeStore.h"
+#import "COString.h"
 
-@interface COIntentionItemDetailViewController ()
+@interface COGoalItemDetailViewController ()
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 
-
 @property (weak, nonatomic) IBOutlet UITextField *intentionNameField;
 @property (weak, nonatomic) IBOutlet UITextView *intentionDescriptionField;
-@property (weak, nonatomic) IBOutlet UITextView *contributionField;
-@property (weak, nonatomic) IBOutlet UITextField *outcome1Field;
-@property (weak, nonatomic) IBOutlet UITextField *outcome2Field;
-@property (weak, nonatomic) IBOutlet UITextField *outcome3Field;
-@property (weak, nonatomic) IBOutlet UITextField *outcome4Field;
-@property (weak, nonatomic) IBOutlet UITextField *outcome5Field;
+@property (weak, nonatomic) IBOutlet UITextView *goalItemRewardField;
+@property (weak, nonatomic) IBOutlet UITextField *goalItemTargetDateField;
 @property (weak, nonatomic) IBOutlet UILabel *dateCreatedLabel;
 
 @property (nonatomic) BOOL m_bIsNew;
 @property (nonatomic) BOOL m_bKeyboardIsBeingShown;
-@property (nonatomic) BOOL m_bUserCancelledNewIntentionItem;
+@property (nonatomic) BOOL m_bUserCancelledNewGoalItem;
 @property (nonatomic) float m_CurrentKeyboardHeight;
 @property (nonatomic) UIEdgeInsets m_OriginalUIEdgeInsets;
 @property (nonatomic) UITextField *m_ActiveTextField;
@@ -38,7 +34,7 @@
 
 @end
 
-@implementation COIntentionItemDetailViewController
+@implementation COGoalItemDetailViewController
 
 // =================================================================================================================
 #pragma mark - Object Methods
@@ -51,7 +47,7 @@
     if (self) {
         self.m_bIsNew = isNew;
         self.m_bKeyboardIsBeingShown = NO;
-        self.m_bUserCancelledNewIntentionItem = NO;
+        self.m_bUserCancelledNewGoalItem = NO;
         self.restorationIdentifier = NSStringFromClass([self class]);
         self.restorationClass = [self class];
         
@@ -189,7 +185,7 @@
 }
 
 // -----------------------------------------------------------------------------------------------------------------
-// Load the form with data from the selected intention item
+// Load the form with data from the selected goal item
 
 - (void) viewWillAppear:(BOOL)animated
 {
@@ -202,39 +198,46 @@
     
     self.scrollView.contentSize = contentSize;
     
-    // Set contentOffset and contentInset on the scrollView only if we are creating a new intention item on an iPhone.
+    // Set contentInset on the scrollView only if we are creating a new goal item on an iPhone.
     if (self.m_bIsNew && ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone)) {
         self.scrollView.contentOffset = CGPointMake(0.0, 0.0-(statusBarFrame.size.height + navBarFrame.size.height));
         UIEdgeInsets scrollViewInset = UIEdgeInsetsMake(statusBarFrame.size.height + navBarFrame.size.height, 0.0, 0.0, 0.0);
         self.scrollView.contentInset = scrollViewInset;
     }
     
-    COIntentionItem *intentionItem = self.m_IntentionItem;
+    COGoalItem *goalItem = self.m_GoalItem;
     
     if (self.m_bIsNew) {
-        self.title = self.m_nIntentionItemTitle;
+        self.title = self.m_nGoalTitle;
     } else {
-        self.title = intentionItem.intentionItemTypeName;
+        self.title = goalItem.intentionItemTypeName;
     }
     
     // Place the data from the intentionItem into the fields on the detail view.
-    self.intentionNameField.text = intentionItem.intentionItemTypeName;
-    self.intentionDescriptionField.text = intentionItem.intentionItemTypeDescription;
-    self.contributionField.text = intentionItem.intentionItemContribution;
-    self.outcome1Field.text = intentionItem.intentionItemOutcome1;
-    self.outcome2Field.text = intentionItem.intentionItemOutcome2;
-    self.outcome3Field.text = intentionItem.intentionItemOutcome3;
-    self.outcome4Field.text = intentionItem.intentionItemOutcome4;
-    self.outcome5Field.text = intentionItem.intentionItemOutcome5;
+    self.intentionNameField.text = goalItem.intentionItemTypeName;
+    self.intentionDescriptionField.text = goalItem.intentionItemTypeDescription;
+    self.goalItemRewardField.text = goalItem.goalItemReward;
     
-    // Format the date into a simle date string and put the date on the detail view.
+    // Format Target Date and Date Created into simple date strings and put the dates on the detail view.
     static NSDateFormatter *dateFormatter = nil;
     if (!dateFormatter) {
         dateFormatter = [[NSDateFormatter alloc] init];
         dateFormatter.dateStyle = NSDateFormatterMediumStyle;
         dateFormatter.timeStyle = NSDateFormatterNoStyle;
     }
-    self.dateCreatedLabel.text = [dateFormatter stringFromDate:intentionItem.intentionItemTypeDateCreated];
+    self.goalItemTargetDateField.text = [dateFormatter stringFromDate:goalItem.goalItemTargetDate];
+    self.dateCreatedLabel.text = [dateFormatter stringFromDate:goalItem.intentionItemTypeDateCreated];
+    
+    // Set up a Date Picker to be used when the user wants to edit the goalItemTargetDate.
+    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+    datePicker.datePickerMode = UIDatePickerModeDate;
+    datePicker.minimumDate = [NSDate date];
+    if (goalItem.goalItemTargetDate == nil) {
+        goalItem.goalItemTargetDate = [NSDate date];
+    }
+    [datePicker setDate:goalItem.goalItemTargetDate];
+    [datePicker addTarget:self action:@selector(updateGoalItemTargetDateTextField:) forControlEvents:UIControlEventValueChanged];
+    [self.goalItemTargetDateField setInputView:datePicker];
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -244,30 +247,36 @@
 {
     [super viewWillDisappear:animated];
     
-    if (!self.m_bUserCancelledNewIntentionItem) {
+    if (!self.m_bUserCancelledNewGoalItem) {
         
         // Save any changes back into the intentionItem
-        COIntentionItem *intentionItem = self.m_IntentionItem;
-        intentionItem.intentionItemTypeName = self.intentionNameField.text;
-        intentionItem.intentionItemTypeDescription = self.intentionDescriptionField.text;
-        intentionItem.intentionItemContribution = self.contributionField.text;
-        intentionItem.intentionItemOutcome1 = self.outcome1Field.text;
-        intentionItem.intentionItemOutcome2 = self.outcome2Field.text;
-        intentionItem.intentionItemOutcome3 = self.outcome3Field.text;
-        intentionItem.intentionItemOutcome4 = self.outcome4Field.text;
-        intentionItem.intentionItemOutcome5 = self.outcome5Field.text;
+        COGoalItem *goalItem = self.m_GoalItem;
+        goalItem.intentionItemTypeName = self.intentionNameField.text;
+        goalItem.intentionItemTypeDescription = self.intentionDescriptionField.text;
+        goalItem.goalItemReward = self.goalItemRewardField.text;
+        
+        static NSDateFormatter *dateFormatter = nil;
+        if (!dateFormatter) {
+            dateFormatter = [[NSDateFormatter alloc] init];
+            dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+            dateFormatter.timeStyle = NSDateFormatterNoStyle;
+        }
+        goalItem.goalItemTargetDate = [dateFormatter dateFromString:self.goalItemTargetDateField.text];
     }
     
     // Clear us as being the first responder
     [self.view endEditing:YES];
 }
 
-// -----------------------------------------------------------------------------------------------------------------
+// =================================================================================================================
+#pragma mark - Selector Methods
+// =================================================================================================================
 
-- (void) setIntentionItem:(COIntentionItem *)intentionItem
+
+- (void) setGoalItem:(COGoalItem *)goalItem
 {
-    _m_IntentionItem = intentionItem;
-    self.navigationItem.title = intentionItem.intentionItemTypeName;
+    _m_GoalItem = goalItem;
+    self.navigationItem.title = goalItem.intentionItemTypeName;
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -282,10 +291,27 @@
 - (void) cancel:(id)sender
 {
     // The user cancelled, then we need to remove the new intention item from the store
-    [[COIntentionItemTypeStore sharedIntentionItemTypeStore] removeIntentionItemType:self.m_IntentionItem];
-    self.m_bUserCancelledNewIntentionItem = YES;
+    [[COIntentionItemTypeStore sharedIntentionItemTypeStore] removeIntentionItemType:self.m_GoalItem];
+    self.m_bUserCancelledNewGoalItem = YES;
     
     [self.presentingViewController dismissViewControllerAnimated:YES completion:self.m_DismissBlock];
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
+- (void) updateGoalItemTargetDateTextField:(id)sender
+{
+    UIDatePicker *datePicker = (UIDatePicker*)self.goalItemTargetDateField.inputView;
+    
+    // Format Target Date and Date Created into simple date strings and put the dates into the text field.
+    static NSDateFormatter *dateFormatter = nil;
+    if (!dateFormatter) {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+        dateFormatter.timeStyle = NSDateFormatterNoStyle;
+    }
+    self.goalItemTargetDateField.text = [dateFormatter stringFromDate:datePicker.date];
+
 }
 
 // =================================================================================================================

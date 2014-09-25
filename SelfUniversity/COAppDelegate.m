@@ -11,8 +11,8 @@
 #import "COAppDelegate.h"
 #import "COGlobalDefsConstants.h"
 #import "COLibraryRootViewController.h"
-#import "COIntentionViewController.h"
-#import "COIntentionItemStore.h"
+#import "COIntentionItemTypeViewController.h"
+#import "COIntentionItemTypeStore.h"
 #import "COContentViewController.h"
 #import "COLearningGuideViewController.h"
 #import "COPracticeViewController.h"
@@ -52,7 +52,7 @@ NSString * const COProductItemsEnabledKey = @"ProductItemsEnabled";
         self.window.rootViewController = tabBarController;
         
         // Create a IntentionViewController and make it the rootViewController of a UINavigationController
-        COIntentionViewController *ivc = [[COIntentionViewController alloc] init];
+        COIntentionItemTypeViewController *ivc = [[COIntentionItemTypeViewController alloc] init];
         ivc.m_tabBarController = tabBarController;
         
         UINavigationController *iNavController = [[UINavigationController alloc] initWithRootViewController:ivc];
@@ -95,7 +95,7 @@ NSString * const COProductItemsEnabledKey = @"ProductItemsEnabled";
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    BOOL success = [[COIntentionItemStore sharedIntentionItemStore] saveChanges];
+    BOOL success = [[COIntentionItemTypeStore sharedIntentionItemTypeStore] saveChanges];
     if (success) {
         NSLog(@"Saved all the intention items.");
     } else {

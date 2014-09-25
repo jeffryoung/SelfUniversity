@@ -1,6 +1,6 @@
 // =================================================================================================================
 //
-//  COIntentionItemStore.m
+//  COIntentionItemTypeStore.m
 //  iLearn University
 //
 //  Created by Jeffrey Young on 8/13/14.
@@ -8,31 +8,31 @@
 //
 // =================================================================================================================
 
-#import "COIntentionItemStore.h"
-#import "COIntentionItem.h"
+#import "COIntentionItemTypeStore.h"
+#import "COIntentionItemType.h"
 @import CoreData;
 
-@interface COIntentionItemStore()
-@property (nonatomic) NSMutableArray *privateIntentionItems;
+@interface COIntentionItemTypeStore()
+@property (nonatomic) NSMutableArray *privateIntentionItemTypes;
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, strong) NSManagedObjectModel *model;
 @end
 
-@implementation COIntentionItemStore
+@implementation COIntentionItemTypeStore
 
 // =================================================================================================================
 #pragma mark - Class Methods
 // =================================================================================================================
 
-+ (instancetype)sharedIntentionItemStore
++ (instancetype)sharedIntentionItemTypeStore
 {
-    static COIntentionItemStore *sharedIntentionItemStore = nil;
+    static COIntentionItemTypeStore *sharedIntentionItemTypeStore = nil;
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
-        sharedIntentionItemStore = [[self alloc] initPrivate];
+        sharedIntentionItemTypeStore = [[self alloc] initPrivate];
     });
-    return sharedIntentionItemStore;
+    return sharedIntentionItemTypeStore;
 }
 
 // =================================================================================================================
@@ -41,9 +41,9 @@
 
 - (instancetype)init
 {
-    // If a programmer calls [[COIntentionItemStore alloc] init], let him or her know by throwing an exception.
+    // If a programmer calls [[COIntentionItemTypeStore alloc] init], let him or her know by throwing an exception.
     @throw [NSException exceptionWithName:@"Singleton Object"
-                                   reason:@"Use +[COIntentionItemStore sharedStore]"
+                                   reason:@"Use +[COIntentionItemTypeStore sharedStore]"
                                  userInfo:nil];
     return nil;
 }
@@ -61,7 +61,7 @@
         NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_model];
         
         // Identify where the SQLite file should go.
-        NSString *path = self.intentionItemsArchivePath;
+        NSString *path = self.intentionItemTypesArchivePath;
         NSURL *storeURL = [NSURL fileURLWithPath:path];
         
         NSError *error = nil;
@@ -77,7 +77,7 @@
         // Create the managed object context
         _context = [[NSManagedObjectContext alloc] init];
         _context.persistentStoreCoordinator = psc;
-        [self loadAllIntentionItems];
+        [self loadAllIntentionItemTypes];
     }
     return self;
 }
@@ -86,9 +86,9 @@
 #pragma mark - Intention Item Handling Methods
 // =================================================================================================================
 
-- (NSArray *)allIntentionItems
+- (NSArray *)allIntentionItemTypes
 {
-    return self.privateIntentionItems;
+    return self.privateIntentionItemTypes;
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -96,68 +96,132 @@
 - (COIntentionItem *)createIntentionItem
 {
     double order;
-    if ([self.allIntentionItems count] == 0) {
+    if ([self.allIntentionItemTypes count] == 0) {
         order = 1.0;
     } else {
-        order = [[self.privateIntentionItems lastObject] intentionItemTypeOrderingValue] + 1.0;
+        order = [[self.privateIntentionItemTypes lastObject] intentionItemTypeOrderingValue] + 1.0;
     }
-    NSLog(@"Adding after %lu items, order = %.2f", (unsigned long)[self.privateIntentionItems count], order);
+    NSLog(@"Adding after %lu items, order = %.2f", (unsigned long)[self.privateIntentionItemTypes count], order);
     
     COIntentionItem *intentionItem = [NSEntityDescription insertNewObjectForEntityForName:@"COIntentionItem" inManagedObjectContext:self.context];
     intentionItem.intentionItemTypeOrderingValue = order;
+    intentionItem.intentionItemTypeSubType = NSLocalizedString(@"Intention Item", @"Intention Item");
     
-    [self.privateIntentionItems addObject:intentionItem];
+    [self.privateIntentionItemTypes addObject:intentionItem];
     
     return intentionItem;
 }
 
 // -----------------------------------------------------------------------------------------------------------------
 
-- (void)moveIntentionItemAtIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex
+- (COGoalItem *)createGoalItem
+{
+    double order;
+    if ([self.allIntentionItemTypes count] == 0) {
+        order = 1.0;
+    } else {
+        order = [[self.privateIntentionItemTypes lastObject] intentionItemTypeOrderingValue] + 1.0;
+    }
+    NSLog(@"Adding after %lu items, order = %.2f", (unsigned long)[self.privateIntentionItemTypes count], order);
+    
+    COGoalItem *goalItem = [NSEntityDescription insertNewObjectForEntityForName:@"COGoalItem" inManagedObjectContext:self.context];
+    goalItem.intentionItemTypeOrderingValue = order;
+    goalItem.intentionItemTypeSubType = NSLocalizedString(@"Goal Item", @"Goal Item");
+    
+    [self.privateIntentionItemTypes addObject:goalItem];
+    
+    return goalItem;
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
+/*- (CODrivingQuestionItem *)createDrivingQuestionItem
+{
+    double order;
+    if ([self.allIntentionItemTypes count] == 0) {
+        order = 1.0;
+    } else {
+        order = [[self.privateIntentionItemTypes lastObject] intentionItemTypeOrderingValue] + 1.0;
+    }
+    NSLog(@"Adding after %lu items, order = %.2f", (unsigned long)[self.privateIntentionItemTypes count], order);
+    
+    CODrivingQuestionItem *drivingQuestionItem = [NSEntityDescription insertNewObjectForEntityForName:@"CODrivingQuestionItem" inManagedObjectContext:self.context];
+    drivingQuestionItem.intentionItemTypeOrderingValue = order;
+    drivingQuestionItem.intentionItemTypeSubType = NSLocalizedString(@"Driving Question Item", @"Driving Question Item");
+    
+    [self.privateIntentionItemTypes addObject:drivingQuestionItem];
+    
+    return drivingQuestionItem;
+}*/
+
+// -----------------------------------------------------------------------------------------------------------------
+
+/*- (COProductItem *)createProductItem
+{
+    double order;
+    if ([self.allIntentionItemTypes count] == 0) {
+        order = 1.0;
+    } else {
+        order = [[self.privateIntentionItemTypes lastObject] intentionItemTypeOrderingValue] + 1.0;
+    }
+    NSLog(@"Adding after %lu items, order = %.2f", (unsigned long)[self.privateIntentionItemTypes count], order);
+    
+    COProductItem *productItem = [NSEntityDescription insertNewObjectForEntityForName:@"COProductItem" inManagedObjectContext:self.context];
+    productItem.intentionItemTypeOrderingValue = order;
+    productItem.intentionItemTypeSubType = NSLocalizedString(@"Product Item", @"Product Item");
+    
+    [self.privateIntentionItemTypes addObject:productItem];
+    
+    return productItem;
+}*/
+
+// -----------------------------------------------------------------------------------------------------------------
+
+- (void)moveIntentionItemTypeAtIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex
 {
     if (fromIndex == toIndex) {
         return;
     }
-    COIntentionItem *intentionItem = self.privateIntentionItems[fromIndex];
+    COIntentionItemType *intentionItemType = self.privateIntentionItemTypes[fromIndex];
     
     // Remove the selected item from the store
-    [self.privateIntentionItems removeObjectAtIndex:fromIndex];
+    [self.privateIntentionItemTypes removeObjectAtIndex:fromIndex];
     
     // Insert the item into the array at the new location
-    [self.privateIntentionItems insertObject:intentionItem atIndex:toIndex];
+    [self.privateIntentionItemTypes insertObject:intentionItemType atIndex:toIndex];
     
     // Compute a new intentionItemTypeOrderingValue for the object that was moved
     double lowerBound = 0.0;
     
     // Is there an object before it in the array?
     if (toIndex > 0) {
-        lowerBound = [self.privateIntentionItems[(toIndex - 1)] intentionItemTypeOrderingValue];
+        lowerBound = [self.privateIntentionItemTypes[(toIndex - 1)] intentionItemTypeOrderingValue];
     } else {
-        lowerBound = [self.privateIntentionItems[1] intentionItemTypeOrderingValue] - 2.0;
+        lowerBound = [self.privateIntentionItemTypes[1] intentionItemTypeOrderingValue] - 2.0;
     }
     
     double upperBound = 0.0;
     
     // Is there an object after it in the array?
-    if (toIndex < [self.privateIntentionItems count] - 1) {
-        upperBound = [self.privateIntentionItems[(toIndex + 1)] intentionItemTypeOrderingValue];
+    if (toIndex < [self.privateIntentionItemTypes count] - 1) {
+        upperBound = [self.privateIntentionItemTypes[(toIndex + 1)] intentionItemTypeOrderingValue];
     } else {
-        upperBound = [self.privateIntentionItems[(toIndex - 1)] intentionItemTypeOrderingValue] + 2.0;
+        upperBound = [self.privateIntentionItemTypes[(toIndex - 1)] intentionItemTypeOrderingValue] + 2.0;
     }
     
     double newOrderValue = (lowerBound + upperBound) / 2.0;
     
     NSLog(@"Moving to order %f", newOrderValue);
-    intentionItem.intentionItemTypeOrderingValue = newOrderValue;
+    intentionItemType.intentionItemTypeOrderingValue = newOrderValue;
     
 }
 
 // -----------------------------------------------------------------------------------------------------------------
 
-- (void)removeIntentionItem:(COIntentionItem *)intentionItem
+- (void)removeIntentionItemType:(COIntentionItemType *)intentionItemType
 {
-    [self.context deleteObject:intentionItem];
-    [self.privateIntentionItems removeObjectIdenticalTo:intentionItem];
+    [self.context deleteObject:intentionItemType];
+    [self.privateIntentionItemTypes removeObjectIdenticalTo:intentionItemType];
      
 }
      
@@ -165,7 +229,7 @@
 #pragma mark - Saving intentionItems in the intentionItemStore using CoreData
 // =================================================================================================================
      
-- (NSString *)intentionItemsArchivePath
+- (NSString *)intentionItemTypesArchivePath
 {
     NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [documentDirectories firstObject];
@@ -186,11 +250,11 @@
 
 // -----------------------------------------------------------------------------------------------------------------
 
-- (void)loadAllIntentionItems
+- (void)loadAllIntentionItemTypes
 {
-    if (!self.privateIntentionItems) {
+    if (!self.privateIntentionItemTypes) {
         NSFetchRequest *request = [[NSFetchRequest alloc] init];
-        NSEntityDescription *e = [NSEntityDescription entityForName:@"COIntentionItem" inManagedObjectContext:self.context];
+        NSEntityDescription *e = [NSEntityDescription entityForName:@"COIntentionItemType" inManagedObjectContext:self.context];
         
         request.entity = e;
         
@@ -203,7 +267,7 @@
             [NSException raise:@"Fetch failed" format:@"Reason: %@", [error localizedDescription]];
         }
         
-        self.privateIntentionItems = [[NSMutableArray alloc] initWithArray:result];
+        self.privateIntentionItemTypes = [[NSMutableArray alloc] initWithArray:result];
     }
 }
 @end
