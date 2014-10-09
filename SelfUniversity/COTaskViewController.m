@@ -8,13 +8,13 @@
 //
 // =================================================================================================================
 
-#import "COProjectViewController.h"
+#import "COTaskViewController.h"
 
-@interface COProjectViewController ()
+@interface COTaskViewController ()
 
 @end
 
-@implementation COProjectViewController
+@implementation COTaskViewController
 
 // =================================================================================================================
 #pragma mark - Initialization
@@ -25,10 +25,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Set the tab bar item's title
-        self.tabBarItem.title = NSLocalizedString(@"Project", @"Project Tab Bar Label");
+        self.tabBarItem.title = NSLocalizedString(@"Task", @"Task Tab Bar Label");
         
         // Create a UIImage from the icon
-        UIImage *image = [UIImage imageNamed:@"ProjectIcon.png"];
+        UIImage *image = [UIImage imageNamed:@"TaskIcon.png"];
         
         // Put that image on the tab bar item
         self.tabBarItem.image = image;

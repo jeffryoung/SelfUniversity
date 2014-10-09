@@ -16,7 +16,7 @@
 
 @property (nonatomic, strong) COGoalItem *m_GoalItem;
 @property (nonatomic, copy) void (^m_DismissBlock)(void);
-@property (nonatomic, strong) NSString *m_nGoalTitle;
+@property (nonatomic, strong) NSString *m_tGoalTitle;
 
 - (instancetype) initForNewItem:(BOOL)isNew;
 

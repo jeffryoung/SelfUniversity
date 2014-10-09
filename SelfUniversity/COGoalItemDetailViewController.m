@@ -8,6 +8,9 @@
 //
 // =================================================================================================================
 
+#import "COGlobalDefsConstants.h"
+#import "COAppDelegate.h"
+#import "COIntentionItemTypeViewController.h"
 #import "COGoalItemDetailViewController.h"
 #import "COGoalItem.h"
 #import "COIntentionItemTypeStore.h"
@@ -45,21 +48,10 @@
     self = [super initWithNibName:nil bundle:nil];
     
     if (self) {
+        // Initialize member state variables
         self.m_bIsNew = isNew;
         self.m_bKeyboardIsBeingShown = NO;
         self.m_bUserCancelledNewGoalItem = NO;
-        self.restorationIdentifier = NSStringFromClass([self class]);
-        self.restorationClass = [self class];
-        
-        if (isNew) {
-            UIBarButtonItem *doneItem = [[UIBarButtonItem alloc]
-                                         initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(save:)];
-            self.navigationItem.rightBarButtonItem = doneItem;
-            
-            UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc]
-                                           initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
-            self.navigationItem.leftBarButtonItem = cancelItem;
-        }
         
         // Register to be notified when the keyboard is displayed and when it goes away.
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -207,10 +199,23 @@
     
     COGoalItem *goalItem = self.m_GoalItem;
     
+    // Set the title on the view controller
     if (self.m_bIsNew) {
-        self.title = self.m_nGoalTitle;
+        self.title = self.m_tGoalTitle;
     } else {
         self.title = goalItem.intentionItemTypeName;
+    }
+    
+    // Create and set Cancel and Done buttons on the navigation controller if this is for a new goal item and we haven't created
+    // the navigation controller buttons already...
+    if (self.m_bIsNew && (self.navigationItem.rightBarButtonItem == nil)) {
+        UIBarButtonItem *doneItem = [[UIBarButtonItem alloc]
+                                     initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(save:)];
+        self.navigationItem.rightBarButtonItem = doneItem;
+        
+        UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc]
+                                       initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+        self.navigationItem.leftBarButtonItem = cancelItem;
     }
     
     // Place the data from the intentionItem into the fields on the detail view.
@@ -248,20 +253,8 @@
     [super viewWillDisappear:animated];
     
     if (!self.m_bUserCancelledNewGoalItem) {
-        
-        // Save any changes back into the intentionItem
-        COGoalItem *goalItem = self.m_GoalItem;
-        goalItem.intentionItemTypeName = self.intentionNameField.text;
-        goalItem.intentionItemTypeDescription = self.intentionDescriptionField.text;
-        goalItem.goalItemReward = self.goalItemRewardField.text;
-        
-        static NSDateFormatter *dateFormatter = nil;
-        if (!dateFormatter) {
-            dateFormatter = [[NSDateFormatter alloc] init];
-            dateFormatter.dateStyle = NSDateFormatterMediumStyle;
-            dateFormatter.timeStyle = NSDateFormatterNoStyle;
-        }
-        goalItem.goalItemTargetDate = [dateFormatter dateFromString:self.goalItemTargetDateField.text];
+        [self saveTextFieldsIntoGoalItem];
+        [[COIntentionItemTypeStore sharedIntentionItemTypeStore] saveChanges];
     }
     
     // Clear us as being the first responder
@@ -314,17 +307,74 @@
 
 }
 
+// -----------------------------------------------------------------------------------------------------------------
+
+- (void) saveTextFieldsIntoGoalItem
+{
+    // Save any changes back into the intentionItem
+    COGoalItem *goalItem = self.m_GoalItem;
+    goalItem.intentionItemTypeName = self.intentionNameField.text;
+    goalItem.intentionItemTypeDescription = self.intentionDescriptionField.text;
+    goalItem.goalItemReward = self.goalItemRewardField.text;
+    
+    static NSDateFormatter *dateFormatter = nil;
+    if (!dateFormatter) {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+        dateFormatter.timeStyle = NSDateFormatterNoStyle;
+    }
+    goalItem.goalItemTargetDate = [dateFormatter dateFromString:self.goalItemTargetDateField.text];
+}
+
 // =================================================================================================================
 #pragma mark - UIViewControllerRestoration Protocol Methods
 // =================================================================================================================
 
 + (UIViewController *) viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder
 {
-    BOOL isNew = NO;
-    if ([identifierComponents count] == 3) {
-        isNew = YES;
-    }
-    return [[self alloc] initForNewItem:isNew];
+    COGoalItemDetailViewController *restoredViewController = [[self alloc] initForNewItem:NO];
+    
+    return restoredViewController;
 }
 
+// -----------------------------------------------------------------------------------------------------------------
+
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    [self saveTextFieldsIntoGoalItem];
+    [[COIntentionItemTypeStore sharedIntentionItemTypeStore] saveChanges];
+    
+    [coder encodeObject:self.m_GoalItem.intentionItemTypeKey forKey:@"intentionItemTypeKey"];
+    [coder encodeObject:self.m_tGoalTitle forKey:@"intentionItemTitle"];
+    [coder encodeBool:self.m_bIsNew forKey:@"intentionItemIsNew"];
+    [super encodeRestorableStateWithCoder:coder];
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
+- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    NSString *intentionItemTypeKey = [coder decodeObjectForKey:@"intentionItemTypeKey"];
+
+    for (COIntentionItemType *intentionItemType in [[COIntentionItemTypeStore sharedIntentionItemTypeStore] allIntentionItemTypes]) {
+        if ([intentionItemTypeKey isEqualToString:intentionItemType.intentionItemTypeKey]) {
+            self.m_GoalItem = (COGoalItem *)intentionItemType;
+            break;
+        }
+    }
+    
+    self.m_tGoalTitle = [coder decodeObjectForKey:@"intentionItemTitle"];
+    self.m_bIsNew = [coder decodeBoolForKey:@"intentionItemIsNew"];
+    
+    [super decodeRestorableStateWithCoder:coder];
+    
+    // If we were entering a new goalItem, then reach back to the intentionItemTypeViewController and tell it to show the detail view controller modally.
+    if (self.m_bIsNew) {
+        COAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+        UITabBarController *tabBarController = (UITabBarController *)appDelegate.window.rootViewController;
+        COIntentionItemTypeViewController *intentionItemTypeViewController = ((UINavigationController *)(tabBarController.viewControllers[kCOIntentionItemTypeViewControllerPosition])).viewControllers[0];
+        [intentionItemTypeViewController registerToPresentDetailViewControllerModally:self];
+    }
+
+}
 @end

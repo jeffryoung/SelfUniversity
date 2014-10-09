@@ -8,6 +8,9 @@
 //
 // =================================================================================================================
 
+#import "COGlobalDefsConstants.h"
+#import "COAppDelegate.h"
+#import "COIntentionItemTypeViewController.h"
 #import "COIntentionItemDetailViewController.h"
 #import "COIntentionItem.h"
 #import "COIntentionItemTypeStore.h"
@@ -54,16 +57,6 @@
         self.m_bUserCancelledNewIntentionItem = NO;
         self.restorationIdentifier = NSStringFromClass([self class]);
         self.restorationClass = [self class];
-        
-        if (isNew) {
-            UIBarButtonItem *doneItem = [[UIBarButtonItem alloc]
-                                         initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(save:)];
-            self.navigationItem.rightBarButtonItem = doneItem;
-            
-            UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc]
-                                           initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
-            self.navigationItem.leftBarButtonItem = cancelItem;
-        }
         
         // Register to be notified when the keyboard is displayed and when it goes away.
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -212,9 +205,21 @@
     COIntentionItem *intentionItem = self.m_IntentionItem;
     
     if (self.m_bIsNew) {
-        self.title = self.m_nIntentionItemTitle;
+        self.title = self.m_tIntentionItemTitle;
     } else {
         self.title = intentionItem.intentionItemTypeName;
+    }
+    
+    // Create and set Cancel and Done buttons on the navigation controller if this is for a new goal item and we haven't created
+    // the navigation controller buttons already...
+    if (self.m_bIsNew && (self.navigationItem.rightBarButtonItem == nil)) {
+        UIBarButtonItem *doneItem = [[UIBarButtonItem alloc]
+                                     initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(save:)];
+        self.navigationItem.rightBarButtonItem = doneItem;
+        
+        UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc]
+                                       initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+        self.navigationItem.leftBarButtonItem = cancelItem;
     }
     
     // Place the data from the intentionItem into the fields on the detail view.
@@ -245,17 +250,7 @@
     [super viewWillDisappear:animated];
     
     if (!self.m_bUserCancelledNewIntentionItem) {
-        
-        // Save any changes back into the intentionItem
-        COIntentionItem *intentionItem = self.m_IntentionItem;
-        intentionItem.intentionItemTypeName = self.intentionNameField.text;
-        intentionItem.intentionItemTypeDescription = self.intentionDescriptionField.text;
-        intentionItem.intentionItemContribution = self.contributionField.text;
-        intentionItem.intentionItemOutcome1 = self.outcome1Field.text;
-        intentionItem.intentionItemOutcome2 = self.outcome2Field.text;
-        intentionItem.intentionItemOutcome3 = self.outcome3Field.text;
-        intentionItem.intentionItemOutcome4 = self.outcome4Field.text;
-        intentionItem.intentionItemOutcome5 = self.outcome5Field.text;
+        [self saveTextFieldsIntoIntentionItem];
     }
     
     // Clear us as being the first responder
@@ -288,17 +283,71 @@
     [self.presentingViewController dismissViewControllerAnimated:YES completion:self.m_DismissBlock];
 }
 
+// -----------------------------------------------------------------------------------------------------------------
+
+- (void) saveTextFieldsIntoIntentionItem
+{
+    // Save any changes back into the intentionItem
+    COIntentionItem *intentionItem = self.m_IntentionItem;
+    intentionItem.intentionItemTypeName = self.intentionNameField.text;
+    intentionItem.intentionItemTypeDescription = self.intentionDescriptionField.text;
+    intentionItem.intentionItemContribution = self.contributionField.text;
+    intentionItem.intentionItemOutcome1 = self.outcome1Field.text;
+    intentionItem.intentionItemOutcome2 = self.outcome2Field.text;
+    intentionItem.intentionItemOutcome3 = self.outcome3Field.text;
+    intentionItem.intentionItemOutcome4 = self.outcome4Field.text;
+    intentionItem.intentionItemOutcome5 = self.outcome5Field.text;
+}
+
 // =================================================================================================================
 #pragma mark - UIViewControllerRestoration Protocol Methods
 // =================================================================================================================
 
 + (UIViewController *) viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder
 {
-    BOOL isNew = NO;
-    if ([identifierComponents count] == 3) {
-        isNew = YES;
-    }
-    return [[self alloc] initForNewItem:isNew];
+    COIntentionItemDetailViewController *restoredViewController = [[self alloc] initForNewItem:NO];
+    
+    return restoredViewController;
 }
 
+// -----------------------------------------------------------------------------------------------------------------
+
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    [self saveTextFieldsIntoIntentionItem];
+    [[COIntentionItemTypeStore sharedIntentionItemTypeStore] saveChanges];
+    
+    [coder encodeObject:self.m_IntentionItem.intentionItemTypeKey forKey:@"intentionItemTypeKey"];
+    [coder encodeObject:self.m_tIntentionItemTitle forKey:@"intentionItemTitle"];
+    [coder encodeBool:self.m_bIsNew forKey:@"intentionItemIsNew"];
+
+    [super encodeRestorableStateWithCoder:coder];
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
+- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    NSString *intentionItemTypeKey = [coder decodeObjectForKey:@"intentionItemTypeKey"];
+    
+    for (COIntentionItemType *intentionItemType in [[COIntentionItemTypeStore sharedIntentionItemTypeStore] allIntentionItemTypes]) {
+        if ([intentionItemTypeKey isEqualToString:intentionItemType.intentionItemTypeKey]) {
+            self.m_IntentionItem = (COIntentionItem *)intentionItemType;
+            break;
+        }
+    }
+    
+    self.m_tIntentionItemTitle = [coder decodeObjectForKey:@"intentionItemTitle"];
+    self.m_bIsNew = [coder decodeBoolForKey:@"intentionItemIsNew"];
+    
+    [super decodeRestorableStateWithCoder:coder];
+    
+    // If we were entering a new intentionItem, then reach back to the intentionItemTypeViewController and tell it to show the detail view controller modally.
+    if (self.m_bIsNew) {
+        COAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+        UITabBarController *tabBarController = (UITabBarController *)appDelegate.window.rootViewController;
+        COIntentionItemTypeViewController *intentionItemTypeViewController = ((UINavigationController *)(tabBarController.viewControllers[kCOIntentionItemTypeViewControllerPosition])).viewControllers[0];
+        [intentionItemTypeViewController registerToPresentDetailViewControllerModally:self];
+    }
+}
 @end

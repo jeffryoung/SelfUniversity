@@ -24,6 +24,16 @@ typedef enum : NSUInteger {
     kProductItem
 } tIntentionType;
 
+typedef enum : NSUInteger {
+    kCOIntentionItemTypeViewControllerPosition,
+    kCOLibraryRootViewControllerPosition,
+    kCOContentViewControllerPosition,
+    kCOLearningGuideViewControllerPosition,
+    kCOPracticeViewControllerPosition,
+    kCOTaskViewControllerPosition
+} tTabBarPositionType;
+
+
 // =================================================================================================================
 #pragma mark - Global Settings Definitions
 // =================================================================================================================

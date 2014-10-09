@@ -1,6 +1,6 @@
 // =================================================================================================================
 //
-//  COIntensionItemTypeViewController.m
+//  COIntentionItemTypeViewController.m
 //  iLearn University
 //
 //  Created by Jeffrey Young on 6/25/14.
@@ -8,6 +8,8 @@
 //
 // =================================================================================================================
 
+#import "COGlobalDefsConstants.h"
+#import "COAppDelegate.h"
 #import "COIntentionItemTypeViewController.h"
 #import "COIntentionItemTypeStore.h"
 #import "COIntentionItem.h"
@@ -15,9 +17,11 @@
 #import "COGoalItem.h"
 #import "COGoalItemDetailViewController.h"
 
-@interface COIntentionItemTypeViewController ()
+@interface COIntentionItemTypeViewController () <UIDataSourceModelAssociation>
 
 @property (nonatomic) NSMutableArray *gListToIntentionTypeTranslator;
+@property (nonatomic) BOOL m_bRestoreInProgressShowDetailViewController;
+@property (nonatomic) UIViewController *m_detailViewController;
 
 @end
 
@@ -32,10 +36,12 @@
     // Call the superclass's designated initializer
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
+        self.m_bRestoreInProgressShowDetailViewController = NO;
+        self.m_detailViewController = nil;
         
         // Set the contents of the navigation bar with a title and buttons
         UINavigationItem *navItem = self.navigationItem;
-        navItem.title = NSLocalizedString(@"Intention", @"Intention View Controller Title");
+        navItem.title = NSLocalizedString(@"Intentions", @"Intention View Controller Title");
         
         UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewIntentionItem:)];
         
@@ -97,6 +103,17 @@
     [super viewDidLoad];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
+    self.tableView.restorationIdentifier = @"COIntentionTypeViewControllerTableView";
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    if (self.m_bRestoreInProgressShowDetailViewController) {
+        [self presentDetailViewModally:self.m_detailViewController];
+        self.m_bRestoreInProgressShowDetailViewController = NO;
+    }
 }
 
 // =================================================================================================================
@@ -137,7 +154,7 @@
     if ([intentionTypeNameList count] >= 2) {
      
         // Create a intentionTypeSelector object, display it and allow the user to choose which type of intention object they would like to add.
-        COListSelector *intentionTypeSelector = [[COListSelector alloc] initWithList:intentionTypeNameList];
+        COListSelectorViewController *intentionTypeSelector = [[COListSelectorViewController alloc] initWithList:intentionTypeNameList];
         intentionTypeSelector.m_delegate = self;
         intentionTypeSelector.m_dismissBlock = ^{
             [self createNewIntentionType];
@@ -200,14 +217,9 @@
         detailViewController.m_DismissBlock = ^{
             [self.tableView reloadData];
         };
-        detailViewController.m_nIntentionItemTitle = NSLocalizedString(@"Create a new Intention", @"Create new intention title");
+        detailViewController.m_tIntentionItemTitle = NSLocalizedString(@"Create a new Intention", @"Create new intention title");
         
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
-        navController.modalPresentationStyle = UIModalPresentationFormSheet;
-        navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        navController.restorationIdentifier = NSStringFromClass([navController class]);
-        
-        [self presentViewController:navController animated:YES completion:nil];
+        [self presentDetailViewModally:detailViewController];
         
     // Goal Items...
     } else if (self.m_nIntentionItemTypeSelected == kGoalItem) {
@@ -222,14 +234,9 @@
         detailViewController.m_DismissBlock = ^{
             [self.tableView reloadData];
         };
-        detailViewController.m_nGoalTitle = NSLocalizedString(@"Create a new Goal", @"Create new goal title");
+        detailViewController.m_tGoalTitle = NSLocalizedString(@"Create a new Goal", @"Create new goal title");
         
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
-        navController.modalPresentationStyle = UIModalPresentationFormSheet;
-        navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        navController.restorationIdentifier = NSStringFromClass([navController class]);
-        
-        [self presentViewController:navController animated:YES completion:nil];
+        [self presentDetailViewModally:detailViewController];
         
         // Driving Question Items...
 //    } else if (self.m_nIntentionItemTypeSelected == kDrivingQuestionItem) {
@@ -278,6 +285,33 @@
 
 // -----------------------------------------------------------------------------------------------------------------
 
+- (void)pushDetailViewOntoNavigationController:(UIViewController *)detailViewController
+{
+    [self.navigationController pushViewController:detailViewController animated:YES];
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
+- (void)presentDetailViewModally:(UIViewController *)detailViewController
+{
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+    navController.modalPresentationStyle = UIModalPresentationFormSheet;
+    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    navController.restorationIdentifier = NSStringFromClass([navController class]);
+    
+    [self presentViewController:navController animated:YES completion:nil];
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
+- (void)registerToPresentDetailViewControllerModally:(UIViewController *)detailViewController
+{
+    self.m_bRestoreInProgressShowDetailViewController = YES;
+    self.m_detailViewController = detailViewController;
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
 - (void)localeChanged:(NSNotification *)note
 {
     [self.tableView reloadData];
@@ -320,7 +354,6 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
     
     // Set the text on the cell with the description of the item that is the nth index of items
-    
     NSArray *intentionItemTypes = [[COIntentionItemTypeStore sharedIntentionItemTypeStore] allIntentionItemTypes];
     COIntentionItemType *intentionItemType = intentionItemTypes[indexPath.row];
     
@@ -363,14 +396,13 @@
     if ([selectedIntentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"Intention Item", @"Intention Item")]) {
         COIntentionItemDetailViewController *intentionItemDetailViewController = [[COIntentionItemDetailViewController alloc] initForNewItem:NO];
         intentionItemDetailViewController.m_IntentionItem = (COIntentionItem *) selectedIntentionItemType;
-        [self.navigationController pushViewController:intentionItemDetailViewController animated:YES];
+        [self pushDetailViewOntoNavigationController:intentionItemDetailViewController];
         
     } else if ([selectedIntentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"Goal Item", @"Goal Item")]) {
         COGoalItemDetailViewController *goalItemDetailViewController = [[COGoalItemDetailViewController alloc] initForNewItem:NO];
         COGoalItem *selectedGoalItem = (COGoalItem *) selectedIntentionItemType;
         goalItemDetailViewController.m_GoalItem = selectedGoalItem;
-        [self.navigationController pushViewController:goalItemDetailViewController animated:YES];
-        
+        [self pushDetailViewOntoNavigationController:goalItemDetailViewController];
     }
 }
 
@@ -380,7 +412,67 @@
 
 + (UIViewController *) viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder
 {
-    return [[self alloc] init];
+    // The single COIntentionItemTypeViewController instance was re-created by the AppDelegate when the TabBarController structure was recreated.
+    // We just need to pass a pointer the that object back to the caller.
+    COAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    UITabBarController *tabBarController = (UITabBarController *)appDelegate.window.rootViewController;
+    COIntentionItemTypeViewController *intentionItemTypeViewController = ((UINavigationController *)(tabBarController.viewControllers[kCOIntentionItemTypeViewControllerPosition])).viewControllers[0];
+    
+    return intentionItemTypeViewController;
 }
+
+// -----------------------------------------------------------------------------------------------------------------
+
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    BOOL isEditing = self.isEditing;
+    [coder encodeBool:isEditing forKey:@"TableViewIsEditing"];
+    [super encodeRestorableStateWithCoder:coder];
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
+- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    BOOL isEditing = [coder decodeBoolForKey:@"TableViewIsEditing"];
+    self.editing = isEditing;
+    [super decodeRestorableStateWithCoder:coder];
+}
+
+// =================================================================================================================
+#pragma mark - UIDataSourceModelAssociation
+// =================================================================================================================
+
+- (NSString *)modelIdentifierForElementAtIndexPath:(NSIndexPath *)path inView:(UIView *)view
+{
+    NSString *identifier = nil;
+    
+    if (path && view) {
+        // Return an identifier of the given NSIndexPath, in case next time the data source changes
+        COIntentionItemType *intentionItemType = [[COIntentionItemTypeStore sharedIntentionItemTypeStore] allIntentionItemTypes][path.row];
+        identifier = intentionItemType.intentionItemTypeKey;
+    }
+    return identifier;
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
+- (NSIndexPath *) indexPathForElementWithModelIdentifier:(NSString *)identifier inView:(UIView *)view
+{
+    NSIndexPath *indexPath = nil;
+    
+    if (identifier && view) {
+        NSArray *intentionItemTypes = [[COIntentionItemTypeStore sharedIntentionItemTypeStore] allIntentionItemTypes];
+        for (COIntentionItemType *item in intentionItemTypes) {
+            if ([identifier isEqualToString:item.intentionItemTypeKey]) {
+                NSUInteger row = [intentionItemTypes indexOfObjectIdenticalTo:item];
+                indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+                break;
+            }
+        }
+    }
+    return indexPath;
+}
+
 
 @end

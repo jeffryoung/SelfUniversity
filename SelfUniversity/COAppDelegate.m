@@ -10,18 +10,21 @@
 
 #import "COAppDelegate.h"
 #import "COGlobalDefsConstants.h"
-#import "COLibraryRootViewController.h"
-#import "COIntentionItemTypeViewController.h"
 #import "COIntentionItemTypeStore.h"
+
+#import "COIntentionItemTypeViewController.h"
+#import "COLibraryRootViewController.h"
 #import "COContentViewController.h"
 #import "COLearningGuideViewController.h"
 #import "COPracticeViewController.h"
-#import "COProjectViewController.h"
+#import "COTaskViewController.h"
 
 NSString * const COIntentionItemsEnabledKey = @"IntentionItemsEnabled";
 NSString * const COGoalItemsEnabledKey = @"GoalItemsEnabled";
 NSString * const CODrivingQuestionItemsEnabledKey = @"DrivingQuestionItemsEnabled";
 NSString * const COProductItemsEnabledKey = @"ProductItemsEnabled";
+
+BOOL m_bAppIsBeingRestored = NO;
 
 @implementation COAppDelegate
 
@@ -47,36 +50,10 @@ NSString * const COProductItemsEnabledKey = @"ProductItemsEnabled";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    if (!self.window.rootViewController) {
-        UITabBarController *tabBarController = [[UITabBarController alloc] init];
-        self.window.rootViewController = tabBarController;
-        
-        // Create a IntentionViewController and make it the rootViewController of a UINavigationController
-        COIntentionItemTypeViewController *ivc = [[COIntentionItemTypeViewController alloc] init];
-        ivc.m_tabBarController = tabBarController;
-        
-        UINavigationController *iNavController = [[UINavigationController alloc] initWithRootViewController:ivc];
-        iNavController.restorationIdentifier = NSStringFromClass([iNavController class]);
-        
-        // Create a view controller that will display the library.
-        COLibraryRootViewController *bvc = [[COLibraryRootViewController alloc] init];
-        bvc.m_tabBarController = tabBarController;
-        
-        // Create a Content ViewController that will display the notebook
-        COContentViewController *cvc = [[COContentViewController alloc] init];
-        
-        // Create a Learning Guide ViewController that will display connections to learning guides
-        COLearningGuideViewController *lgvc = [[COLearningGuideViewController alloc] init];
-        
-        // Create a Practice ViewController that will display the practice log
-        COPracticeViewController *pravc = [[COPracticeViewController alloc] init];
-        
-        // Create a Project ViewController that will display the Project Tracker
-        COProjectViewController *provc = [[COProjectViewController alloc] init];
-        
-        // Place each tab's controllers into the tab bar array.
-        tabBarController.viewControllers = @[iNavController, bvc, cvc, lgvc, pravc, provc];
+    if (!m_bAppIsBeingRestored) {
+        self.window.rootViewController = [self createTabBarControllerStructure];
     }
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -103,6 +80,45 @@ NSString * const COProductItemsEnabledKey = @"ProductItemsEnabled";
     }
 }
 
+// -----------------------------------------------------------------------------------------------------------------
+
+- (UIViewController *) createTabBarControllerStructure
+{
+    // Create a IntentionItemTypeViewController and make it the rootViewController of a UINavigationController
+    COIntentionItemTypeViewController *ivc = [[COIntentionItemTypeViewController alloc] init];
+    
+    UINavigationController *iNavController = [[UINavigationController alloc] initWithRootViewController:ivc];
+    iNavController.restorationIdentifier = NSStringFromClass([iNavController class]);
+    
+    // Create a view controller that will display the library.
+    COLibraryRootViewController *lrvc = [[COLibraryRootViewController alloc] init];
+    
+    // Create a Content ViewController that will display the notebook
+    COContentViewController *cvc = [[COContentViewController alloc] init];
+    
+    // Create a Learning Guide ViewController that will display connections to learning guides
+    COLearningGuideViewController *lgvc = [[COLearningGuideViewController alloc] init];
+    
+    // Create a Practice ViewController that will display the practice log
+    COPracticeViewController *pravc = [[COPracticeViewController alloc] init];
+    
+    // Create a Task ViewController that will display the Task Tracker
+    COTaskViewController *taskvc = [[COTaskViewController alloc] init];
+    
+    // Create the UITabBarController to hold all these view controllers and set its restorationIdentifier
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    tabBarController.restorationIdentifier = NSStringFromClass([tabBarController class]);
+    
+    // Put a pointer to the tabBarController in the appropriate view controllers for easy access.
+    ivc.m_tabBarController = tabBarController;
+    lrvc.m_tabBarController = tabBarController;
+    
+    // Place each tab's controllers into the tab bar array.
+    tabBarController.viewControllers = @[iNavController, lrvc, cvc, lgvc, pravc, taskvc];
+    
+    return tabBarController;
+}
+
 // =================================================================================================================
 #pragma mark - State Restoration Methods
 // =================================================================================================================
@@ -116,6 +132,8 @@ NSString * const COProductItemsEnabledKey = @"ProductItemsEnabled";
 
 - (BOOL) application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder
 {
+    m_bAppIsBeingRestored = YES;
+    
     return YES;
 }
 
@@ -123,15 +141,27 @@ NSString * const COProductItemsEnabledKey = @"ProductItemsEnabled";
 
 - (UIViewController *)application:(UIApplication *)application viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder
 {
-    // Create a new navigation controller
-    UIViewController *vc = [[UINavigationController alloc] init];
+    UIViewController *vc = nil;
     
-    // The last object in the path array is the restoration identifier for this view controller
-    vc.restorationIdentifier = [identifierComponents lastObject];
+    // If there is only 1 identifier component, then this is the main UITabBarController
+    NSUInteger numberOfIdentifierComponents = [identifierComponents count];
     
-    // If there is only 1 identifier component, then this is the root view controller
-    if ([identifierComponents count] == 1) {
+    // If there is one identifierComponents, then it is the tabBarController that is being restored.  Create it and make it the rootViewController for the window.
+    if (numberOfIdentifierComponents == 1) {
+        vc = [self createTabBarControllerStructure];
         self.window.rootViewController = vc;
+/*    } else {
+        // Get the restoration identifier for the last object on the array of identifierComponents
+        NSString *restorationIdentifier = [identifierComponents lastObject];
+        
+        // Identify the type of class we are going to restore
+        Class viewControllerClass = NSClassFromString(restorationIdentifier);
+        
+        // Create a new view controller of the correct class type
+        vc = [[viewControllerClass alloc] init];
+        
+        // Set the restorationIdentifier on the class, but not the class so that restoration will be handled by this method in the future.
+        vc.restorationIdentifier = restorationIdentifier;*/
     }
     return vc;
 }

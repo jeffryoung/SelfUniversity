@@ -1,6 +1,6 @@
 // =================================================================================================================
 //
-//  COListSelector.m
+//  COListSelectorViewController.m
 //  iLearn University
 //
 //  Created by Jeffrey Young on 8/13/14.
@@ -8,13 +8,13 @@
 //
 // =================================================================================================================
 
-#import "COListSelector.h"
+#import "COListSelectorViewController.h"
 
 // =================================================================================================================
 #pragma mark - Private Object Data
 // =================================================================================================================
 
-@interface COListSelector ()
+@interface COListSelectorViewController ()
 
 @property (nonatomic,strong) NSArray *gListText;
 
@@ -24,7 +24,7 @@
 #pragma mark - Object Methods
 // =================================================================================================================
 
-@implementation COListSelector;
+@implementation COListSelectorViewController;
 
 @synthesize m_delegate;
 

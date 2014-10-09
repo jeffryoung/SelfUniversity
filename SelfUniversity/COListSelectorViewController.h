@@ -1,6 +1,6 @@
 // =================================================================================================================
 //
-//  COListSelector.h
+//  COListSelectorViewController.h
 //  iLearn University
 //
 //  Created by Jeffrey Young on 8/13/14.
@@ -26,7 +26,7 @@
 #pragma mark - Interface Definition
 // =================================================================================================================
 
-@interface COListSelector : UITableViewController <UIViewControllerRestoration>
+@interface COListSelectorViewController : UITableViewController <UIViewControllerRestoration>
 
 @property (nonatomic) NSInteger m_nIndexSelected;
 @property (retain) id m_delegate;

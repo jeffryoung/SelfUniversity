@@ -12,11 +12,11 @@
 
 @class COIntentionItem;
 
-@interface COIntentionItemDetailViewController : UIViewController <UIViewControllerRestoration>
+@interface COIntentionItemDetailViewController : UIViewController <UITextFieldDelegate, UIViewControllerRestoration>
 
 @property (nonatomic, strong) COIntentionItem *m_IntentionItem;
 @property (nonatomic, copy) void (^m_DismissBlock)(void);
-@property (nonatomic, strong) NSString *m_nIntentionItemTitle;
+@property (nonatomic, strong) NSString *m_tIntentionItemTitle;
 
 - (instancetype) initForNewItem:(BOOL)isNew;
 
