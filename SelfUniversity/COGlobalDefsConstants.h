@@ -42,5 +42,6 @@ extern NSString * const COIntentionItemsEnabledKey;
 extern NSString * const COGoalItemsEnabledKey;
 extern NSString * const CODrivingQuestionItemsEnabledKey;
 extern NSString * const COProductItemsEnabledKey;
+extern NSString * const COSelfEmpowermentItemsEnabledKey;
 
 #endif

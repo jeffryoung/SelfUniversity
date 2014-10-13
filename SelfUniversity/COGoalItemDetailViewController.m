@@ -21,10 +21,18 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 
+@property (weak, nonatomic) IBOutlet UIImageView *intentionItemTypeLogo;
+
 @property (weak, nonatomic) IBOutlet UITextField *intentionNameField;
 @property (weak, nonatomic) IBOutlet UITextView *intentionDescriptionField;
 @property (weak, nonatomic) IBOutlet UITextView *goalItemRewardField;
 @property (weak, nonatomic) IBOutlet UITextField *goalItemTargetDateField;
+@property (weak, nonatomic) IBOutlet UILabel *dateCreatedField;
+
+@property (weak, nonatomic) IBOutlet UILabel *goalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *goalDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *rewardLabel;
+@property (weak, nonatomic) IBOutlet UILabel *targetDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateCreatedLabel;
 
 @property (nonatomic) BOOL m_bIsNew;
@@ -34,6 +42,7 @@
 @property (nonatomic) UIEdgeInsets m_OriginalUIEdgeInsets;
 @property (nonatomic) UITextField *m_ActiveTextField;
 @property (nonatomic) UITextView *m_ActiveTextView;
+@property (nonatomic) NSArray *m_FieldTransitions;
 
 @end
 
@@ -54,14 +63,10 @@
         self.m_bUserCancelledNewGoalItem = NO;
         
         // Register to be notified when the keyboard is displayed and when it goes away.
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWillShow:)
-                                                     name:UIKeyboardDidShowNotification object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWillHide:)
-                                                     name:UIKeyboardWillHideNotification object:nil];
-        
+        NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+        [defaultCenter addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
+        [defaultCenter addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
         // Set the restoration identifier for this view controller.
         self.restorationIdentifier = NSStringFromClass([self class]);
         self.restorationClass = [self class];
@@ -164,6 +169,22 @@
 
 // -----------------------------------------------------------------------------------------------------------------
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    // Get the field that we should be editing next, if any...
+    NSUInteger index = [self.m_FieldTransitions indexOfObject:textField];
+    if ((index != NSNotFound) && ((index+1) < [self.m_FieldTransitions count])) {
+        UIResponder *nextField = [self.m_FieldTransitions objectAtIndex:(index+1)];
+        [nextField becomeFirstResponder];
+        return NO;
+    } else {
+        [textField resignFirstResponder];
+        return YES;
+    }
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
     self.m_ActiveTextView = textView;
@@ -173,6 +194,13 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
+    // Get the field that we should be editing next, if any...
+    NSUInteger index = [self.m_FieldTransitions indexOfObject:textView];
+    if ((index != NSNotFound) && ((index+1) < [self.m_FieldTransitions count])) {
+        UIResponder *nextField = [self.m_FieldTransitions objectAtIndex:(index+1)];
+        [nextField becomeFirstResponder];
+    }
+    
     self.m_ActiveTextView = nil;
 }
 
@@ -218,7 +246,11 @@
         self.navigationItem.leftBarButtonItem = cancelItem;
     }
     
+    // Load the array of field transitions for the Next button.
+    self.m_FieldTransitions = @[self.intentionNameField, self.intentionDescriptionField, self.goalItemRewardField, self.goalItemTargetDateField];
+    
     // Place the data from the intentionItem into the fields on the detail view.
+    self.intentionItemTypeLogo.image = [UIImage imageNamed:@"GoalItemIcon.png"];
     self.intentionNameField.text = goalItem.intentionItemTypeName;
     self.intentionDescriptionField.text = goalItem.intentionItemTypeDescription;
     self.goalItemRewardField.text = goalItem.goalItemReward;
@@ -231,7 +263,7 @@
         dateFormatter.timeStyle = NSDateFormatterNoStyle;
     }
     self.goalItemTargetDateField.text = [dateFormatter stringFromDate:goalItem.goalItemTargetDate];
-    self.dateCreatedLabel.text = [dateFormatter stringFromDate:goalItem.intentionItemTypeDateCreated];
+    self.dateCreatedField.text = [dateFormatter stringFromDate:goalItem.intentionItemTypeDateCreated];
     
     // Set up a Date Picker to be used when the user wants to edit the goalItemTargetDate.
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
@@ -259,6 +291,13 @@
     
     // Clear us as being the first responder
     [self.view endEditing:YES];
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 // =================================================================================================================
@@ -375,6 +414,6 @@
         COIntentionItemTypeViewController *intentionItemTypeViewController = ((UINavigationController *)(tabBarController.viewControllers[kCOIntentionItemTypeViewControllerPosition])).viewControllers[0];
         [intentionItemTypeViewController registerToPresentDetailViewControllerModally:self];
     }
-
 }
+
 @end

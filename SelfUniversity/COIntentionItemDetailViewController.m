@@ -20,6 +20,7 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 
+@property (weak, nonatomic) IBOutlet UIImageView *intentionItemTypeLogo;
 
 @property (weak, nonatomic) IBOutlet UITextField *intentionNameField;
 @property (weak, nonatomic) IBOutlet UITextView *intentionDescriptionField;
@@ -29,6 +30,18 @@
 @property (weak, nonatomic) IBOutlet UITextField *outcome3Field;
 @property (weak, nonatomic) IBOutlet UITextField *outcome4Field;
 @property (weak, nonatomic) IBOutlet UITextField *outcome5Field;
+@property (weak, nonatomic) IBOutlet UILabel *dateCreatedField;
+
+@property (weak, nonatomic) IBOutlet UILabel *intentionQuestionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *intentionNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *intentionDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *contributionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *outcomeQuestionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *outcome1Label;
+@property (weak, nonatomic) IBOutlet UILabel *outcome2Label;
+@property (weak, nonatomic) IBOutlet UILabel *outcome3Label;
+@property (weak, nonatomic) IBOutlet UILabel *outcome4Label;
+@property (weak, nonatomic) IBOutlet UILabel *outcome5Label;
 @property (weak, nonatomic) IBOutlet UILabel *dateCreatedLabel;
 
 @property (nonatomic) BOOL m_bIsNew;
@@ -38,6 +51,7 @@
 @property (nonatomic) UIEdgeInsets m_OriginalUIEdgeInsets;
 @property (nonatomic) UITextField *m_ActiveTextField;
 @property (nonatomic) UITextView *m_ActiveTextView;
+@property (nonatomic) NSArray *m_FieldTransitions;
 
 @end
 
@@ -59,14 +73,10 @@
         self.restorationClass = [self class];
         
         // Register to be notified when the keyboard is displayed and when it goes away.
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWillShow:)
-                                                     name:UIKeyboardDidShowNotification object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWillHide:)
-                                                     name:UIKeyboardWillHideNotification object:nil];
-        
+        NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+        [defaultCenter addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
+        [defaultCenter addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
         // Set the restoration identifier for this view controller.
         self.restorationIdentifier = NSStringFromClass([self class]);
         self.restorationClass = [self class];
@@ -169,6 +179,22 @@
 
 // -----------------------------------------------------------------------------------------------------------------
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    // Get the field that we should be editing next, if any...
+    NSUInteger index = [self.m_FieldTransitions indexOfObject:textField];
+    if ((index != NSNotFound) && ((index+1) < [self.m_FieldTransitions count])) {
+        UIResponder *nextField = [self.m_FieldTransitions objectAtIndex:(index+1)];
+        [nextField becomeFirstResponder];
+        return NO;
+    } else {
+        [textField resignFirstResponder];
+        return YES;
+    }
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
     self.m_ActiveTextView = textView;
@@ -178,8 +204,16 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
+    // Get the field that we should be editing next, if any...
+    NSUInteger index = [self.m_FieldTransitions indexOfObject:textView];
+    if ((index != NSNotFound) && ((index+1) < [self.m_FieldTransitions count])) {
+        UIResponder *nextField = [self.m_FieldTransitions objectAtIndex:(index+1)];
+        [nextField becomeFirstResponder];
+    }
+    
     self.m_ActiveTextView = nil;
 }
+
 
 // -----------------------------------------------------------------------------------------------------------------
 // Load the form with data from the selected intention item
@@ -222,7 +256,11 @@
         self.navigationItem.leftBarButtonItem = cancelItem;
     }
     
+    // Load the array of field transitions for the Next button.
+    self.m_FieldTransitions = @[self.intentionNameField, self.intentionDescriptionField, self.contributionField, self.outcome1Field, self.outcome2Field, self.outcome3Field, self.outcome4Field, self.outcome5Field];
+
     // Place the data from the intentionItem into the fields on the detail view.
+    self.intentionItemTypeLogo.image = [UIImage imageNamed:@"IntentionItemIcon.png"];
     self.intentionNameField.text = intentionItem.intentionItemTypeName;
     self.intentionDescriptionField.text = intentionItem.intentionItemTypeDescription;
     self.contributionField.text = intentionItem.intentionItemContribution;
@@ -239,7 +277,7 @@
         dateFormatter.dateStyle = NSDateFormatterMediumStyle;
         dateFormatter.timeStyle = NSDateFormatterNoStyle;
     }
-    self.dateCreatedLabel.text = [dateFormatter stringFromDate:intentionItem.intentionItemTypeDateCreated];
+    self.dateCreatedField.text = [dateFormatter stringFromDate:intentionItem.intentionItemTypeDateCreated];
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -259,28 +297,17 @@
 
 // -----------------------------------------------------------------------------------------------------------------
 
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
 - (void) setIntentionItem:(COIntentionItem *)intentionItem
 {
     _m_IntentionItem = intentionItem;
     self.navigationItem.title = intentionItem.intentionItemTypeName;
-}
-
-// -----------------------------------------------------------------------------------------------------------------
-
-- (void) save:(id)sender
-{
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.m_DismissBlock];
-}
-
-// -----------------------------------------------------------------------------------------------------------------
-
-- (void) cancel:(id)sender
-{
-    // The user cancelled, then we need to remove the new intention item from the store
-    [[COIntentionItemTypeStore sharedIntentionItemTypeStore] removeIntentionItemType:self.m_IntentionItem];
-    self.m_bUserCancelledNewIntentionItem = YES;
-    
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.m_DismissBlock];
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -297,6 +324,26 @@
     intentionItem.intentionItemOutcome3 = self.outcome3Field.text;
     intentionItem.intentionItemOutcome4 = self.outcome4Field.text;
     intentionItem.intentionItemOutcome5 = self.outcome5Field.text;
+}
+
+// =================================================================================================================
+#pragma mark - Selector methods
+// =================================================================================================================
+
+- (void) save:(id)sender
+{
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.m_DismissBlock];
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
+- (void) cancel:(id)sender
+{
+    // The user cancelled, then we need to remove the new intention item from the store
+    [[COIntentionItemTypeStore sharedIntentionItemTypeStore] removeIntentionItemType:self.m_IntentionItem];
+    self.m_bUserCancelledNewIntentionItem = YES;
+    
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.m_DismissBlock];
 }
 
 // =================================================================================================================
@@ -350,4 +397,5 @@
         [intentionItemTypeViewController registerToPresentDetailViewControllerModally:self];
     }
 }
+
 @end

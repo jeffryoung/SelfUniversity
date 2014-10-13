@@ -11,11 +11,13 @@
 #import "COGlobalDefsConstants.h"
 #import "COAppDelegate.h"
 #import "COIntentionItemTypeViewController.h"
+#import "COIntentionItemTypeCell.h"
 #import "COIntentionItemTypeStore.h"
 #import "COIntentionItem.h"
 #import "COIntentionItemDetailViewController.h"
 #import "COGoalItem.h"
 #import "COGoalItemDetailViewController.h"
+
 
 @interface COIntentionItemTypeViewController () <UIDataSourceModelAssociation>
 
@@ -53,11 +55,8 @@
         self.restorationIdentifier = NSStringFromClass([self class]);
         self.restorationClass = [self class];
         
-        // Register ourselves as observers for changes in Dynamic Type size.
-        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-        [nc addObserver:self selector:@selector(updateTableViewForDynamicTypeSize) name:UIContentSizeCategoryDidChangeNotification object:nil];
-        
         // Register for locale change notifications
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         [nc addObserver:self selector:@selector(localeChanged:) name:NSCurrentLocaleDidChangeNotification object:nil];
     }
     return self;
@@ -102,7 +101,12 @@
 {
     [super viewDidLoad];
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
+    // Load the NIB file that contains the user interface for the IntentionItemTypeCell
+    UINib *nib = [UINib nibWithNibName:@"COIntentionItemTypeCell" bundle:nil];
+    
+    // Register this NIB, so we can use it for the cell.
+    [self.tableView registerNib:nib forCellReuseIdentifier:@"COIntentionItemTypeCell"];
+    
     self.tableView.restorationIdentifier = @"COIntentionTypeViewControllerTableView";
 }
 
@@ -164,7 +168,7 @@
         // Create a navigation controller to display the list selector modally.
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:intentionTypeSelector];
         navController.modalPresentationStyle = UIModalPresentationFormSheet;
-        navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        navController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
         navController.restorationIdentifier = NSStringFromClass([navController class]);
         
         [self presentViewController:navController animated:YES completion:nil];
@@ -317,27 +321,6 @@
     [self.tableView reloadData];
 }
 
-// -----------------------------------------------------------------------------------------------------------------
-
-- (void)updateTableViewForDynamicTypeSize
-{
-    static NSDictionary *cellHeightDictionary;
-    
-    if (!cellHeightDictionary) {
-        cellHeightDictionary = @{ UIContentSizeCategoryExtraSmall : @44,
-                                  UIContentSizeCategorySmall : @44,
-                                  UIContentSizeCategoryMedium : @44,
-                                  UIContentSizeCategoryLarge : @44,
-                                  UIContentSizeCategoryExtraLarge : @55,
-                                  UIContentSizeCategoryExtraExtraLarge : @65,
-                                  UIContentSizeCategoryExtraExtraExtraLarge : @75 };
-    }
-    NSString *userSize = [[UIApplication sharedApplication] preferredContentSizeCategory];
-    NSNumber *cellHeight = cellHeightDictionary[userSize];
-    [self.tableView setRowHeight:cellHeight.floatValue];
-    [self.tableView reloadData];
-}
-
 // =================================================================================================================
 #pragma mark - UITableViewDataSource Protocol Methods
 // =================================================================================================================
@@ -351,13 +334,43 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
+    // Get a new or recycled cell
+    COIntentionItemTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"COIntentionItemTypeCell" forIndexPath:indexPath];
     
     // Set the text on the cell with the description of the item that is the nth index of items
     NSArray *intentionItemTypes = [[COIntentionItemTypeStore sharedIntentionItemTypeStore] allIntentionItemTypes];
     COIntentionItemType *intentionItemType = intentionItemTypes[indexPath.row];
     
-    cell.textLabel.text = intentionItemType.intentionItemTypeName;
+    // Get the icon image for this intentionItemType
+    UIImage *iconImage = nil;
+    
+    if ([intentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"Intention Item", @"Intention Item")]) {
+        iconImage = [UIImage imageNamed:@"IntentionItemIcon.png"];
+    } else if ([intentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"Goal Item", @"Goal Item")]) {
+        iconImage = [UIImage imageNamed:@"GoalItemIcon.png"];
+    } else if ([intentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"Driving Question Item", @"Driving Question Item")]) {
+        iconImage = [UIImage imageNamed:@"DrivingQuestionItemIcon.png"];
+    } else if ([intentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"Product Item", @"Product Item")]) {
+        iconImage = [UIImage imageNamed:@"ProductItemIcon.png"];
+    } else if ([intentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"SelfEmpowerment Item", @"SelfEmpowerment Item")]) {
+        iconImage = [UIImage imageNamed:@"SelfEmpowermentItemIcon.png"];
+    }
+    
+    // Put that image in the cell to illustrate the intention type.
+    cell.logoImageView.image = iconImage;
+    
+    // Configure the cell with information from the intentionItemType
+    cell.intentionItemTypeNameField.text = intentionItemType.intentionItemTypeName;
+    cell.intentionItemTypeDescriptionField.text = intentionItemType.intentionItemTypeDescription;
+    
+    // Format the date into a simle date string and put the date into the cell.
+    static NSDateFormatter *dateFormatter = nil;
+    if (!dateFormatter) {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+        dateFormatter.timeStyle = NSDateFormatterNoStyle;
+    }
+    cell.intentionItemTypeDateCreatedField.text = [dateFormatter stringFromDate:intentionItemType.intentionItemTypeDateCreated];
     
     return cell;
 }
@@ -473,6 +486,5 @@
     }
     return indexPath;
 }
-
 
 @end

@@ -12,7 +12,7 @@
 
 @class COGoalItem;
 
-@interface COGoalItemDetailViewController : UIViewController <UITextFieldDelegate, UIViewControllerRestoration>
+@interface COGoalItemDetailViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UIViewControllerRestoration>
 
 @property (nonatomic, strong) COGoalItem *m_GoalItem;
 @property (nonatomic, copy) void (^m_DismissBlock)(void);
