@@ -9,15 +9,11 @@
 // =================================================================================================================
 
 #import <UIKit/UIKit.h>
+#import "COIntentionItemTypeDetailViewController.h"
+#import "COIntentionItem.h"
 
-@class COIntentionItem;
-
-@interface COIntentionItemDetailViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UIViewControllerRestoration>
+@interface COIntentionItemDetailViewController : COIntentionItemTypeDetailViewController <COIntentionItemTypeDetailView, UIViewControllerRestoration>
 
 @property (nonatomic, strong) COIntentionItem *m_IntentionItem;
-@property (nonatomic, copy) void (^m_DismissBlock)(void);
-@property (nonatomic, strong) NSString *m_tIntentionItemTitle;
-
-- (instancetype) initForNewItem:(BOOL)isNew;
 
 @end

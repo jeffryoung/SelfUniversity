@@ -11,6 +11,7 @@
                 <outlet property="contributionLabel" destination="v8b-RU-HdN" id="JJF-hR-EUt"/>
                 <outlet property="dateCreatedField" destination="kiW-PD-hVb" id="ikB-TP-ePi"/>
                 <outlet property="dateCreatedLabel" destination="chN-dq-k06" id="Ab8-tD-Snm"/>
+                <outlet property="helpButton" destination="cDQ-N2-qxg" id="TMs-t4-Sdg"/>
                 <outlet property="intentionDescriptionField" destination="VZ8-os-2yN" id="fKs-7h-pwO"/>
                 <outlet property="intentionDescriptionLabel" destination="2c2-3f-Tp7" id="HSs-vG-LpG"/>
                 <outlet property="intentionItemTypeLogo" destination="isR-xr-04x" id="vCF-dQ-0g4"/>
@@ -61,6 +62,9 @@
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" verticalCompressionResistancePriority="755" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDQ-N2-qxg" userLabel="More Information Button">
                     <rect key="frame" x="558" y="60" width="22" height="22"/>
+                    <connections>
+                        <action selector="displayHelpViewController:" destination="-1" eventType="touchUpInside" id="UN5-Nc-yrH"/>
+                    </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Your Intention:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eW3-dV-wzB">
                     <rect key="frame" x="20" y="97" width="99" height="18"/>

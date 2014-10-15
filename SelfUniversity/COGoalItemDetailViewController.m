@@ -14,7 +14,7 @@
 #import "COGoalItemDetailViewController.h"
 #import "COGoalItem.h"
 #import "COIntentionItemTypeStore.h"
-#import "COString.h"
+#import "COGoalITemHelpViewController.h"
 
 @interface COGoalItemDetailViewController ()
 
@@ -35,15 +35,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *targetDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateCreatedLabel;
 
-@property (nonatomic) BOOL m_bIsNew;
-@property (nonatomic) BOOL m_bKeyboardIsBeingShown;
-@property (nonatomic) BOOL m_bUserCancelledNewGoalItem;
-@property (nonatomic) float m_CurrentKeyboardHeight;
-@property (nonatomic) UIEdgeInsets m_OriginalUIEdgeInsets;
-@property (nonatomic) UITextField *m_ActiveTextField;
-@property (nonatomic) UITextView *m_ActiveTextView;
-@property (nonatomic) NSArray *m_FieldTransitions;
-
 @end
 
 @implementation COGoalItemDetailViewController
@@ -54,19 +45,13 @@
 
 - (instancetype) initForNewItem:(BOOL)isNew
 {
-    self = [super initWithNibName:nil bundle:nil];
+    self = [super initForNewItem:isNew];
     
     if (self) {
-        // Initialize member state variables
-        self.m_bIsNew = isNew;
-        self.m_bKeyboardIsBeingShown = NO;
-        self.m_bUserCancelledNewGoalItem = NO;
+        // Connect the IBOutlets scrollView and contentView to the super class so the super class can use them
+        self.m_pScrollView = self.scrollView;
+        self.m_pContentView = self.contentView;
         
-        // Register to be notified when the keyboard is displayed and when it goes away.
-        NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
-        [defaultCenter addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
-        [defaultCenter addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-
         // Set the restoration identifier for this view controller.
         self.restorationIdentifier = NSStringFromClass([self class]);
         self.restorationClass = [self class];
@@ -76,132 +61,13 @@
 
 // -----------------------------------------------------------------------------------------------------------------
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    @throw [NSException exceptionWithName:@"Wrong initializer" reason:@"Use initForNewItem:" userInfo:nil];
-    return nil;
-}
-
-// -----------------------------------------------------------------------------------------------------------------
-
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    [self.view addSubview:self.contentView];
-}
-
-// -----------------------------------------------------------------------------------------------------------------
-
-- (void)viewDidUnload
-{
-    self.contentView = nil;
-    [super viewDidUnload];
-}
-
-// -----------------------------------------------------------------------------------------------------------------
-// When the keyboard is shown, then we might need to scroll the view up to see the current field if they keyboard
-// covered it up.
-
-- (void)keyboardWillShow:(NSNotification*)aNotification
-{
-    if (!self.m_bKeyboardIsBeingShown) {
-        NSDictionary* info = [aNotification userInfo];
-        CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-        self.m_CurrentKeyboardHeight = kbSize.height;
-        
-        // If active text field is hidden by keyboard, scroll it so it's visible
-        CGRect visibleFrameRect = self.scrollView.frame;
-        visibleFrameRect.size.height -= self.m_CurrentKeyboardHeight;
-        
-        // Get the activeFrameRect, depending upon whether the user is editing one of the text fields or text views.
-        CGRect activeFrameRect = CGRectNull;
-        if (self.m_ActiveTextField != nil) {
-            activeFrameRect = self.m_ActiveTextField.frame;
-        } else if (self.m_ActiveTextView != nil) {
-            activeFrameRect = self.m_ActiveTextView.frame;
-        } else {
-            return;
-        }
-        
-        // Set the insets to allow proper scrolling with the keyboard in view
-        // If the activeFrameRect is covered up by the keyboard, then scroll it into view.
-        self.m_OriginalUIEdgeInsets = self.scrollView.contentInset;
-        UIEdgeInsets newContentInsets = self.scrollView.contentInset;
-        if (self.m_OriginalUIEdgeInsets.bottom < self.m_CurrentKeyboardHeight) {
-            newContentInsets.bottom = self.m_CurrentKeyboardHeight;
-        }
-        
-        self.scrollView.contentInset = newContentInsets;
-        self.scrollView.scrollIndicatorInsets = newContentInsets;
-        
-        if (!CGRectContainsRect(visibleFrameRect, activeFrameRect) ) {
-            [self.scrollView scrollRectToVisible:activeFrameRect animated:YES];
-        }
-        
-        self.m_bKeyboardIsBeingShown = YES;
-    }
-}
-
-// -----------------------------------------------------------------------------------------------------------------
-// Called when the UIKeyboardWillHideNotification is sent
-
-- (void)keyboardWillHide:(NSNotification*)aNotification
-{
-    self.m_CurrentKeyboardHeight = 0.0;
-    self.scrollView.contentInset = self.m_OriginalUIEdgeInsets;
-    self.scrollView.scrollIndicatorInsets = self.m_OriginalUIEdgeInsets;
-    self.m_bKeyboardIsBeingShown = NO;
-}
-
-// -----------------------------------------------------------------------------------------------------------------
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    self.m_ActiveTextField = textField;
-}
-
-// -----------------------------------------------------------------------------------------------------------------
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    self.m_ActiveTextField = nil;
-}
-
-// -----------------------------------------------------------------------------------------------------------------
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    // Get the field that we should be editing next, if any...
-    NSUInteger index = [self.m_FieldTransitions indexOfObject:textField];
-    if ((index != NSNotFound) && ((index+1) < [self.m_FieldTransitions count])) {
-        UIResponder *nextField = [self.m_FieldTransitions objectAtIndex:(index+1)];
-        [nextField becomeFirstResponder];
-        return NO;
-    } else {
-        [textField resignFirstResponder];
-        return YES;
-    }
-}
-
-// -----------------------------------------------------------------------------------------------------------------
-
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-    self.m_ActiveTextView = textView;
-}
-
-// -----------------------------------------------------------------------------------------------------------------
-
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
-    // Get the field that we should be editing next, if any...
-    NSUInteger index = [self.m_FieldTransitions indexOfObject:textView];
-    if ((index != NSNotFound) && ((index+1) < [self.m_FieldTransitions count])) {
-        UIResponder *nextField = [self.m_FieldTransitions objectAtIndex:(index+1)];
-        [nextField becomeFirstResponder];
-    }
+    // Connect the IBOutlets scrollView and contentView to the super class so the super class can use them
+    self.m_pScrollView = self.scrollView;
+    self.m_pContentView = self.contentView;
     
-    self.m_ActiveTextView = nil;
+    [super viewDidLoad];
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -211,43 +77,38 @@
 {
     [super viewWillAppear:animated];
     
-    CGSize contentSize = self.contentView.frame.size;
-    
-    CGRect statusBarFrame = [UIApplication sharedApplication].statusBarFrame;
-    CGRect navBarFrame = self.navigationController.navigationBar.frame;
-    
-    self.scrollView.contentSize = contentSize;
-    
-    // Set contentInset on the scrollView only if we are creating a new goal item on an iPhone.
-    if (self.m_bIsNew && ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone)) {
-        self.scrollView.contentOffset = CGPointMake(0.0, 0.0-(statusBarFrame.size.height + navBarFrame.size.height));
-        UIEdgeInsets scrollViewInset = UIEdgeInsetsMake(statusBarFrame.size.height + navBarFrame.size.height, 0.0, 0.0, 0.0);
-        self.scrollView.contentInset = scrollViewInset;
-    }
-    
     COGoalItem *goalItem = self.m_GoalItem;
     
     // Set the title on the view controller
     if (self.m_bIsNew) {
-        self.title = self.m_tGoalTitle;
+        self.title = self.m_tIntentionItemTypeControllerTitle;
     } else {
         self.title = goalItem.intentionItemTypeName;
     }
     
-    // Create and set Cancel and Done buttons on the navigation controller if this is for a new goal item and we haven't created
-    // the navigation controller buttons already...
-    if (self.m_bIsNew && (self.navigationItem.rightBarButtonItem == nil)) {
-        UIBarButtonItem *doneItem = [[UIBarButtonItem alloc]
-                                     initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(save:)];
-        self.navigationItem.rightBarButtonItem = doneItem;
-        
-        UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc]
-                                       initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
-        self.navigationItem.leftBarButtonItem = cancelItem;
-    }
-    
     // Load the array of field transitions for the Next button.
     self.m_FieldTransitions = @[self.intentionNameField, self.intentionDescriptionField, self.goalItemRewardField, self.goalItemTargetDateField];
+    
+    [self loadTextFieldsFromGoalItem];
+    
+}
+
+// =================================================================================================================
+#pragma mark - Selector Methods
+// =================================================================================================================
+
+
+- (void) setGoalItem:(COGoalItem *)goalItem
+{
+    _m_GoalItem = goalItem;
+    self.navigationItem.title = goalItem.intentionItemTypeName;
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
+- (void) loadTextFieldsFromGoalItem
+{
+    COGoalItem *goalItem = self.m_GoalItem;
     
     // Place the data from the intentionItem into the fields on the detail view.
     self.intentionItemTypeLogo.image = [UIImage imageNamed:@"GoalItemIcon.png"];
@@ -275,58 +136,7 @@
     [datePicker setDate:goalItem.goalItemTargetDate];
     [datePicker addTarget:self action:@selector(updateGoalItemTargetDateTextField:) forControlEvents:UIControlEventValueChanged];
     [self.goalItemTargetDateField setInputView:datePicker];
-}
 
-// -----------------------------------------------------------------------------------------------------------------
-// Put the data on the form back into the intentionItem member variable.
-
-- (void) viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    if (!self.m_bUserCancelledNewGoalItem) {
-        [self saveTextFieldsIntoGoalItem];
-        [[COIntentionItemTypeStore sharedIntentionItemTypeStore] saveChanges];
-    }
-    
-    // Clear us as being the first responder
-    [self.view endEditing:YES];
-}
-
-// -----------------------------------------------------------------------------------------------------------------
-
-- (void) dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-// =================================================================================================================
-#pragma mark - Selector Methods
-// =================================================================================================================
-
-
-- (void) setGoalItem:(COGoalItem *)goalItem
-{
-    _m_GoalItem = goalItem;
-    self.navigationItem.title = goalItem.intentionItemTypeName;
-}
-
-// -----------------------------------------------------------------------------------------------------------------
-
-- (void) save:(id)sender
-{
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.m_DismissBlock];
-}
-
-// -----------------------------------------------------------------------------------------------------------------
-
-- (void) cancel:(id)sender
-{
-    // The user cancelled, then we need to remove the new intention item from the store
-    [[COIntentionItemTypeStore sharedIntentionItemTypeStore] removeIntentionItemType:self.m_GoalItem];
-    self.m_bUserCancelledNewGoalItem = YES;
-    
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.m_DismissBlock];
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -348,9 +158,9 @@
 
 // -----------------------------------------------------------------------------------------------------------------
 
-- (void) saveTextFieldsIntoGoalItem
+- (void) saveTextFieldsIntoIntentionItemType
 {
-    // Save any changes back into the intentionItem
+    // Save any changes back into the goalItem
     COGoalItem *goalItem = self.m_GoalItem;
     goalItem.intentionItemTypeName = self.intentionNameField.text;
     goalItem.intentionItemTypeDescription = self.intentionDescriptionField.text;
@@ -363,6 +173,21 @@
         dateFormatter.timeStyle = NSDateFormatterNoStyle;
     }
     goalItem.goalItemTargetDate = [dateFormatter dateFromString:self.goalItemTargetDateField.text];
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+- (void) removeCurrentIntentionItemType
+{
+    [[COIntentionItemTypeStore sharedIntentionItemTypeStore] removeIntentionItemType:self.m_GoalItem];
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
+- (IBAction)displayHelpViewController:(id)sender
+{
+    COGoalItemHelpViewController *goalItemHelpViewController = [[COGoalItemHelpViewController alloc] init];
+    [self.navigationController pushViewController:goalItemHelpViewController animated:YES];
+    
 }
 
 // =================================================================================================================
@@ -380,11 +205,11 @@
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder
 {
-    [self saveTextFieldsIntoGoalItem];
+    [self saveTextFieldsIntoIntentionItemType];
     [[COIntentionItemTypeStore sharedIntentionItemTypeStore] saveChanges];
     
     [coder encodeObject:self.m_GoalItem.intentionItemTypeKey forKey:@"intentionItemTypeKey"];
-    [coder encodeObject:self.m_tGoalTitle forKey:@"intentionItemTitle"];
+    [coder encodeObject:self.m_tIntentionItemTypeControllerTitle forKey:@"intentionItemDetailControllerTitle"];
     [coder encodeBool:self.m_bIsNew forKey:@"intentionItemIsNew"];
     [super encodeRestorableStateWithCoder:coder];
 }
@@ -402,7 +227,7 @@
         }
     }
     
-    self.m_tGoalTitle = [coder decodeObjectForKey:@"intentionItemTitle"];
+    self.m_tIntentionItemTypeControllerTitle = [coder decodeObjectForKey:@"intentionItemDetailControllerTitle"];
     self.m_bIsNew = [coder decodeBoolForKey:@"intentionItemIsNew"];
     
     [super decodeRestorableStateWithCoder:coder];

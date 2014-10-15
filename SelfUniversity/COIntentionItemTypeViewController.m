@@ -221,7 +221,7 @@
         detailViewController.m_DismissBlock = ^{
             [self.tableView reloadData];
         };
-        detailViewController.m_tIntentionItemTitle = NSLocalizedString(@"Create a new Intention", @"Create new intention title");
+        detailViewController.m_tIntentionItemTypeControllerTitle = NSLocalizedString(@"Create a new Intention", @"Create new intention title");
         
         [self presentDetailViewModally:detailViewController];
         
@@ -238,7 +238,7 @@
         detailViewController.m_DismissBlock = ^{
             [self.tableView reloadData];
         };
-        detailViewController.m_tGoalTitle = NSLocalizedString(@"Create a new Goal", @"Create new goal title");
+        detailViewController.m_tIntentionItemTypeControllerTitle = NSLocalizedString(@"Create a new Goal", @"Create new goal title");
         
         [self presentDetailViewModally:detailViewController];
         
