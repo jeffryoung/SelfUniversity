@@ -14,7 +14,7 @@
 		<string>https://github.com/jeffryoung/SelfUniversity.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>iLearn University.xcodeproj/project.xcworkspace</string>
+	<string>iLearn University.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>8710A73BA7478A7D5375B559988A0FA4777A0C19</key>

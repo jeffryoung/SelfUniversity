@@ -11,6 +11,7 @@
 #import <Foundation/Foundation.h>
 #import "COIntentionItem.h"
 #import "COGoalItem.h"
+#import "COProductStoryItem.h"
 
 @interface COIntentionItemTypeStore : NSObject
 
@@ -28,7 +29,8 @@
 - (COIntentionItem *) createIntentionItem;
 - (COGoalItem *) createGoalItem;
 //- (CODrivingQuestionItem *) createDrivingQuestionItem;
-//- (COProductItem *) createProductItem;
+- (COProductStoryItem *) createProductStoryItem;
+//- (COSelfEmpowermentItem *) createSelfEmpowermentItem;
 - (void) removeIntentionItemType:(COIntentionItemType *)intentionItemType;
 - (void) moveIntentionItemTypeAtIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 - (BOOL) saveChanges;

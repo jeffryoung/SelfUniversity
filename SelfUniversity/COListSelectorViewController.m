@@ -78,6 +78,7 @@ static NSString *intentionTypeCellIdentifier;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:intentionTypeCellIdentifier];
     
     self.title = NSLocalizedString(@"Creating...", @"List Selector Title");
+    self.navigationItem.rightBarButtonItem.enabled = NO;
      
 }
 
@@ -153,6 +154,9 @@ static NSString *intentionTypeCellIdentifier;
     if (oldCell.accessoryType == UITableViewCellAccessoryCheckmark) {
         oldCell.accessoryType = UITableViewCellAccessoryNone;
     }
+    
+    // Enable the Done button
+    self.navigationItem.rightBarButtonItem.enabled = YES;
     
 }
 

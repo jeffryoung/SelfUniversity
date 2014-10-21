@@ -17,6 +17,8 @@
 #import "COIntentionItemDetailViewController.h"
 #import "COGoalItem.h"
 #import "COGoalItemDetailViewController.h"
+#import "COProductStoryItem.h"
+#import "COProductStoryItemDetailViewController.h"
 
 
 @interface COIntentionItemTypeViewController () <UIDataSourceModelAssociation>
@@ -148,9 +150,9 @@
         [listToIntentionTypeTranslator addObject:@(kDrivingQuestionItem)];
     }
     
-    if ([defaults boolForKey:@"ProductItemsEnabled"]) {
-        [intentionTypeNameList addObject:NSLocalizedString(@"A New Product?", @"New Product Question")];
-        [listToIntentionTypeTranslator addObject:@(kProductItem)];
+    if ([defaults boolForKey:@"ProductStoryItemsEnabled"]) {
+        [intentionTypeNameList addObject:NSLocalizedString(@"A New Product Story?", @"New Product Story Question")];
+        [listToIntentionTypeTranslator addObject:@(kProductStoryItem)];
     }
     
     // If we have multiple types of intentions to choose from, then put up a modal dialog to let the user choose which
@@ -264,26 +266,24 @@
         [self presentViewController:navController animated:YES completion:nil];
  */
         // Product Items...
-//    } else if (self.m_nIntentionItemTypeSelected == kProductItem) {
-/*        COProductItem *newProductItem = [[COIntentionItemTypeStore sharedIntentionItemTypeStore] createProductItem];
-         newProductItem.intentionItemTypeName = @"";
-         newProductItem.intentionItemTypeDescription = @"";
-         
-         COProductItemDetailViewController *detailViewController = [[COProductItemDetailViewController alloc] initForNewItem:YES];
-         detailViewController.m_ProductItem = newProductItem;
-         detailViewController.m_DismissBlock = ^{
-         [self.tableView reloadData];
-         };
-         detailViewController.m_nProductTitle = NSLocalizedString(@"Create a new Product", @"Create new product title");
-         
-         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
-         navController.modalPresentationStyle = UIModalPresentationFormSheet;
-         navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-         navController.restorationIdentifier = NSStringFromClass([navController class]);
-         
-         [self presentViewController:navController animated:YES completion:nil];
-         */
-
+    } else if (self.m_nIntentionItemTypeSelected == kProductStoryItem) {
+        COProductStoryItem *newProductStoryItem = [[COIntentionItemTypeStore sharedIntentionItemTypeStore] createProductStoryItem];
+        newProductStoryItem.intentionItemTypeName = @"";
+        newProductStoryItem.intentionItemTypeDescription = @"";
+        
+        COProductStoryItemDetailViewController *detailViewController = [[COProductStoryItemDetailViewController alloc] initForNewItem:YES];
+        detailViewController.m_ProductStoryItem = newProductStoryItem;
+        detailViewController.m_DismissBlock = ^{
+            [self.tableView reloadData];
+        };
+        detailViewController.m_tIntentionItemTypeControllerTitle = NSLocalizedString(@"Create a new Product Story", @"Create new product story title");
+        
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+        navController.modalPresentationStyle = UIModalPresentationFormSheet;
+        navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        navController.restorationIdentifier = NSStringFromClass([navController class]);
+        
+        [self presentViewController:navController animated:YES completion:nil];
     }
 }
 
@@ -350,8 +350,8 @@
         iconImage = [UIImage imageNamed:@"GoalItemIcon.png"];
     } else if ([intentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"Driving Question Item", @"Driving Question Item")]) {
         iconImage = [UIImage imageNamed:@"DrivingQuestionItemIcon.png"];
-    } else if ([intentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"Product Item", @"Product Item")]) {
-        iconImage = [UIImage imageNamed:@"ProductItemIcon.png"];
+    } else if ([intentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"Product Story Item", @"Product Story Item")]) {
+        iconImage = [UIImage imageNamed:@"ProductStoryItemIcon.png"];
     } else if ([intentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"SelfEmpowerment Item", @"SelfEmpowerment Item")]) {
         iconImage = [UIImage imageNamed:@"SelfEmpowermentItemIcon.png"];
     }
@@ -416,6 +416,12 @@
         COGoalItem *selectedGoalItem = (COGoalItem *) selectedIntentionItemType;
         goalItemDetailViewController.m_GoalItem = selectedGoalItem;
         [self pushDetailViewOntoNavigationController:goalItemDetailViewController];
+        
+    } else if ([selectedIntentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"Product Story Item", @"Product Story Item")]) {
+        COProductStoryItemDetailViewController *productStoryItemDetailViewController = [[COProductStoryItemDetailViewController alloc] initForNewItem:NO];
+        COProductStoryItem *selectedProductStoryItem = (COProductStoryItem *) selectedIntentionItemType;
+        productStoryItemDetailViewController.m_ProductStoryItem = selectedProductStoryItem;
+        [self pushDetailViewOntoNavigationController:productStoryItemDetailViewController];
     }
 }
 

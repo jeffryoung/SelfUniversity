@@ -13,11 +13,11 @@
 
 @interface COIntentionItem : COIntentionItemType
 
-@property (nonatomic, retain)   NSString  * intentionItemContribution;
-@property (nonatomic, retain)   NSString  * intentionItemOutcome1;
-@property (nonatomic, retain)   NSString  * intentionItemOutcome2;
-@property (nonatomic, retain)   NSString  * intentionItemOutcome3;
-@property (nonatomic, retain)   NSString  * intentionItemOutcome4;
-@property (nonatomic, retain)   NSString  * intentionItemOutcome5;
+@property (nonatomic, strong)   NSString  * intentionItemContribution;
+@property (nonatomic, strong)   NSString  * intentionItemOutcome1;
+@property (nonatomic, strong)   NSString  * intentionItemOutcome2;
+@property (nonatomic, strong)   NSString  * intentionItemOutcome3;
+@property (nonatomic, strong)   NSString  * intentionItemOutcome4;
+@property (nonatomic, strong)   NSString  * intentionItemOutcome5;
 
 @end

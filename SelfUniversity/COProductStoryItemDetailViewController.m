@@ -1,9 +1,9 @@
 // =================================================================================================================
 //
-//  COGoalItemDetailViewController.m
+//  COProductStoryItemDetailViewController.m
 //  iLearn University
 //
-//  Created by Jeffrey Young on 9/21/14.
+//  Created by Jeffrey Young on 10/20/14.
 //  Copyright (c) 2014 infinite Discoveries. All rights reserved.
 //
 // =================================================================================================================
@@ -11,12 +11,12 @@
 #import "COGlobalDefsConstants.h"
 #import "COAppDelegate.h"
 #import "COIntentionItemTypeViewController.h"
-#import "COGoalItemDetailViewController.h"
-#import "COGoalItem.h"
+#import "COProductStoryItemDetailViewController.h"
+#import "COProductStoryItem.h"
 #import "COIntentionItemTypeStore.h"
-#import "COGoalItemHelpViewController.h"
+#import "COProductStoryItemHelpViewController.h"
 
-@interface COGoalItemDetailViewController ()
+@interface COProductStoryItemDetailViewController ()
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
@@ -25,19 +25,21 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *intentionNameField;
 @property (weak, nonatomic) IBOutlet UITextView *intentionDescriptionField;
-@property (weak, nonatomic) IBOutlet UITextView *goalItemRewardField;
-@property (weak, nonatomic) IBOutlet UITextField *goalItemTargetDateField;
+@property (weak, nonatomic) IBOutlet UITextField *productStoryItemUserRoleField;
+@property (weak, nonatomic) IBOutlet UITextField *productStoryItemGoalField;
+@property (weak, nonatomic) IBOutlet UITextField *productStoryItemBenefitField;
+@property (weak, nonatomic) IBOutlet UITextField *productStoryItemSizeField;
+@property (weak, nonatomic) IBOutlet UITextField *productStoryItemParentField;
+@property (weak, nonatomic) IBOutlet UITextField *productStoryItemConditionsOfSatisfaction1Field;
+@property (weak, nonatomic) IBOutlet UITextField *productStoryItemConditionsOfSatisfaction2Field;
+@property (weak, nonatomic) IBOutlet UITextField *productStoryItemConditionsOfSatisfaction3Field;
+@property (weak, nonatomic) IBOutlet UITextField *productStoryItemConditionsOfSatisfaction4Field;
+@property (weak, nonatomic) IBOutlet UITextField *productStoryItemConditionsOfSatisfaction5Field;
 @property (weak, nonatomic) IBOutlet UILabel *dateCreatedField;
-
-@property (weak, nonatomic) IBOutlet UILabel *goalLabel;
-@property (weak, nonatomic) IBOutlet UILabel *goalDescriptionLabel;
-@property (weak, nonatomic) IBOutlet UILabel *rewardLabel;
-@property (weak, nonatomic) IBOutlet UILabel *targetDateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *dateCreatedLabel;
 
 @end
 
-@implementation COGoalItemDetailViewController
+@implementation COProductStoryItemDetailViewController
 
 // =================================================================================================================
 #pragma mark - Object Methods
@@ -77,19 +79,30 @@
 {
     [super viewWillAppear:animated];
     
-    COGoalItem *goalItem = self.m_GoalItem;
+    COProductStoryItem *productStoryItem = self.m_ProductStoryItem;
     
     // Set the title on the view controller
     if (self.m_bIsNew) {
         self.title = self.m_tIntentionItemTypeControllerTitle;
     } else {
-        self.title = goalItem.intentionItemTypeName;
+        self.title = productStoryItem.intentionItemTypeName;
     }
     
     // Load the array of field transitions for the Next button.
-    self.m_FieldTransitions = @[self.intentionNameField, self.intentionDescriptionField, self.goalItemRewardField, self.goalItemTargetDateField];
+    self.m_FieldTransitions = @[self.intentionNameField,
+                                self.intentionDescriptionField,
+                                self.productStoryItemUserRoleField,
+                                self.productStoryItemGoalField,
+                                self.productStoryItemBenefitField,
+                                self.productStoryItemSizeField,
+                                self.productStoryItemParentField,
+                                self.productStoryItemConditionsOfSatisfaction1Field,
+                                self.productStoryItemConditionsOfSatisfaction2Field,
+                                self.productStoryItemConditionsOfSatisfaction3Field,
+                                self.productStoryItemConditionsOfSatisfaction4Field,
+                                self.productStoryItemConditionsOfSatisfaction5Field];
     
-    [self loadTextFieldsFromGoalItem];
+    [self loadTextFieldsFromProductStoryItem];
     
 }
 
@@ -98,23 +111,32 @@
 // =================================================================================================================
 
 
-- (void) setGoalItem:(COGoalItem *)goalItem
+- (void) setProductStoryItem:(COProductStoryItem *)productStoryItem
 {
-    _m_GoalItem = goalItem;
-    self.navigationItem.title = goalItem.intentionItemTypeName;
+    _m_ProductStoryItem = productStoryItem;
+    self.navigationItem.title = productStoryItem.intentionItemTypeName;
 }
 
 // -----------------------------------------------------------------------------------------------------------------
 
-- (void) loadTextFieldsFromGoalItem
+- (void) loadTextFieldsFromProductStoryItem
 {
-    COGoalItem *goalItem = self.m_GoalItem;
+    COProductStoryItem *productStoryItem = self.m_ProductStoryItem;
     
     // Place the data from the intentionItem into the fields on the detail view.
-    self.intentionItemTypeLogo.image = [UIImage imageNamed:@"GoalItemIcon.png"];
-    self.intentionNameField.text = goalItem.intentionItemTypeName;
-    self.intentionDescriptionField.text = goalItem.intentionItemTypeDescription;
-    self.goalItemRewardField.text = goalItem.goalItemReward;
+    self.intentionItemTypeLogo.image = [UIImage imageNamed:@"ProductStoryItemIcon.png"];
+    self.intentionNameField.text = productStoryItem.intentionItemTypeName;
+    self.intentionDescriptionField.text = productStoryItem.intentionItemTypeDescription;
+    self.productStoryItemUserRoleField.text = productStoryItem.productStoryItemUserRole;
+    self.productStoryItemGoalField.text = productStoryItem.productStoryItemGoal;
+    self.productStoryItemBenefitField.text = productStoryItem.productStoryItemBenefit;
+    self.productStoryItemSizeField.text = productStoryItem.productStoryItemSize;
+    self.productStoryItemParentField.text = productStoryItem.productStoryItemParent;
+    self.productStoryItemConditionsOfSatisfaction1Field.text = productStoryItem.productStoryItemConditionsOfSatisfaction1;
+    self.productStoryItemConditionsOfSatisfaction2Field.text = productStoryItem.productStoryItemConditionsOfSatisfaction2;
+    self.productStoryItemConditionsOfSatisfaction3Field.text = productStoryItem.productStoryItemConditionsOfSatisfaction3;
+    self.productStoryItemConditionsOfSatisfaction4Field.text = productStoryItem.productStoryItemConditionsOfSatisfaction4;
+    self.productStoryItemConditionsOfSatisfaction5Field.text = productStoryItem.productStoryItemConditionsOfSatisfaction5;
     
     // Format Target Date and Date Created into simple date strings and put the dates on the detail view.
     static NSDateFormatter *dateFormatter = nil;
@@ -123,70 +145,42 @@
         dateFormatter.dateStyle = NSDateFormatterMediumStyle;
         dateFormatter.timeStyle = NSDateFormatterNoStyle;
     }
-    self.goalItemTargetDateField.text = [dateFormatter stringFromDate:goalItem.goalItemTargetDate];
-    self.dateCreatedField.text = [dateFormatter stringFromDate:goalItem.intentionItemTypeDateCreated];
+    self.dateCreatedField.text = [dateFormatter stringFromDate:productStoryItem.intentionItemTypeDateCreated];
     
-    // Set up a Date Picker to be used when the user wants to edit the goalItemTargetDate.
-    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
-    datePicker.datePickerMode = UIDatePickerModeDate;
-    datePicker.minimumDate = [NSDate date];
-    if (goalItem.goalItemTargetDate == nil) {
-        goalItem.goalItemTargetDate = [NSDate date];
-    }
-    [datePicker setDate:goalItem.goalItemTargetDate];
-    [datePicker addTarget:self action:@selector(updateGoalItemTargetDateTextField:) forControlEvents:UIControlEventValueChanged];
-    [self.goalItemTargetDateField setInputView:datePicker];
-
-}
-
-// -----------------------------------------------------------------------------------------------------------------
-
-- (void) updateGoalItemTargetDateTextField:(id)sender
-{
-    UIDatePicker *datePicker = (UIDatePicker*)self.goalItemTargetDateField.inputView;
-    
-    // Format Target Date and Date Created into simple date strings and put the dates into the text field.
-    static NSDateFormatter *dateFormatter = nil;
-    if (!dateFormatter) {
-        dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateStyle = NSDateFormatterMediumStyle;
-        dateFormatter.timeStyle = NSDateFormatterNoStyle;
-    }
-    self.goalItemTargetDateField.text = [dateFormatter stringFromDate:datePicker.date];
-
 }
 
 // -----------------------------------------------------------------------------------------------------------------
 
 - (void) saveTextFieldsIntoIntentionItemType
 {
-    // Save any changes back into the goalItem
-    COGoalItem *goalItem = self.m_GoalItem;
-    goalItem.intentionItemTypeName = self.intentionNameField.text;
-    goalItem.intentionItemTypeDescription = self.intentionDescriptionField.text;
-    goalItem.goalItemReward = self.goalItemRewardField.text;
-    
-    static NSDateFormatter *dateFormatter = nil;
-    if (!dateFormatter) {
-        dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateStyle = NSDateFormatterMediumStyle;
-        dateFormatter.timeStyle = NSDateFormatterNoStyle;
-    }
-    goalItem.goalItemTargetDate = [dateFormatter dateFromString:self.goalItemTargetDateField.text];
+    // Save any changes back into the productStoryItem
+    COProductStoryItem *productStoryItem = self.m_ProductStoryItem;
+    productStoryItem.intentionItemTypeName = self.intentionNameField.text;
+    productStoryItem.intentionItemTypeDescription = self.intentionDescriptionField.text;
+    productStoryItem.productStoryItemUserRole = self.productStoryItemUserRoleField.text;
+    productStoryItem.productStoryItemGoal = self.productStoryItemGoalField.text;
+    productStoryItem.productStoryItemBenefit = self.productStoryItemBenefitField.text;
+    productStoryItem.productStoryItemSize = self.productStoryItemSizeField.text;
+    productStoryItem.productStoryItemParent = self.productStoryItemParentField.text;
+    productStoryItem.productStoryItemConditionsOfSatisfaction1 = self.productStoryItemConditionsOfSatisfaction1Field.text;
+    productStoryItem.productStoryItemConditionsOfSatisfaction2 = self.productStoryItemConditionsOfSatisfaction2Field.text;
+    productStoryItem.productStoryItemConditionsOfSatisfaction3 = self.productStoryItemConditionsOfSatisfaction3Field.text;
+    productStoryItem.productStoryItemConditionsOfSatisfaction4 = self.productStoryItemConditionsOfSatisfaction4Field.text;
+    productStoryItem.productStoryItemConditionsOfSatisfaction5 = self.productStoryItemConditionsOfSatisfaction5Field.text;
 }
 
 // -----------------------------------------------------------------------------------------------------------------
 - (void) removeCurrentIntentionItemType
 {
-    [[COIntentionItemTypeStore sharedIntentionItemTypeStore] removeIntentionItemType:self.m_GoalItem];
+    [[COIntentionItemTypeStore sharedIntentionItemTypeStore] removeIntentionItemType:self.m_ProductStoryItem];
 }
 
 // -----------------------------------------------------------------------------------------------------------------
 
 - (IBAction)displayHelpViewController:(id)sender
 {
-    COGoalItemHelpViewController *goalItemHelpViewController = [[COGoalItemHelpViewController alloc] init];
-    [self.navigationController pushViewController:goalItemHelpViewController animated:YES];
+    COProductStoryItemHelpViewController *productStoryItemHelpViewController = [[COProductStoryItemHelpViewController alloc] init];
+    [self.navigationController pushViewController:productStoryItemHelpViewController animated:YES];
     
 }
 
@@ -196,7 +190,7 @@
 
 + (UIViewController *) viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder
 {
-    COGoalItemDetailViewController *restoredViewController = [[self alloc] initForNewItem:NO];
+    COProductStoryItemDetailViewController *restoredViewController = [[self alloc] initForNewItem:NO];
     
     return restoredViewController;
 }
@@ -208,7 +202,7 @@
     [self saveTextFieldsIntoIntentionItemType];
     [[COIntentionItemTypeStore sharedIntentionItemTypeStore] saveChanges];
     
-    [coder encodeObject:self.m_GoalItem.intentionItemTypeKey forKey:@"intentionItemTypeKey"];
+    [coder encodeObject:self.m_ProductStoryItem.intentionItemTypeKey forKey:@"intentionItemTypeKey"];
     [coder encodeObject:self.m_tIntentionItemTypeControllerTitle forKey:@"intentionItemDetailControllerTitle"];
     [coder encodeBool:self.m_bIsNew forKey:@"intentionItemIsNew"];
     [super encodeRestorableStateWithCoder:coder];
@@ -222,7 +216,7 @@
 
     for (COIntentionItemType *intentionItemType in [[COIntentionItemTypeStore sharedIntentionItemTypeStore] allIntentionItemTypes]) {
         if ([intentionItemTypeKey isEqualToString:intentionItemType.intentionItemTypeKey]) {
-            self.m_GoalItem = (COGoalItem *)intentionItemType;
+            self.m_ProductStoryItem = (COProductStoryItem *)intentionItemType;
             break;
         }
     }
@@ -232,7 +226,7 @@
     
     [super decodeRestorableStateWithCoder:coder];
     
-    // If we were entering a new goalItem, then reach back to the intentionItemTypeViewController and tell it to show the detail view controller modally.
+    // If we were entering a new productStoryItem, then reach back to the intentionItemTypeViewController and tell it to show the detail view controller modally.
     if (self.m_bIsNew) {
         COAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
         UITabBarController *tabBarController = (UITabBarController *)appDelegate.window.rootViewController;

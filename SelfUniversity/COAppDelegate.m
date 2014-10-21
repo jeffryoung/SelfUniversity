@@ -22,7 +22,8 @@
 NSString * const COIntentionItemsEnabledKey = @"IntentionItemsEnabled";
 NSString * const COGoalItemsEnabledKey = @"GoalItemsEnabled";
 NSString * const CODrivingQuestionItemsEnabledKey = @"DrivingQuestionItemsEnabled";
-NSString * const COProductItemsEnabledKey = @"ProductItemsEnabled";
+NSString * const COProductStoryItemsEnabledKey = @"ProductStoryItemsEnabled";
+NSString * const COSelfEmpowermentItemsEnabledKey = @"SelfEmpowermentItemsEnabled";
 
 BOOL m_bAppIsBeingRestored = NO;
 
@@ -42,7 +43,8 @@ BOOL m_bAppIsBeingRestored = NO;
     NSDictionary *factorySettings = @{COIntentionItemsEnabledKey: @YES,
                                       COGoalItemsEnabledKey: @YES,
                                       CODrivingQuestionItemsEnabledKey: @YES,
-                                      COProductItemsEnabledKey: @YES};
+                                      COProductStoryItemsEnabledKey: @YES,
+                                      COSelfEmpowermentItemsEnabledKey: @YES};
     [defaults registerDefaults:factorySettings];
 }
 

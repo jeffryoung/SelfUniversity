@@ -21,7 +21,8 @@ typedef enum : NSUInteger {
     kIntentionItem,
     kGoalItem,
     kDrivingQuestionItem,
-    kProductItem
+    kProductStoryItem,
+    kSelfEmpowermentItem
 } tIntentionType;
 
 typedef enum : NSUInteger {
@@ -41,7 +42,7 @@ typedef enum : NSUInteger {
 extern NSString * const COIntentionItemsEnabledKey;
 extern NSString * const COGoalItemsEnabledKey;
 extern NSString * const CODrivingQuestionItemsEnabledKey;
-extern NSString * const COProductItemsEnabledKey;
+extern NSString * const COProductStoryItemsEnabledKey;
 extern NSString * const COSelfEmpowermentItemsEnabledKey;
 
 #endif

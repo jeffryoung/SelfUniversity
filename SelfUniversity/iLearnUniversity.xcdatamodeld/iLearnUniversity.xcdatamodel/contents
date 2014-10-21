@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14A389" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="CODrivingQuestionItem" representedClassName="CODrivingQuestionItem" parentEntity="COIntentionItemType" syncable="YES"/>
     <entity name="COGoalItem" representedClassName="COGoalItem" parentEntity="COIntentionItemType" syncable="YES">
         <attribute name="goalItemReward" optional="YES" attributeType="String" syncable="YES"/>
@@ -21,12 +21,23 @@
         <attribute name="intentionItemTypeOrderingValue" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="intentionItemTypeSubType" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
     </entity>
-    <entity name="COProductItem" representedClassName="COProductItem" parentEntity="COIntentionItemType" syncable="YES"/>
+    <entity name="COProductStoryItem" representedClassName="COProductStoryItem" parentEntity="COIntentionItemType" syncable="YES">
+        <attribute name="productStoryItemBenefit" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productStoryItemConditionsOfSatisfaction1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productStoryItemConditionsOfSatisfaction2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productStoryItemConditionsOfSatisfaction3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productStoryItemConditionsOfSatisfaction4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productStoryItemConditionsOfSatisfaction5" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productStoryItemGoal" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productStoryItemParent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productStoryItemSize" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productStoryItemUserRole" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="CODrivingQuestionItem" positionX="-36" positionY="45" width="128" height="45"/>
-        <element name="COGoalItem" positionX="-54" positionY="36" width="128" height="73"/>
-        <element name="COIntentionItemType" positionX="-63" positionY="-18" width="128" height="133"/>
-        <element name="COIntentionItem" positionX="-63" positionY="27" width="128" height="133"/>
-        <element name="COProductItem" positionX="-18" positionY="54" width="128" height="45"/>
+        <element name="COGoalItem" positionX="-207" positionY="161" width="128" height="73"/>
+        <element name="COIntentionItem" positionX="-585" positionY="74" width="128" height="133"/>
+        <element name="COIntentionItemType" positionX="-297" positionY="-72" width="189" height="133"/>
+        <element name="COProductStoryItem" positionX="-45" positionY="-306" width="297" height="193"/>
     </elements>
 </model>

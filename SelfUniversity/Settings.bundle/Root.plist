@@ -48,7 +48,17 @@
 			<key>Title</key>
 			<string>Product Items</string>
 			<key>Key</key>
-			<string>ProductItemsEnabled</string>
+			<string>ProductStoryItemsEnabled</string>
+			<key>DefaultValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Self Empowerment Items</string>
+			<key>Key</key>
+			<string>SelfEmpowermentItemsEnabled</string>
 			<key>DefaultValue</key>
 			<true/>
 		</dict>
