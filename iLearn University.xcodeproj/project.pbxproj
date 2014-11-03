@@ -59,6 +59,11 @@
 		E4DC0B30195B6D11001CE110 /* COPracticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC0B2F195B6D11001CE110 /* COPracticeViewController.m */; };
 		E4DC0B33195B6D2A001CE110 /* COTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC0B32195B6D2A001CE110 /* COTaskViewController.m */; };
 		E4DC0B36195B6D40001CE110 /* COPortfolioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC0B35195B6D40001CE110 /* COPortfolioViewController.m */; };
+		E4F2915E19F99804007A08E1 /* COPBLItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F2915719F99804007A08E1 /* COPBLItem.m */; };
+		E4F2915F19F99804007A08E1 /* COPBLItemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F2915919F99804007A08E1 /* COPBLItemDetailViewController.m */; };
+		E4F2916019F99804007A08E1 /* COPBLItemDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4F2915A19F99804007A08E1 /* COPBLItemDetailViewController.xib */; };
+		E4F2916119F99804007A08E1 /* COPBLItemHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4F2915C19F99804007A08E1 /* COPBLItemHelpViewController.m */; };
+		E4F2916219F99804007A08E1 /* COPBLItemHelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4F2915D19F99804007A08E1 /* COPBLItemHelpViewController.xib */; };
 		E4F55A4719BA6DD100CC39C8 /* iLearnUniversity.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E4F55A4519BA6DD100CC39C8 /* iLearnUniversity.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -156,6 +161,14 @@
 		E4DC0B32195B6D2A001CE110 /* COTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COTaskViewController.m; sourceTree = "<group>"; };
 		E4DC0B34195B6D40001CE110 /* COPortfolioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COPortfolioViewController.h; sourceTree = "<group>"; };
 		E4DC0B35195B6D40001CE110 /* COPortfolioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COPortfolioViewController.m; sourceTree = "<group>"; };
+		E4F2915619F99804007A08E1 /* COPBLItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COPBLItem.h; sourceTree = "<group>"; };
+		E4F2915719F99804007A08E1 /* COPBLItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COPBLItem.m; sourceTree = "<group>"; };
+		E4F2915819F99804007A08E1 /* COPBLItemDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COPBLItemDetailViewController.h; sourceTree = "<group>"; };
+		E4F2915919F99804007A08E1 /* COPBLItemDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COPBLItemDetailViewController.m; sourceTree = "<group>"; };
+		E4F2915A19F99804007A08E1 /* COPBLItemDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = COPBLItemDetailViewController.xib; sourceTree = "<group>"; };
+		E4F2915B19F99804007A08E1 /* COPBLItemHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COPBLItemHelpViewController.h; sourceTree = "<group>"; };
+		E4F2915C19F99804007A08E1 /* COPBLItemHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COPBLItemHelpViewController.m; sourceTree = "<group>"; };
+		E4F2915D19F99804007A08E1 /* COPBLItemHelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = COPBLItemHelpViewController.xib; sourceTree = "<group>"; };
 		E4F55A4619BA6DD100CC39C8 /* iLearnUniversity.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iLearnUniversity.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -328,6 +341,7 @@
 				E4937C2219F594E400FBE6D9 /* Intention Item */,
 				E4937C2319F5950900FBE6D9 /* Goal Item */,
 				E4937C2419F5958600FBE6D9 /* Product Story Item */,
+				E4F2916319F99828007A08E1 /* Project Based Learning Item */,
 			);
 			name = "Intention View";
 			sourceTree = "<group>";
@@ -420,6 +434,21 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E4F2916319F99828007A08E1 /* Project Based Learning Item */ = {
+			isa = PBXGroup;
+			children = (
+				E4F2915619F99804007A08E1 /* COPBLItem.h */,
+				E4F2915719F99804007A08E1 /* COPBLItem.m */,
+				E4F2915819F99804007A08E1 /* COPBLItemDetailViewController.h */,
+				E4F2915919F99804007A08E1 /* COPBLItemDetailViewController.m */,
+				E4F2915A19F99804007A08E1 /* COPBLItemDetailViewController.xib */,
+				E4F2915B19F99804007A08E1 /* COPBLItemHelpViewController.h */,
+				E4F2915C19F99804007A08E1 /* COPBLItemHelpViewController.m */,
+				E4F2915D19F99804007A08E1 /* COPBLItemHelpViewController.xib */,
+			);
+			name = "Project Based Learning Item";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -508,11 +537,13 @@
 				E4DB82A619D0C78C00CA9C5D /* COGoalItemDetailViewController.xib in Resources */,
 				E40688A619B1181300722306 /* Localizable.strings in Resources */,
 				E476AC7C196356BF007734C0 /* BookStoryboard_iPhone.storyboard in Resources */,
+				E4F2916219F99804007A08E1 /* COPBLItemHelpViewController.xib in Resources */,
 				E4C28614199ABDCE00DB405B /* iLearn University.pdf in Resources */,
 				E4C766A919E85E9500CB6463 /* COIntentionItemTypeCell.xib in Resources */,
 				E4DC0B06195B581E001CE110 /* Images.xcassets in Resources */,
 				E4937C3119F598A400FBE6D9 /* COProductStoryItemHelpViewController.xib in Resources */,
 				E4937C2F19F598A400FBE6D9 /* COProductStoryItemDetailViewController.xib in Resources */,
+				E4F2916019F99804007A08E1 /* COPBLItemDetailViewController.xib in Resources */,
 				E497C2E319EF1E6D0082E2DE /* COGoalItemHelpViewController.xib in Resources */,
 				E495B7E819CF66C0009DFFCD /* COIntentionItemDetailViewController.xib in Resources */,
 			);
@@ -535,6 +566,7 @@
 			files = (
 				E4937C3019F598A400FBE6D9 /* COProductStoryItemHelpViewController.m in Sources */,
 				E4C766A519E85CBB00CB6463 /* COIntentionItemTypeCell.m in Sources */,
+				E4F2915F19F99804007A08E1 /* COPBLItemDetailViewController.m in Sources */,
 				E4DB82A419D0C77400CA9C5D /* COGoalItemDetailViewController.m in Sources */,
 				E476AC7F19635C33007734C0 /* COBookModelController.m in Sources */,
 				E4937C2D19F598A400FBE6D9 /* COProductStoryItem.m in Sources */,
@@ -554,6 +586,7 @@
 				E497C2E119EF1DC60082E2DE /* COGoalItemHelpViewController.m in Sources */,
 				E4DC0B2A195B6CD6001CE110 /* COIntentionItemTypeViewController.m in Sources */,
 				E457D8CA19EC621A00E6901B /* COIntentionItemHelpViewController.m in Sources */,
+				E4F2915E19F99804007A08E1 /* COPBLItem.m in Sources */,
 				E4DC0B2D195B6CF2001CE110 /* COContentViewController.m in Sources */,
 				E4DC0B36195B6D40001CE110 /* COPortfolioViewController.m in Sources */,
 				E4DB82A119D0C71800CA9C5D /* COGoalItem.m in Sources */,
@@ -562,6 +595,7 @@
 				E495B7E719CF66C0009DFFCD /* COIntentionItemDetailViewController.m in Sources */,
 				E4AFDB1819D48CCA0016081E /* COString.m in Sources */,
 				E4DC0AFD195B581E001CE110 /* main.m in Sources */,
+				E4F2916119F99804007A08E1 /* COPBLItemHelpViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

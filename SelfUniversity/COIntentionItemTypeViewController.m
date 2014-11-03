@@ -19,6 +19,8 @@
 #import "COGoalItemDetailViewController.h"
 #import "COProductStoryItem.h"
 #import "COProductStoryItemDetailViewController.h"
+#import "COPBLItem.h"
+#import "COPBLItemDetailViewController.h"
 
 
 @interface COIntentionItemTypeViewController () <UIDataSourceModelAssociation>
@@ -94,6 +96,8 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.tableView.window.opaque = NO;
+    self.tableView.window.backgroundColor = [[UIColor clearColor] colorWithAlphaComponent:0.3];
     [self.tableView reloadData];
 }
 
@@ -213,6 +217,7 @@
     // Display the correct detail view controller for that type of item as a modal dialog box.
     
     // Intention Items...
+    // ------------------------------------------------------------------------------------------------------------
     if (self.m_nIntentionItemTypeSelected == kIntentionItem) {
         COIntentionItem *newIntentionItem = [[COIntentionItemTypeStore sharedIntentionItemTypeStore] createIntentionItem];
         newIntentionItem.intentionItemTypeName = @"";
@@ -228,6 +233,7 @@
         [self presentDetailViewModally:detailViewController];
         
     // Goal Items...
+    // ------------------------------------------------------------------------------------------------------------
     } else if (self.m_nIntentionItemTypeSelected == kGoalItem) {
         COGoalItem *newGoalItem = [[COIntentionItemTypeStore sharedIntentionItemTypeStore] createGoalItem];
         newGoalItem.intentionItemTypeName = @"";
@@ -244,19 +250,20 @@
         
         [self presentDetailViewModally:detailViewController];
         
-        // Driving Question Items...
-//    } else if (self.m_nIntentionItemTypeSelected == kDrivingQuestionItem) {
+    // Driving Question Items...
+    // ------------------------------------------------------------------------------------------------------------
+    } else if (self.m_nIntentionItemTypeSelected == kDrivingQuestionItem) {
         
-/*        CODrivingQuestionItem *newDrivingQuestionItem = [[COIntentionItemTypeStore sharedIntentionItemTypeStore] createDrivingQuestionItem];
-        newDrivingQuestionItem.intentionItemTypeName = @"";
-        newDrivingQuestionItem.intentionItemTypeDescription = @"";
+        COPBLItem *newPBLItem = [[COIntentionItemTypeStore sharedIntentionItemTypeStore] createPBLItem];
+        newPBLItem.intentionItemTypeName = @"";
+        newPBLItem.intentionItemTypeDescription = @"";
         
-        CODrivingQuestionItemDetailViewController *detailViewController = [[CODrivingQuestionItemDetailViewController alloc] initForNewItem:YES];
-        detailViewController.m_DrivingQuestionItem = newDrivingQuestionItem;
+        COPBLItemDetailViewController *detailViewController = [[COPBLItemDetailViewController alloc] initForNewItem:YES];
+        detailViewController.m_PBLItem = newPBLItem;
         detailViewController.m_DismissBlock = ^{
             [self.tableView reloadData];
         };
-        detailViewController.m_nDrivingQuestionTitle = NSLocalizedString(@"Create a new Driving Question", @"Create new driving question title");
+        detailViewController.m_tIntentionItemTypeControllerTitle = NSLocalizedString(@"Create a new Project Based Learning Question", @"Create new Project Based Learning title");
         
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
         navController.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -264,8 +271,9 @@
         navController.restorationIdentifier = NSStringFromClass([navController class]);
         
         [self presentViewController:navController animated:YES completion:nil];
- */
-        // Product Items...
+
+    // Product Items...
+    // ------------------------------------------------------------------------------------------------------------
     } else if (self.m_nIntentionItemTypeSelected == kProductStoryItem) {
         COProductStoryItem *newProductStoryItem = [[COIntentionItemTypeStore sharedIntentionItemTypeStore] createProductStoryItem];
         newProductStoryItem.intentionItemTypeName = @"";
@@ -346,14 +354,19 @@
     
     if ([intentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"Intention Item", @"Intention Item")]) {
         iconImage = [UIImage imageNamed:@"IntentionItemIcon.png"];
+        cell.intentionItemTypeNameField.textColor = [UIColor redColor];
     } else if ([intentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"Goal Item", @"Goal Item")]) {
         iconImage = [UIImage imageNamed:@"GoalItemIcon.png"];
-    } else if ([intentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"Driving Question Item", @"Driving Question Item")]) {
-        iconImage = [UIImage imageNamed:@"DrivingQuestionItemIcon.png"];
+        cell.intentionItemTypeNameField.textColor = [UIColor orangeColor];
+    } else if ([intentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"Project Based Learning Item", @"Project Based Learning Item")]) {
+        iconImage = [UIImage imageNamed:@"ProjectBasedLearningItemIcon.png"];
+        cell.intentionItemTypeNameField.textColor = [UIColor magentaColor];
     } else if ([intentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"Product Story Item", @"Product Story Item")]) {
         iconImage = [UIImage imageNamed:@"ProductStoryItemIcon.png"];
+        cell.intentionItemTypeNameField.textColor = [UIColor blueColor];
     } else if ([intentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"SelfEmpowerment Item", @"SelfEmpowerment Item")]) {
         iconImage = [UIImage imageNamed:@"SelfEmpowermentItemIcon.png"];
+        cell.intentionItemTypeNameField.textColor = [UIColor cyanColor];
     }
     
     // Put that image in the cell to illustrate the intention type.
@@ -422,6 +435,13 @@
         COProductStoryItem *selectedProductStoryItem = (COProductStoryItem *) selectedIntentionItemType;
         productStoryItemDetailViewController.m_ProductStoryItem = selectedProductStoryItem;
         [self pushDetailViewOntoNavigationController:productStoryItemDetailViewController];
+        
+    } else if ([selectedIntentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"Project Based Learning Item", @"Project Based Learning Item")]) {
+        COPBLItemDetailViewController *pblItemDetailViewController = [[COPBLItemDetailViewController alloc] initForNewItem:NO];
+        COPBLItem *selectedPBLItem = (COPBLItem *) selectedIntentionItemType;
+        pblItemDetailViewController.m_PBLItem = selectedPBLItem;
+        [self pushDetailViewOntoNavigationController:pblItemDetailViewController];
+    
     }
 }
 

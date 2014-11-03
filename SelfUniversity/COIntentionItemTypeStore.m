@@ -135,7 +135,7 @@
 
 // -----------------------------------------------------------------------------------------------------------------
 
-/*- (CODrivingQuestionItem *)createDrivingQuestionItem
+- (COPBLItem *)createPBLItem
 {
     double order;
     if ([self.allIntentionItemTypes count] == 0) {
@@ -145,14 +145,14 @@
     }
     NSLog(@"Adding after %lu items, order = %.2f", (unsigned long)[self.privateIntentionItemTypes count], order);
     
-    CODrivingQuestionItem *drivingQuestionItem = [NSEntityDescription insertNewObjectForEntityForName:@"CODrivingQuestionItem" inManagedObjectContext:self.context];
-    drivingQuestionItem.intentionItemTypeOrderingValue = order;
-    drivingQuestionItem.intentionItemTypeSubType = NSLocalizedString(@"Driving Question Item", @"Driving Question Item");
+    COPBLItem *pblItem = [NSEntityDescription insertNewObjectForEntityForName:@"COPBLItem" inManagedObjectContext:self.context];
+    pblItem.intentionItemTypeOrderingValue = order;
+    pblItem.intentionItemTypeSubType = NSLocalizedString(@"Project Based Learning Item", @"Project Based Learning Item");
     
-    [self.privateIntentionItemTypes addObject:drivingQuestionItem];
+    [self.privateIntentionItemTypes addObject:pblItem];
     
-    return drivingQuestionItem;
-}*/
+    return pblItem;
+}
 
 // -----------------------------------------------------------------------------------------------------------------
 

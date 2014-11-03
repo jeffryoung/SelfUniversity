@@ -12,6 +12,7 @@
 #import "COIntentionItem.h"
 #import "COGoalItem.h"
 #import "COProductStoryItem.h"
+#import "COPBLItem.h"
 
 @interface COIntentionItemTypeStore : NSObject
 
@@ -28,7 +29,7 @@
 + (instancetype) sharedIntentionItemTypeStore;
 - (COIntentionItem *) createIntentionItem;
 - (COGoalItem *) createGoalItem;
-//- (CODrivingQuestionItem *) createDrivingQuestionItem;
+- (COPBLItem *) createPBLItem;
 - (COProductStoryItem *) createProductStoryItem;
 //- (COSelfEmpowermentItem *) createSelfEmpowermentItem;
 - (void) removeIntentionItemType:(COIntentionItemType *)intentionItemType;
