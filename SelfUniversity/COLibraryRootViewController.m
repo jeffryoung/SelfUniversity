@@ -50,7 +50,7 @@
 {
     [super viewDidLoad];
     
-	// Do any additional setup after loading the view, typically from a nib.
+/*	// Do any additional setup after loading the view, typically from a nib.
     // Configure the page view controller and add it as a child view controller
 
     self.m_pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
@@ -75,22 +75,38 @@
     [self.m_pageViewController didMoveToParentViewController:self];
     
     // Add the page view controller's gesture recognizers to the book view controller's view so that the gestures are started more easily.
-    self.view.gestureRecognizers = self.m_pageViewController.gestureRecognizers;
+    self.view.gestureRecognizers = self.m_pageViewController.gestureRecognizers; */
 }
 
 // -----------------------------------------------------------------------------------------------------------------
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    NSString *customURL = @"itms-books://";
+    
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:customURL]])
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:customURL]];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"URL error"
+                                                        message:[NSString stringWithFormat:
+                                                                 @"No custom URL defined for %@", customURL]
+                                                       delegate:self cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+    
     // Reduce the vertical size of the view frame so that it will not overlap the Tab Bar at the bottom of the window.
     
-    NSLog(@"%s tabBarController view bounds height = %f", __PRETTY_FUNCTION__, self.m_tabBarController.tabBar.bounds.size.height);
+/*    NSLog(@"%s tabBarController view bounds height = %f", __PRETTY_FUNCTION__, self.m_tabBarController.tabBar.bounds.size.height);
     
     CGRect pageViewRect = self.view.bounds;
     pageViewRect.size.height -= self.m_tabBarController.tabBar.bounds.size.height;
     self.m_pageViewController.view.frame = pageViewRect;
     
-    NSLog(@"%s Setting view frame bounds to %@.", __PRETTY_FUNCTION__, NSStringFromCGRect(pageViewRect));
+    NSLog(@"%s Setting view frame bounds to %@.", __PRETTY_FUNCTION__, NSStringFromCGRect(pageViewRect));*/
 }
 
 // -----------------------------------------------------------------------------------------------------------------

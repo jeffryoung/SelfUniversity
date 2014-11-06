@@ -36,9 +36,9 @@
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Driving Question Items</string>
+			<string>Project Based Learning Items</string>
 			<key>Key</key>
-			<string>DrivingQuestionItemsEnabled</string>
+			<string>ProjectBasedLearningItemsEnabled</string>
 			<key>DefaultValue</key>
 			<true/>
 		</dict>

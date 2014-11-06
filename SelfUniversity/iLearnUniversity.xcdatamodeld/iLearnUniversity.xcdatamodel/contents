@@ -41,11 +41,21 @@
         <attribute name="productStoryItemSize" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="productStoryItemUserRole" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="COSelfEmpowermentItem" representedClassName="COSelfEmpowermentItem" parentEntity="COIntentionItemType" syncable="YES">
+        <attribute name="selfEmpowermentItemAnswer1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selfEmpowermentItemAnswer2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selfEmpowermentItemAnswer3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selfEmpowermentItemAnswer4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selfEmpowermentItemAnswer5" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selfEmpowermentItemAnswer6" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selfEmpowermentItemAnswer7" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="COPBLItem" positionX="-36" positionY="45" width="128" height="148"/>
         <element name="COGoalItem" positionX="-207" positionY="161" width="128" height="75"/>
         <element name="COIntentionItem" positionX="-585" positionY="74" width="128" height="133"/>
         <element name="COIntentionItemType" positionX="-297" positionY="-72" width="189" height="133"/>
+        <element name="COPBLItem" positionX="-36" positionY="45" width="128" height="148"/>
         <element name="COProductStoryItem" positionX="-45" positionY="-306" width="297" height="193"/>
+        <element name="COSelfEmpowermentItem" positionX="-378" positionY="-153" width="128" height="148"/>
     </elements>
 </model>

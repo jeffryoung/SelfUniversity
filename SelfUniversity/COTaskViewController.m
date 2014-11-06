@@ -43,10 +43,25 @@
 
 // -----------------------------------------------------------------------------------------------------------------
 
-- (void)viewDidLoad
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [super viewWillAppear:animated];
+    
+    NSString *customURL = @"trello://";
+    
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:customURL]])
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:customURL]];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"URL error"
+                                                        message:[NSString stringWithFormat:
+                                                                 @"No custom URL defined for %@", customURL]
+                                                       delegate:self cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 // -----------------------------------------------------------------------------------------------------------------

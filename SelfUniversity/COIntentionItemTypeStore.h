@@ -13,6 +13,7 @@
 #import "COGoalItem.h"
 #import "COProductStoryItem.h"
 #import "COPBLItem.h"
+#import "COSelfEmpowermentItem.h"
 
 @interface COIntentionItemTypeStore : NSObject
 
@@ -31,7 +32,7 @@
 - (COGoalItem *) createGoalItem;
 - (COPBLItem *) createPBLItem;
 - (COProductStoryItem *) createProductStoryItem;
-//- (COSelfEmpowermentItem *) createSelfEmpowermentItem;
+- (COSelfEmpowermentItem *) createSelfEmpowermentItem;
 - (void) removeIntentionItemType:(COIntentionItemType *)intentionItemType;
 - (void) moveIntentionItemTypeAtIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 - (BOOL) saveChanges;

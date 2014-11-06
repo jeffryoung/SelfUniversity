@@ -21,7 +21,8 @@
 #import "COProductStoryItemDetailViewController.h"
 #import "COPBLItem.h"
 #import "COPBLItemDetailViewController.h"
-
+#import "COSelfEmpowermentItem.h"
+#import "COSelfEmpowermentItemDetailViewController.h"
 
 @interface COIntentionItemTypeViewController () <UIDataSourceModelAssociation>
 
@@ -140,23 +141,28 @@
     NSMutableArray *listToIntentionTypeTranslator = [[NSMutableArray alloc] init];
     
     if ([defaults boolForKey:@"IntentionItemsEnabled"]) {
-        [intentionTypeNameList addObject:NSLocalizedString(@"A New Intention?", @"New Intention Question")];
+        [intentionTypeNameList addObject:NSLocalizedString(@"A New Intention?", @"A New Intention Question?")];
         [listToIntentionTypeTranslator addObject:@(kIntentionItem)];
     }
     
     if ([defaults boolForKey:@"GoalItemsEnabled"]) {
-        [intentionTypeNameList addObject:NSLocalizedString(@"A New Goal?", @"New Goal Question")];
+        [intentionTypeNameList addObject:NSLocalizedString(@"A New Goal?", @"A New Goal Question?")];
         [listToIntentionTypeTranslator addObject:@(kGoalItem)];
     }
     
-    if ([defaults boolForKey:@"DrivingQuestionItemsEnabled"]) {
-        [intentionTypeNameList addObject:NSLocalizedString(@"A New Driving Question?", @"New Driving Question Question")];
-        [listToIntentionTypeTranslator addObject:@(kDrivingQuestionItem)];
+    if ([defaults boolForKey:@"ProjectBasedLearningItemsEnabled"]) {
+        [intentionTypeNameList addObject:NSLocalizedString(@"A New Project Based Learning Project?", @"A New Project Based Learning Project?")];
+        [listToIntentionTypeTranslator addObject:@(kProjectBasedLearningItem)];
     }
     
     if ([defaults boolForKey:@"ProductStoryItemsEnabled"]) {
-        [intentionTypeNameList addObject:NSLocalizedString(@"A New Product Story?", @"New Product Story Question")];
+        [intentionTypeNameList addObject:NSLocalizedString(@"A New Product Story?", @"A New Product Story?")];
         [listToIntentionTypeTranslator addObject:@(kProductStoryItem)];
+    }
+    
+    if ([defaults boolForKey:@"SelfEmpowermentItemsEnabled"]) {
+        [intentionTypeNameList addObject:NSLocalizedString(@"A New Self-Empowerment Problem?", @"A New Self-Empowerment Problem?")];
+        [listToIntentionTypeTranslator addObject:@(kSelfEmpowermentItem)];
     }
     
     // If we have multiple types of intentions to choose from, then put up a modal dialog to let the user choose which
@@ -250,9 +256,9 @@
         
         [self presentDetailViewModally:detailViewController];
         
-    // Driving Question Items...
+    // Project Based Learning Items...
     // ------------------------------------------------------------------------------------------------------------
-    } else if (self.m_nIntentionItemTypeSelected == kDrivingQuestionItem) {
+    } else if (self.m_nIntentionItemTypeSelected == kProjectBasedLearningItem) {
         
         COPBLItem *newPBLItem = [[COIntentionItemTypeStore sharedIntentionItemTypeStore] createPBLItem];
         newPBLItem.intentionItemTypeName = @"";
@@ -263,7 +269,7 @@
         detailViewController.m_DismissBlock = ^{
             [self.tableView reloadData];
         };
-        detailViewController.m_tIntentionItemTypeControllerTitle = NSLocalizedString(@"Create a new Project Based Learning Question", @"Create new Project Based Learning title");
+        detailViewController.m_tIntentionItemTypeControllerTitle = NSLocalizedString(@"Create a new Project Based Learning Project", @"Create new Project Based Learning Project title");
         
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
         navController.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -285,6 +291,27 @@
             [self.tableView reloadData];
         };
         detailViewController.m_tIntentionItemTypeControllerTitle = NSLocalizedString(@"Create a new Product Story", @"Create new product story title");
+        
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+        navController.modalPresentationStyle = UIModalPresentationFormSheet;
+        navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        navController.restorationIdentifier = NSStringFromClass([navController class]);
+        
+        [self presentViewController:navController animated:YES completion:nil];
+
+    // Self-Empowerment Items...
+    // ------------------------------------------------------------------------------------------------------------
+    } else if (self.m_nIntentionItemTypeSelected == kSelfEmpowermentItem) {
+        COSelfEmpowermentItem *newSelfEmpowermentItem = [[COIntentionItemTypeStore sharedIntentionItemTypeStore] createSelfEmpowermentItem];
+        newSelfEmpowermentItem.intentionItemTypeName = @"";
+        newSelfEmpowermentItem.intentionItemTypeDescription = @"";
+        
+        COSelfEmpowermentItemDetailViewController *detailViewController = [[COSelfEmpowermentItemDetailViewController alloc] initForNewItem:YES];
+        detailViewController.m_SelfEmpowermentItem = newSelfEmpowermentItem;
+        detailViewController.m_DismissBlock = ^{
+            [self.tableView reloadData];
+        };
+        detailViewController.m_tIntentionItemTypeControllerTitle = NSLocalizedString(@"Create a new Self-Empowerment Problem", @"Create new Self-Empowerment Problem title");
         
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
         navController.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -364,9 +391,9 @@
     } else if ([intentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"Product Story Item", @"Product Story Item")]) {
         iconImage = [UIImage imageNamed:@"ProductStoryItemIcon.png"];
         cell.intentionItemTypeNameField.textColor = [UIColor blueColor];
-    } else if ([intentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"SelfEmpowerment Item", @"SelfEmpowerment Item")]) {
+    } else if ([intentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"Self-Empowerment Item", @"Self-Empowerment Item")]) {
         iconImage = [UIImage imageNamed:@"SelfEmpowermentItemIcon.png"];
-        cell.intentionItemTypeNameField.textColor = [UIColor cyanColor];
+        cell.intentionItemTypeNameField.textColor = [UIColor blackColor];
     }
     
     // Put that image in the cell to illustrate the intention type.
@@ -442,6 +469,12 @@
         pblItemDetailViewController.m_PBLItem = selectedPBLItem;
         [self pushDetailViewOntoNavigationController:pblItemDetailViewController];
     
+    } else if ([selectedIntentionItemType.intentionItemTypeSubType isEqualToString:NSLocalizedString(@"Self-Empowerment Item", @"Self-Empowerment Item")]) {
+        COSelfEmpowermentItemDetailViewController *selfEmpowermentItemDetailViewController = [[COSelfEmpowermentItemDetailViewController alloc] initForNewItem:NO];
+        COSelfEmpowermentItem *selectedSelfEmpowermentItem = (COSelfEmpowermentItem *) selectedIntentionItemType;
+        selfEmpowermentItemDetailViewController.m_SelfEmpowermentItem = selectedSelfEmpowermentItem;
+        [self pushDetailViewOntoNavigationController:selfEmpowermentItemDetailViewController];
+        
     }
 }
 

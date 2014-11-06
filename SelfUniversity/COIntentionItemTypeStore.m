@@ -177,24 +177,24 @@
 
 // -----------------------------------------------------------------------------------------------------------------
 
-/*- (COSelfEmpowermentItem *)createSelfEmpowermentItem
+- (COSelfEmpowermentItem *)createSelfEmpowermentItem
  {
- double order;
- if ([self.allIntentionItemTypes count] == 0) {
- order = 1.0;
- } else {
- order = [[self.privateIntentionItemTypes lastObject] intentionItemTypeOrderingValue] + 1.0;
+     double order;
+     if ([self.allIntentionItemTypes count] == 0) {
+         order = 1.0;
+     } else {
+         order = [[self.privateIntentionItemTypes lastObject] intentionItemTypeOrderingValue] + 1.0;
+     }
+     NSLog(@"Adding after %lu items, order = %.2f", (unsigned long)[self.privateIntentionItemTypes count], order);
+     
+     COSelfEmpowermentItem *selfEmpowermentItem = [NSEntityDescription insertNewObjectForEntityForName:@"COSelfEmpowermentItem" inManagedObjectContext:self.context];
+     selfEmpowermentItem.intentionItemTypeOrderingValue = order;
+     selfEmpowermentItem.intentionItemTypeSubType = NSLocalizedString(@"Self-Empowerment Item", @"Self-Empowerment Item");
+     
+     [self.privateIntentionItemTypes addObject:selfEmpowermentItem];
+     
+     return selfEmpowermentItem;
  }
- NSLog(@"Adding after %lu items, order = %.2f", (unsigned long)[self.privateIntentionItemTypes count], order);
- 
- COSelfEmpowermentItem *selfEmpowermentItem = [NSEntityDescription insertNewObjectForEntityForName:@"COSelfEmpowermentItem" inManagedObjectContext:self.context];
- selfEmpowermentItem.intentionItemTypeOrderingValue = order;
- selfEmpowermentItem.intentionItemTypeSubType = NSLocalizedString(@"Product Item", @"Product Item");
- 
- [self.privateIntentionItemTypes addObject:selfEmpowermentItem];
- 
- return selfEmpowermentItem;
- }*/
 
 // -----------------------------------------------------------------------------------------------------------------
 

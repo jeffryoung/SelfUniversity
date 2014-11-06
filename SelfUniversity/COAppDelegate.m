@@ -21,7 +21,7 @@
 
 NSString * const COIntentionItemsEnabledKey = @"IntentionItemsEnabled";
 NSString * const COGoalItemsEnabledKey = @"GoalItemsEnabled";
-NSString * const CODrivingQuestionItemsEnabledKey = @"DrivingQuestionItemsEnabled";
+NSString * const COProjectBasedLearningItemsEnabledKey = @"ProjectBasedLearningItemsEnabled";
 NSString * const COProductStoryItemsEnabledKey = @"ProductStoryItemsEnabled";
 NSString * const COSelfEmpowermentItemsEnabledKey = @"SelfEmpowermentItemsEnabled";
 
@@ -42,7 +42,7 @@ BOOL m_bAppIsBeingRestored = NO;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *factorySettings = @{COIntentionItemsEnabledKey: @YES,
                                       COGoalItemsEnabledKey: @YES,
-                                      CODrivingQuestionItemsEnabledKey: @YES,
+                                      COProjectBasedLearningItemsEnabledKey: @YES,
                                       COProductStoryItemsEnabledKey: @YES,
                                       COSelfEmpowermentItemsEnabledKey: @YES};
     [defaults registerDefaults:factorySettings];
@@ -153,18 +153,6 @@ BOOL m_bAppIsBeingRestored = NO;
     if (numberOfIdentifierComponents == 1) {
         vc = [self createTabBarControllerStructure];
         self.window.rootViewController = vc;
-/*    } else {
-        // Get the restoration identifier for the last object on the array of identifierComponents
-        NSString *restorationIdentifier = [identifierComponents lastObject];
-        
-        // Identify the type of class we are going to restore
-        Class viewControllerClass = NSClassFromString(restorationIdentifier);
-        
-        // Create a new view controller of the correct class type
-        vc = [[viewControllerClass alloc] init];
-        
-        // Set the restorationIdentifier on the class, but not the class so that restoration will be handled by this method in the future.
-        vc.restorationIdentifier = restorationIdentifier;*/
     }
     return vc;
 }
