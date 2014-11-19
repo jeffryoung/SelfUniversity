@@ -58,9 +58,8 @@
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"URL error"
-                                                        message:[NSString stringWithFormat:
-                                                                 @"No custom URL defined for %@", customURL]
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot invoke Evernote"
+                                                        message:[NSString stringWithFormat: @"Please install Evernote in using the App Store."]
                                                        delegate:self cancelButtonTitle:@"Ok"
                                               otherButtonTitles:nil];
         [alert show];

@@ -182,7 +182,7 @@
 		E4F2915B19F99804007A08E1 /* COPBLItemHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COPBLItemHelpViewController.h; sourceTree = "<group>"; };
 		E4F2915C19F99804007A08E1 /* COPBLItemHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COPBLItemHelpViewController.m; sourceTree = "<group>"; };
 		E4F2915D19F99804007A08E1 /* COPBLItemHelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = COPBLItemHelpViewController.xib; sourceTree = "<group>"; };
-		E4F55A4619BA6DD100CC39C8 /* iLearnUniversity.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iLearnUniversity.xcdatamodel; sourceTree = "<group>"; };
+		E4F55A4619BA6DD100CC39C8 /* iLearnUniversity.xcdatamodel */ = {isa = PBXFileReference; explicitFileType = wrapper.xcdatamodel; path = iLearnUniversity.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

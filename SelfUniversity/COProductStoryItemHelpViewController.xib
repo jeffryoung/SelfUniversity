@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
@@ -20,65 +20,65 @@
             </connections>
             <point key="canvasLocation" x="163" y="161"/>
         </scrollView>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="726"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="250" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="infinite" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="924"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to fill out the Product Story form:" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xbK-ZR-8aS">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="260" verticalCompressionResistancePriority="760" text="How to fill out the Product Story form:" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xbK-ZR-8aS">
                     <rect key="frame" x="20" y="20" width="560" height="21"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What do you most want to make happen in the world?" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHH-CD-tG5">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="261" verticalCompressionResistancePriority="761" text="Product Story" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHH-CD-tG5">
                     <rect key="frame" x="25" y="49" width="555" height="18"/>
                     <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                     <color key="textColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ysk-kG-NFK">
-                    <rect key="frame" x="25" y="146" width="555" height="63"/>
-                    <string key="text">Another way of asking this question: What have you experienced in your life that gives you energy? What have you done, even when you are exhausted, that melted away the exhaustion and replaced it with energy and joy?  What happened in the world around you when this occurred?</string>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="263" verticalCompressionResistancePriority="763" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GqY-3p-mly">
+                    <rect key="frame" x="25" y="130" width="555" height="32"/>
+                    <string key="text">First, write down a title for the story that will identify the story for you.  Then describe the context the user will be in when this story occurs.</string>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GqY-3p-mly">
-                    <rect key="frame" x="25" y="217" width="555" height="32"/>
-                    <string key="text">First give this a name and type the name into the "Your Intention" field.  Then describe more fully what you most want to make happen in the world in the description field.</string>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is your contribution toward this intention?" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="coM-eN-hSD">
-                    <rect key="frame" x="25" y="281" width="555" height="18"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="264" verticalCompressionResistancePriority="764" text="The Story:" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="coM-eN-hSD">
+                    <rect key="frame" x="25" y="194" width="555" height="18"/>
                     <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                     <color key="textColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="df5-x2-bv2">
-                    <rect key="frame" x="25" y="307" width="555" height="63"/>
-                    <string key="text">Just because you might want to see hunger or poverty eliminated from the world, or for peace to spread everywhere, doesn't mean you will be able to do this all by yourself.  What is it that you can do through your own actions or example that will be your contribution toward your intended outcome?</string>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="265" verticalCompressionResistancePriority="765" lineBreakMode="wordWrap" numberOfLines="13" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="df5-x2-bv2">
+                    <rect key="frame" x="25" y="220" width="555" height="78"/>
+                    <string key="text">Every Product Story can be stated clearly when it is in the form:  As a _____ I want to ______ so that _______.  For example:  As a student, I want to learn how to keep learning on my own, so that I can successfully adapt to a changing future.  This form makes the story clear about what the customer wants and why.  It then becomes the problem you are trying to help solve for the user with your new product.</string>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What else needs to occur for your intention to be true?" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qz0-uD-zFd">
-                    <rect key="frame" x="25" y="402" width="555" height="18"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="267" verticalCompressionResistancePriority="767" text="Conditions of Satisfaction:" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qz0-uD-zFd">
+                    <rect key="frame" x="25" y="432" width="555" height="18"/>
                     <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                     <color key="textColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xob-Bf-RHv">
-                    <rect key="frame" x="25" y="428" width="555" height="47"/>
-                    <string key="text">Your intention and contribution might be quite broad and far reaching.  It is often helpful to think about tangible outcomes that you could produce that would support manifesting your intention?</string>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="262" verticalCompressionResistancePriority="762" lineBreakMode="wordWrap" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hE7-wZ-wPG">
+                    <rect key="frame" x="25" y="75" width="555" height="47"/>
+                    <string key="text">When you are creating a new product, it is essential that you think about what experience your customer or client will have as a result of your product.  A Product Story is specifically from the user's point of view of something that is meaningful for them to do.</string>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hE7-wZ-wPG">
-                    <rect key="frame" x="25" y="75" width="555" height="63"/>
-                    <string key="text">Don't think about an answer to this question - feel it.  What is it that brings you passion and joy?  Or gets you riled up when you experience it?  It doesn't matter whether the emotion is positive or negative, it only matters that you care enough to want to make something happen or make something go away. </string>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="266" verticalCompressionResistancePriority="766" lineBreakMode="wordWrap" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emP-pK-ppu">
+                    <rect key="frame" x="25" y="306" width="555" height="94"/>
+                    <string key="text">Stories mainly come in three sizes:  Epic, Feature, and Implementable.  Epic stories are many months long and can span one or more releases of your product.  Features are several weeks long and cannot be implemented in a single work Sprint.  Implementable are in the order of taking days to implement.  Start with Epic stories and break them down into several Features, with each Feature broken down further into several Implementable stories.  There is a way of indicating the hierarchy of stories by indicating the title of the Parent Story.</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="258" verticalCompressionResistancePriority="758" lineBreakMode="wordWrap" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xob-Bf-RHv">
+                    <rect key="frame" x="25" y="458" width="555" height="63"/>
+                    <string key="text">How will your customer know if they are really satisfied with your solution to their problem?  There are usually several conditions that need to be met in order for them to be truly satisfied.  What are they?  Here is a place to list them so you know if your solution is on the right track.</string>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -88,25 +88,26 @@
             <constraints>
                 <constraint firstItem="coM-eN-hSD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="2tr-1g-y3g"/>
                 <constraint firstAttribute="trailing" secondItem="GqY-3p-mly" secondAttribute="trailing" constant="20" symbolic="YES" id="4IZ-nf-Kzf"/>
-                <constraint firstItem="Ysk-kG-NFK" firstAttribute="top" secondItem="hE7-wZ-wPG" secondAttribute="bottom" constant="8" symbolic="YES" id="EUX-v0-ppr"/>
+                <constraint firstItem="Qz0-uD-zFd" firstAttribute="top" secondItem="emP-pK-ppu" secondAttribute="bottom" constant="32" id="8ao-HL-SsB"/>
                 <constraint firstItem="Qz0-uD-zFd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="EdR-jZ-sJe"/>
                 <constraint firstAttribute="trailing" secondItem="xbK-ZR-8aS" secondAttribute="trailing" constant="20" symbolic="YES" id="F2T-9T-aFq"/>
                 <constraint firstItem="xob-Bf-RHv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="H0f-Np-IE2"/>
-                <constraint firstItem="Ysk-kG-NFK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="Ikl-9y-LDS"/>
                 <constraint firstItem="xHH-CD-tG5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="S9x-AG-IOa"/>
+                <constraint firstItem="emP-pK-ppu" firstAttribute="top" secondItem="df5-x2-bv2" secondAttribute="bottom" constant="8" symbolic="YES" id="TlQ-vd-hJX"/>
+                <constraint firstAttribute="bottom" secondItem="xob-Bf-RHv" secondAttribute="bottom" priority="250" constant="20" symbolic="YES" id="Tws-WU-J7D"/>
                 <constraint firstItem="xbK-ZR-8aS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" symbolic="YES" id="Uc2-g8-MsK"/>
-                <constraint firstItem="GqY-3p-mly" firstAttribute="top" secondItem="Ysk-kG-NFK" secondAttribute="bottom" constant="8" symbolic="YES" id="WJN-ca-XQ1"/>
+                <constraint firstItem="GqY-3p-mly" firstAttribute="top" secondItem="hE7-wZ-wPG" secondAttribute="bottom" constant="8" symbolic="YES" id="V0A-z3-COR"/>
                 <constraint firstAttribute="trailing" secondItem="hE7-wZ-wPG" secondAttribute="trailing" constant="20" symbolic="YES" id="Yl8-0Q-UHH"/>
                 <constraint firstAttribute="trailing" secondItem="df5-x2-bv2" secondAttribute="trailing" constant="20" symbolic="YES" id="a2D-uf-lXX"/>
-                <constraint firstAttribute="trailing" secondItem="Ysk-kG-NFK" secondAttribute="trailing" constant="20" symbolic="YES" id="bB3-6g-ulF"/>
                 <constraint firstItem="hE7-wZ-wPG" firstAttribute="top" secondItem="xHH-CD-tG5" secondAttribute="bottom" constant="8" symbolic="YES" id="cA9-PJ-lcJ"/>
                 <constraint firstItem="hE7-wZ-wPG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="eY6-om-fKc"/>
                 <constraint firstItem="coM-eN-hSD" firstAttribute="top" secondItem="GqY-3p-mly" secondAttribute="bottom" constant="32" id="fec-3p-VJy"/>
                 <constraint firstItem="df5-x2-bv2" firstAttribute="top" secondItem="coM-eN-hSD" secondAttribute="bottom" constant="8" symbolic="YES" id="gT6-Pk-t7n"/>
+                <constraint firstAttribute="trailing" secondItem="emP-pK-ppu" secondAttribute="trailing" constant="20" id="ksN-l4-3XH"/>
                 <constraint firstAttribute="trailing" secondItem="coM-eN-hSD" secondAttribute="trailing" constant="20" symbolic="YES" id="lZg-59-gOF"/>
                 <constraint firstItem="df5-x2-bv2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="pEy-g8-TxX"/>
+                <constraint firstItem="coM-eN-hSD" firstAttribute="leading" secondItem="emP-pK-ppu" secondAttribute="leading" id="po8-yR-bpF"/>
                 <constraint firstAttribute="trailing" secondItem="Qz0-uD-zFd" secondAttribute="trailing" constant="20" symbolic="YES" id="qgh-0U-Are"/>
-                <constraint firstItem="Qz0-uD-zFd" firstAttribute="top" secondItem="df5-x2-bv2" secondAttribute="bottom" constant="32" id="uoj-bs-2mg"/>
                 <constraint firstItem="xob-Bf-RHv" firstAttribute="top" secondItem="Qz0-uD-zFd" secondAttribute="bottom" constant="8" symbolic="YES" id="uzF-vh-Qut"/>
                 <constraint firstItem="xHH-CD-tG5" firstAttribute="top" secondItem="xbK-ZR-8aS" secondAttribute="bottom" constant="8" symbolic="YES" id="wbc-vl-n5M"/>
                 <constraint firstAttribute="trailing" secondItem="xHH-CD-tG5" secondAttribute="trailing" constant="20" symbolic="YES" id="xNm-WD-1Ie"/>
@@ -115,7 +116,7 @@
                 <constraint firstItem="GqY-3p-mly" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="zhN-n8-J9n"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="852" y="233"/>
+            <point key="canvasLocation" x="852" y="332"/>
         </view>
     </objects>
 </document>

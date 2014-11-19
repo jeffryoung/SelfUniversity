@@ -90,9 +90,9 @@
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"URL error"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot invoke iBooks"
                                                         message:[NSString stringWithFormat:
-                                                                 @"No custom URL defined for %@", customURL]
+                                                                 @"Please install iBooks from the App Store."]
                                                        delegate:self cancelButtonTitle:@"Ok"
                                               otherButtonTitles:nil];
         [alert show];

@@ -55,9 +55,9 @@
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"URL error"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot invoke Trello"
                                                         message:[NSString stringWithFormat:
-                                                                 @"No custom URL defined for %@", customURL]
+                                                                 @"Please install Trello from the App Store"]
                                                        delegate:self cancelButtonTitle:@"Ok"
                                               otherButtonTitles:nil];
         [alert show];

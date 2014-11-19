@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
@@ -20,7 +20,7 @@
             </connections>
             <point key="canvasLocation" x="163" y="161"/>
         </scrollView>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="250" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="infinite" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="600" height="2544"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -192,6 +192,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="JpT-AA-4WX" firstAttribute="top" secondItem="m47-WG-Td1" secondAttribute="bottom" constant="8" symbolic="YES" id="0gL-7D-6U3"/>
+                <constraint firstAttribute="bottom" secondItem="ebj-Sw-TJz" secondAttribute="bottom" priority="250" constant="20" symbolic="YES" id="0nR-1Q-K3P"/>
                 <constraint firstAttribute="trailing" secondItem="ebj-Sw-TJz" secondAttribute="trailing" constant="20" id="0vU-ja-bBm"/>
                 <constraint firstAttribute="trailing" secondItem="Om1-Vu-hID" secondAttribute="trailing" constant="20" id="1Cx-Ai-S0k"/>
                 <constraint firstItem="l4H-9g-OiD" firstAttribute="top" secondItem="QP0-ht-dbd" secondAttribute="bottom" constant="8" symbolic="YES" id="2P3-sl-90H"/>
