@@ -156,9 +156,9 @@
     PBLItem.intentionItemTypeName = self.intentionNameField.text;
     PBLItem.intentionItemTypeDescription = self.intentionDescriptionField.text;
     PBLItem.pblItemSubDrivingQuestion = self.pblItemSubDrivingQuestionField.text;
-    PBLItem.pblItemClarifyingQuestion1 = self.pblItemSubDrivingQuestionField.text;
-    PBLItem.pblItemClarifyingQuestion2 = self.pblItemSubDrivingQuestionField.text;
-    PBLItem.pblItemClarifyingQuestion3 = self.pblItemSubDrivingQuestionField.text;
+    PBLItem.pblItemClarifyingQuestion1 = self.pblItemClarifyingQuestion1Field.text;
+    PBLItem.pblItemClarifyingQuestion2 = self.pblItemClarifyingQuestion2Field.text;
+    PBLItem.pblItemClarifyingQuestion3 = self.pblItemClarifyingQuestion3Field.text;
     PBLItem.pblItemGuidingQuestion1 = self.pblItemGuidingQuestion1Field.text;
     PBLItem.pblItemGuidingQuestion2 = self.pblItemGuidingQuestion2Field.text;
     PBLItem.pblItemGuidingQuestion3 = self.pblItemGuidingQuestion3Field.text;

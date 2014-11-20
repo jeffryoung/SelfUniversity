@@ -20,6 +20,7 @@
 		E476AC7A196356B8007734C0 /* BookStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E476AC79196356B8007734C0 /* BookStoryboard_iPad.storyboard */; };
 		E476AC7C196356BF007734C0 /* BookStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E476AC7B196356BF007734C0 /* BookStoryboard_iPhone.storyboard */; };
 		E476AC7F19635C33007734C0 /* COBookModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = E476AC7E19635C33007734C0 /* COBookModelController.m */; };
+		E487B02B1A1D54D500C05582 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E487B02A1A1D54D500C05582 /* Launch Screen.xib */; };
 		E4937C2D19F598A400FBE6D9 /* COProductStoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E4937C2619F598A400FBE6D9 /* COProductStoryItem.m */; };
 		E4937C2E19F598A400FBE6D9 /* COProductStoryItemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4937C2819F598A400FBE6D9 /* COProductStoryItemDetailViewController.m */; };
 		E4937C2F19F598A400FBE6D9 /* COProductStoryItemDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4937C2919F598A400FBE6D9 /* COProductStoryItemDetailViewController.xib */; };
@@ -106,6 +107,7 @@
 		E476AC7B196356BF007734C0 /* BookStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BookStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		E476AC7D19635C33007734C0 /* COBookModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COBookModelController.h; sourceTree = "<group>"; };
 		E476AC7E19635C33007734C0 /* COBookModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COBookModelController.m; sourceTree = "<group>"; };
+		E487B02A1A1D54D500C05582 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		E4937C2519F598A400FBE6D9 /* COProductStoryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COProductStoryItem.h; sourceTree = "<group>"; };
 		E4937C2619F598A400FBE6D9 /* COProductStoryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COProductStoryItem.m; sourceTree = "<group>"; };
 		E4937C2719F598A400FBE6D9 /* COProductStoryItemDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COProductStoryItemDetailViewController.h; sourceTree = "<group>"; };
@@ -420,7 +422,6 @@
 				E4DAD8EE1969F426001C59A7 /* Practice View */,
 				E4DAD8EF1969F438001C59A7 /* Task View */,
 				E42A354319AFB6A6006AF3AC /* Utilities */,
-				E4DC0B05195B581E001CE110 /* Images.xcassets */,
 				E4DC0AF7195B581E001CE110 /* Supporting Files */,
 			);
 			name = "iLearn University";
@@ -433,6 +434,8 @@
 				E4F55A4519BA6DD100CC39C8 /* iLearnUniversity.xcdatamodeld */,
 				E476AC79196356B8007734C0 /* BookStoryboard_iPad.storyboard */,
 				E476AC7B196356BF007734C0 /* BookStoryboard_iPhone.storyboard */,
+				E4DC0B05195B581E001CE110 /* Images.xcassets */,
+				E487B02A1A1D54D500C05582 /* Launch Screen.xib */,
 				E4C28613199ABDCE00DB405B /* iLearn University.pdf */,
 				E4DC0AF8195B581E001CE110 /* iLearn University-Info.plist */,
 				E4DC0AFE195B581E001CE110 /* iLearn University-Prefix.pch */,
@@ -568,6 +571,7 @@
 				E476AC7C196356BF007734C0 /* BookStoryboard_iPhone.storyboard in Resources */,
 				E4B70BBF1A081F8D000EAB44 /* COSelfEmpowermentItemDetailViewController.xib in Resources */,
 				E4F2916219F99804007A08E1 /* COPBLItemHelpViewController.xib in Resources */,
+				E487B02B1A1D54D500C05582 /* Launch Screen.xib in Resources */,
 				E4C28614199ABDCE00DB405B /* iLearn University.pdf in Resources */,
 				E4B70BC11A081F8D000EAB44 /* COSelfEmpowermentItemHelpViewController.xib in Resources */,
 				E4C766A919E85E9500CB6463 /* COIntentionItemTypeCell.xib in Resources */,
@@ -759,10 +763,12 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 0.1.0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SelfUniversity/iLearn University-Prefix.pch";
 				INFOPLIST_FILE = "SelfUniversity/iLearn University-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "iLearn University";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -776,10 +782,12 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 0.1.0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SelfUniversity/iLearn University-Prefix.pch";
 				INFOPLIST_FILE = "SelfUniversity/iLearn University-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "iLearn University";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
